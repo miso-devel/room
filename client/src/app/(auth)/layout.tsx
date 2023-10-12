@@ -1,6 +1,9 @@
 import { HomeLogo, LearningLogo, MemberLogo } from '@/components/ui/svg';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
 import Image from 'next/image';
-export default function PageLayout({ children }: { children: React.ReactNode }) {
+export default async function PageLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions);
   return (
     <main className="w-2/3 m-auto text-secondary-content">
       <div className="navbar my-5 bg-secondary rounded-md">
@@ -25,7 +28,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <Image src="/me.png" alt="me" width={50} height={50} />
+                <Image src={session?.user?.image as string} alt="me" width={50} height={50} />
               </div>
             </label>
             <ul
@@ -33,7 +36,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-md w-52 bg-secondary"
             >
               <li>
-                <a className="justify-between">Profile</a>
+                <a className="justify-between">{session?.user?.name ?? ''}</a>
               </li>
               <li>
                 <a>Logout</a>
