@@ -1,5 +1,5 @@
 import { Hono } from "https://deno.land/x/hono@v3.7.2/mod.ts";
-import { Member } from "./controller/members.ts";
+import { Member } from "./controller/members/index.ts";
 
 const app = new Hono();
 
@@ -11,7 +11,10 @@ app.get("/members", async (c) => {
 });
 
 app.get("/members/:id", async (c) => {
-  const member = Member.show();
+  const id = c.req.param("id");
+  if (!id) return c.json({ error: "メンバーが存在しませんでした" });
+  const member = await Member.show(id);
+  return c.json(member);
 });
 
 app.get("/workshops", async (c) => {});
