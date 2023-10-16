@@ -1,12 +1,13 @@
 import { Hono } from "https://deno.land/x/hono@v3.7.2/mod.ts";
-import { Member } from "./controller/Members.ts";
+import { Member } from "./controller/members.ts";
 
 const app = new Hono();
 
 app.get("/", (c) => c.text("Hello Hono!"));
 
 app.get("/members", async (c) => {
-  const members = Member.index();
+  const members = await Member.index();
+  return c.json(members);
 });
 
 app.get("/members/:id", async (c) => {
