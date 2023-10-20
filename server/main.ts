@@ -19,7 +19,8 @@ app.get("/members/:id", async (c) => {
 
 app.get("/workshops", async (c) => {});
 app.get("/workshops/:id", async (c) => {});
-app.post("/workshops", async (c) => {});
+app.post("/workshops", async (c) => {
+});
 app.patch("/workshops", async (c) => {});
 app.delete("/workshops", async (c) => {});
 
