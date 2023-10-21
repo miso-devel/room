@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default async function PageLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
   return (
-    <main className="w-2/3 m-auto text-secondary-content">
+    <main className="md:w-1/3 md:m-auto mx-5 text-secondary-content">
       <div className="navbar my-5 bg-secondary rounded-md">
         <div className="flex-1">
           <a href="/" className="btn btn-ghost normal-case text-xl">

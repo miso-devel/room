@@ -1,0 +1,1 @@
+const appFetcher = (url: string) => {};

@@ -48,7 +48,8 @@
           "name": { "type": "string" },
           "avatar": { "type": "string" },
           "joinedAt": { "type": "integer" }
-        }
+        },
+        "required": ["id", "name", "avatar"]
       }
     }
   }
