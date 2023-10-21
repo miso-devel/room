@@ -1,7 +1,9 @@
 import { Bot } from "../../bot/main.ts";
 import { Secret } from "../../secret.ts";
-import { TMember } from "./type.ts";
 import { toMember } from "./util.ts";
+import { components } from "../../types/schema.ts";
+
+type TMember = components["schemas"]["User"];
 
 const index = async () => {
   const data = await Bot.helpers.getMembers(Secret.GUILD_ID, { limit: 300 });

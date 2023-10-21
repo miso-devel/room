@@ -2,6 +2,7 @@
   "folders": [
     { "path": "./client" },
     { "path": "./server" },
+    { "path": "./docs" },
     { "path": "." }
   ]
 }

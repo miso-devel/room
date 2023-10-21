@@ -1,0 +1,15 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "generate-client": "npx openapi-typescript schema.json -o ../client/src/types/schema.ts",
+    "generate-server": "npx openapi-typescript schema.json -o ../server/types/schema.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "openapi-typescript": "7.0.0-next.2"
+  }
+}

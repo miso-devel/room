@@ -1,9 +1,9 @@
 'use client';
-import { TMember } from '@/types/app';
 import { FC } from 'react';
 import { Members } from '../members';
+import { components } from '@/types/schema';
 
-type TProps = { members: TMember[] };
+type TProps = { members: components['schemas']['User'][] };
 
 export const Form: FC<TProps> = ({ members }) => {
   const openModal = () => {

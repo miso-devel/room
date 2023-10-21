@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import { TMember } from '@/types/app';
+import { components } from '@/types/schema';
 
-type TProps = { members: TMember[] };
+type TProps = { members: components['schemas']['User'][] };
 
 export const Members: FC<TProps> = ({ members }) => {
   return (
@@ -14,7 +14,7 @@ export const Members: FC<TProps> = ({ members }) => {
   );
 };
 
-type TMemberProps = { member: TMember };
+type TMemberProps = { member: components['schemas']['User'] };
 
 const Member: FC<TMemberProps> = ({ member }) => {
   const isSetAvatar = member.avatar?.split('/')[member.avatar?.split('/').length - 1] !== 'NaN.png';

@@ -1,6 +1,8 @@
 import { Bot } from "../../bot/main.ts";
 import { getAvatarURL, type Member as TInternalMember } from "../../deps.ts";
-import { TMember } from "./type.ts";
+import { components } from "../../types/schema.ts";
+
+type TMember = components["schemas"]["User"];
 
 export const toMember = (member: TInternalMember): TMember => {
   const avatarUrl = getAvatarURL(
@@ -10,7 +12,6 @@ export const toMember = (member: TInternalMember): TMember => {
     { avatar: member.user?.avatar },
   );
 
-  console.log(avatarUrl);
   return {
     id: member.user?.id.toString(),
     name: member.user?.username,
