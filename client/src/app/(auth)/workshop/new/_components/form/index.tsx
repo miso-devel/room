@@ -9,6 +9,7 @@ type TMemberForm = { theme: string; url: string };
 
 export const Form: FC<TProps> = ({ members }) => {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [isRegular, setIsRegular] = useState(false);
   const [checkedMember, setCheckedMember] = useState<Map<string, components['schemas']['User'] & TMemberForm>>(
@@ -25,6 +26,15 @@ export const Form: FC<TProps> = ({ members }) => {
     }
   };
 
+  const onSubmit = async () => {
+    await fetch(`${process.env.SERVER_URL}/workshop`, {
+      method: 'POST',
+      body: JSON.stringify({ title, description, date, isRegular, members: definedMember }),
+      mode: 'cors',
+      credentials: 'include',
+    });
+  };
+
   return (
     <div className="flex gap-5 flex-col">
       <div className="flex flex-col">
@@ -38,6 +48,16 @@ export const Form: FC<TProps> = ({ members }) => {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="workshop name here"
           className="input input-bordered input-secondary w-full max-w-xs"
+        />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="workshop_name" className="pb-2">
+          説明
+        </label>
+        <textarea
+          className="textarea textarea-secondary"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
       <div className="flex flex-col">

@@ -1,27 +1,18 @@
-import { Hono } from "https://deno.land/x/hono@v3.7.2/mod.ts";
 import { Member } from "./controller/members/index.ts";
+import { Workshop } from "./controller/workshop.ts";
+import { Hono } from "./mod.ts";
 
 const app = new Hono();
 
-app.get("/", (c) => c.text("Hello Hono!"));
+// members API
+app.get("/members", Member.index);
+app.get("/members/:id", Member.show);
 
-app.get("/members", async (c) => {
-  const members = await Member.index();
-  return c.json(members);
-});
-
-app.get("/members/:id", async (c) => {
-  const id = c.req.param("id");
-  if (!id) return c.json({ error: "メンバーが存在しませんでした" });
-  const member = await Member.show(id);
-  return c.json(member);
-});
-
-app.get("/workshops", async (c) => {});
-app.get("/workshops/:id", async (c) => {});
-app.post("/workshops", async (c) => {
-});
-app.patch("/workshops", async (c) => {});
-app.delete("/workshops", async (c) => {});
+// workshops API
+app.get("/workshops", Workshop.index);
+app.get("/workshops/:id", Workshop.show);
+app.post("/workshops", Workshop.create);
+app.patch("/workshops", Workshop.update);
+app.delete("/workshops", Workshop.remove);
 
 Deno.serve(app.fetch);
