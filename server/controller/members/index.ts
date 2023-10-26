@@ -6,6 +6,7 @@ import { Env, Handler } from "https://deno.land/x/hono@v3.7.2/types.ts";
 
 type TMember = components["schemas"]["User"];
 
+// Handler<Env, "/members", {}, Promise<Response>>とかの型は結構無理やりしてる感じがあるので修正できるならする
 const index: Handler<Env, "/members", {}, Promise<Response>> = async (c) => {
   const data = await Bot.helpers.getMembers(Secret.GUILD_ID, { limit: 300 });
   const members: TMember[] = [];
