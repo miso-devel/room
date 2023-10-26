@@ -1,4 +1,4 @@
-import { Env, Handler } from "../mod.ts";
+import { Env, Handler } from "../../mod.ts";
 
 const index: Handler<Env, "/woskshops", {}, Promise<Response>> = async (c) => {
   return c.json({});

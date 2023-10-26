@@ -1,5 +1,5 @@
 import { Member } from "./controller/members/index.ts";
-import { Workshop } from "./controller/workshop.ts";
+import { Workshop } from "./controller/workshop/index.ts";
 import { Hono } from "./mod.ts";
 
 const app = new Hono();
