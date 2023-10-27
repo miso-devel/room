@@ -59,7 +59,7 @@
           "title": { "type": "string" },
           "description": { "type": "string" }
         },
-        "required": ["id", "name", "isRegular"]
+        "required": ["id", "title"]
       }
     }
   }
