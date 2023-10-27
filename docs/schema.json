@@ -50,6 +50,16 @@
           "joinedAt": { "type": "integer" }
         },
         "required": ["id", "name", "avatar"]
+      },
+
+      "Workshop": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["id", "name", "isRegular"]
       }
     }
   }

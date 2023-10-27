@@ -88,6 +88,11 @@ export interface components {
             avatar: string;
             joinedAt?: number;
         };
+        Workshop: {
+            id: string;
+            title?: string;
+            description?: string;
+        };
     };
     responses: never;
     parameters: never;
