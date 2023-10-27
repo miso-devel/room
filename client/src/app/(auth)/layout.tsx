@@ -20,7 +20,7 @@ export default async function PageLayout({ children }: { children: React.ReactNo
             <a href="/members" className="btn-ghost p-2 rounded-full">
               <MemberLogo />
             </a>
-            <a href="/workshop" className="btn-ghost p-2 rounded-full">
+            <a href="/workshops" className="btn-ghost p-2 rounded-full">
               <LearningLogo />
             </a>
           </div>
