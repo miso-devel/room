@@ -1,8 +1,8 @@
 import { createBot, Intents } from "../deps.ts";
-import { Secret } from "../secret.ts";
+import { SECRET } from "../secret.ts";
 
 export const Bot = createBot({
-  token: Secret.DISCORD_TOKEN,
+  token: SECRET.DISCORD_TOKEN,
   intents: Intents.Guilds | Intents.GuildMessages | Intents.MessageContent,
   events: {
     ready: (_bot, payload) => {
