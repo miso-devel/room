@@ -4,12 +4,12 @@ export {
   type Handler,
   Hono,
 } from "https://deno.land/x/hono@v3.7.2/mod.ts";
-export { load } from "https://deno.land/std@0.194.0/dotenv/mod.ts";
 export {
   cors,
   logger,
   poweredBy,
-} from "https://deno.land/x/hono@v3.3.0/middleware.ts";
+} from "https://deno.land/x/hono@v3.7.2/middleware.ts";
+export { load } from "https://deno.land/std@0.194.0/dotenv/mod.ts";
 export {
   deleteCookie,
   getCookie,
