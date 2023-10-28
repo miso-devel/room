@@ -5,6 +5,10 @@ export default async function WorkshopsShowPage({ params }: { params: { workshop
     `${process.env.SERVER_URL}/workshops/${params.workshopId}`
   ).then((data) => data.json());
 
+  const events: components['schemas']['Event'] = await fetch(
+    `${process.env.SERVER_URL}/events?workshopId=${params.workshopId}`
+  ).then((data) => data.json());
+
   return (
     <div className="prose">
       <div className="flex flex-col gap-3">

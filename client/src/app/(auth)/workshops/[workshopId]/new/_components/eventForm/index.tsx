@@ -5,11 +5,11 @@ import { FC, useState } from 'react';
 import { Members } from '../members';
 
 type TMemberForm = { theme: string; url: string };
-type TProps = { members: components['schemas']['User'][]; workshopName: components['schemas']['Workshop']['title'] };
+type TProps = { members: components['schemas']['User'][]; workshop: components['schemas']['Workshop'] };
 
-export const EventForm: FC<TProps> = ({ members, workshopName }) => {
+export const EventForm: FC<TProps> = ({ members, workshop }) => {
   // TODO: 初期値は 1. とか何番目のイベントなのかわかる状態をもらっておきたい
-  const [theme, setTheme] = useState(workshopName);
+  const [theme, setTheme] = useState(workshop.title);
   const [date, setDate] = useState('');
   const [checkedMember, setCheckedMember] = useState<Map<string, components['schemas']['User'] & TMemberForm>>(
     new Map()
@@ -28,7 +28,7 @@ export const EventForm: FC<TProps> = ({ members, workshopName }) => {
   const onSubmit = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`, {
       method: 'POST',
-      body: JSON.stringify({ theme, date }),
+      body: JSON.stringify({ workshopId: workshop.id, theme, date, isCronTarget: false }),
       mode: 'cors',
       credentials: 'include',
     });

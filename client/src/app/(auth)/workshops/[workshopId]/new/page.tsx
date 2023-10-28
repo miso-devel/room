@@ -15,7 +15,7 @@ export default async function NewEvent({ params }: { params: { workshopId: strin
     <div className="prose max-w-full">
       <h1>Event new</h1>
       <Workshop workshop={workshop} />
-      <EventForm members={members} workshopName={workshop.title} />
+      <EventForm members={members} workshop={workshop} />
     </div>
   );
 }
