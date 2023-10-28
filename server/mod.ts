@@ -4,6 +4,7 @@ export {
   type Handler,
   Hono,
 } from "https://deno.land/x/hono@v3.7.2/mod.ts";
+export type { TypedResponse } from "https://deno.land/x/hono@v3.7.2/mod.ts";
 export {
   cors,
   logger,
