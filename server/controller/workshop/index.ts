@@ -16,7 +16,9 @@ const index: Handler<Env, "/woskshops", {}, Promise<TypedResponse>> = async (
 const show: Handler<Env, "/workshops/:id", {}, Promise<TypedResponse>> = async (
   c,
 ) => {
-  return c.json({});
+  const workshopId = c.req.param("id");
+  const workshop = await DB.fetchOne({ prefix, id: workshopId });
+  return c.json(workshop);
 };
 
 const create: Handler<Env, "/workshops", {}, Promise<TypedResponse>> = async (
