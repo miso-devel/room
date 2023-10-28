@@ -1,4 +1,11 @@
-export default function Workshop() {
+import { components } from '@/types/schema';
+import { Workshops } from './_components/workshops';
+
+export default async function WorkshopsPage() {
+  const workshops: components['schemas']['Workshop'][] = await fetch(`${process.env.SERVER_URL}/workshops`).then(
+    async (data) => data.json()
+  );
+  console.log(workshops);
   return (
     <div className="prose">
       <div className="flex gap-3">
@@ -7,6 +14,7 @@ export default function Workshop() {
           作成
         </a>
       </div>
+      <Workshops workshops={workshops} />
     </div>
   );
 }
