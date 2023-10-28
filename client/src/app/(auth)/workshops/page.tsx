@@ -5,7 +5,7 @@ export default async function WorkshopsPage() {
   const workshops: components['schemas']['Workshop'][] = await fetch(`${process.env.SERVER_URL}/workshops`).then(
     async (data) => data.json()
   );
-  console.log(workshops);
+
   return (
     <div className="prose">
       <div className="flex gap-3">
