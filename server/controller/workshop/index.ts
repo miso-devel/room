@@ -9,7 +9,8 @@ type TWorkshop = components["schemas"]["Workshop"];
 const index: Handler<Env, "/woskshops", {}, Promise<TypedResponse>> = async (
   c,
 ) => {
-  return c.json({});
+  const workshops = await DB.fetchAll({ prefix });
+  return c.json(workshops);
 };
 
 const show: Handler<Env, "/workshops/:id", {}, Promise<TypedResponse>> = async (
