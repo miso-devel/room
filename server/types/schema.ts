@@ -93,6 +93,13 @@ export interface components {
             title: string;
             description?: string;
         };
+        Event: {
+            id: string;
+            workshopId?: string;
+            theme: string;
+            date: string;
+            isCronTarget: boolean;
+        };
     };
     responses: never;
     parameters: never;
