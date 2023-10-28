@@ -5,10 +5,11 @@ import { FC, useState } from 'react';
 import { Members } from '../members';
 
 type TMemberForm = { theme: string; url: string };
-type TProps = { members: components['schemas']['User'][] };
+type TProps = { members: components['schemas']['User'][]; workshopName: components['schemas']['Workshop']['title'] };
 
-export const EventForm: FC<TProps> = ({ members }) => {
-  const [isRegular, setIsRegular] = useState(false);
+export const EventForm: FC<TProps> = ({ members, workshopName }) => {
+  // TODO: 初期値は 1. とか何番目のイベントなのかわかる状態をもらっておきたい
+  const [theme, setTheme] = useState(workshopName);
   const [date, setDate] = useState('');
   const [checkedMember, setCheckedMember] = useState<Map<string, components['schemas']['User'] & TMemberForm>>(
     new Map()
@@ -24,19 +25,46 @@ export const EventForm: FC<TProps> = ({ members }) => {
     }
   };
 
+  const onSubmit = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`, {
+      method: 'POST',
+      body: JSON.stringify({ theme, date }),
+      mode: 'cors',
+      credentials: 'include',
+    });
+  };
+
   return (
-    <div>
-      <div>
-        <label className="cursor-pointer flex flex-col items-start w-16">
-          <div className="pb-2">定期開催</div>
-          <input
-            type="checkbox"
-            className="toggle toggle-secondary"
-            checked={isRegular}
-            onChange={(e) => setIsRegular(e.target.checked)}
-          />
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-col">
+        <label htmlFor="workshop_name" className="pb-2">
+          テーマ
         </label>
+        <input
+          id="workshop_name"
+          type="text"
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+          placeholder="theme here"
+          className="input input-bordered input-secondary w-full max-w-xs"
+        />
       </div>
+
+      {/* TODO: 現在より前の日付を選べないようにはしたい */}
+      <div className="flex flex-col">
+        <label htmlFor="workshop_datetime" className="pb-2">
+          時間
+        </label>
+        <input
+          id="workshop_datetime"
+          type="datetime-local"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          placeholder="date here"
+          className="input input-bordered input-secondary w-full max-w-xs"
+        />
+      </div>
+
       <div>
         <div className="flex items-center gap-3 pb-2">
           <label>登壇者の追加</label>
@@ -78,20 +106,12 @@ export const EventForm: FC<TProps> = ({ members }) => {
             );
           })}
         </div>
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="workshop_datetime" className="pb-2">
-            時間
-          </label>
-          <input
-            id="workshop_datetime"
-            type="datetime-local"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            placeholder="date here"
-            className="input input-bordered input-secondary w-full max-w-xs"
-          />
-        </div>
+      <div className="flex justify-center">
+        <button className="btn btn-outline btn-secondary w-full" onClick={onSubmit}>
+          イベントの作成
+        </button>
       </div>
     </div>
   );
