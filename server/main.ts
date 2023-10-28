@@ -1,3 +1,4 @@
+import { Event } from "./controller/events/index.ts";
 import { Member } from "./controller/members/index.ts";
 import { Workshop } from "./controller/workshop/index.ts";
 import { cors, Hono, logger, poweredBy } from "./mod.ts";
@@ -35,5 +36,12 @@ app.get("/workshops/:id", Workshop.show);
 app.post("/workshops", Workshop.create);
 app.patch("/workshops", Workshop.update);
 app.delete("/workshops", Workshop.remove);
+
+// events API
+app.get("/events", Event.index);
+app.get("/events/:id", Event.show);
+app.post("/events", Event.create);
+app.patch("/events", Event.update);
+app.delete("/events", Event.remove);
 
 Deno.serve(app.fetch);
