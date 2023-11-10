@@ -4,7 +4,7 @@ tasks:
   client-up:
     dir: "./client"
     cmds:
-      - cd pnpm run dev
+      - pnpm run dev
 
   server-up:
     dir: "./server"
