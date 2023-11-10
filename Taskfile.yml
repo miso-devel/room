@@ -1,0 +1,17 @@
+version: '3'
+
+tasks:
+  client-up:
+    dir: "./client"
+    cmds:
+      - cd pnpm run dev
+
+  server-up:
+    dir: "./server"
+    cmds:
+      - deno task dev
+
+  generate-type:
+    dir: "./docs"
+    cmds:
+      - pnpm run generate-client && pnpm run generate-server
