@@ -16,7 +16,7 @@ export default async function WorkshopsShowPage({ params }: { params: { workshop
         <p className="m-0">{workshop.description}</p>
       </div>
       <div className="flex justify-center my-5">
-        <a className="btn btn-outline btn-secondary w-full" role="button" href={`/workshops/${params.workshopId}/new`}>
+        <a className="btn btn-outline btn-secondary w-full" role="button" href={`/events/${params.workshopId}/new`}>
           イベントの作成
         </a>
       </div>
