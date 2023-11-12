@@ -1,7 +1,8 @@
 // https://github.com/denoland/deno/issues/19035
 /// <reference lib="deno.unstable" />
 /// <reference no-default-lib="true" />
-import { ulid } from "../mod.ts";
+
+import { ulid } from "../deps.ts";
 
 const kv = await Deno.openKv();
 type id = { id: string };

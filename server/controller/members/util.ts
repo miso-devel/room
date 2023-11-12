@@ -13,7 +13,7 @@ export const toMember = (member: TInternalMember): TMember => {
   );
 
   return {
-    id: member.user?.id.toString(),
+    id: member.user.id.toString(),
     name: member.user?.username,
     avatar: avatarUrl,
     joinedAt: member.joinedAt,

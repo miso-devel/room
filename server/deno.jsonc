@@ -5,5 +5,11 @@
   },
   "fmt": {
     "lineWidth": 120
+  },
+  "compilerOptions": {
+    "lib": [
+      "deno.window",
+      "dom"
+    ]
   }
 }

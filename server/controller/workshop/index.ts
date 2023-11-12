@@ -1,5 +1,6 @@
 import { DB } from "../../db/db.ts";
-import { Env, Handler, TypedResponse } from "../../mod.ts";
+import { Env, Handler, TypedResponse } from "../../deps.ts";
+
 import { components } from "../../types/schema.ts";
 
 const prefix = "workshop";

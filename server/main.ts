@@ -1,7 +1,7 @@
 import { Event } from "./controller/events/index.ts";
 import { Member } from "./controller/members/index.ts";
 import { Workshop } from "./controller/workshop/index.ts";
-import { cors, Hono, logger, poweredBy } from "./mod.ts";
+import { cors, Hono, logger, poweredBy } from "./deps.ts";
 import { SECRET } from "./secret.ts";
 
 const app = new Hono();

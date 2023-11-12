@@ -1,8 +1,8 @@
 import { Bot } from "../../bot/main.ts";
 import { toMember } from "./util.ts";
 import { components } from "../../types/schema.ts";
-import { Env, Handler } from "https://deno.land/x/hono@v3.7.2/types.ts";
 import { SECRET } from "../../secret.ts";
+import { Env, Handler, Response } from "../../deps.ts";
 
 type TMember = components["schemas"]["User"];
 
