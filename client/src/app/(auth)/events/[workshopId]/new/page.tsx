@@ -1,6 +1,6 @@
 import { components } from '@/types/schema';
 import { EventForm } from './_components/eventForm';
-import { Workshop } from './_components/workshop/page';
+import { Workshop } from './_components/workshop';
 
 export default async function NewEvent({ params }: { params: { workshopId: string } }) {
   const workshop: components['schemas']['Workshop'] = await fetch(
