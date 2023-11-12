@@ -6,7 +6,8 @@ export const Bot = createBot({
   intents: Intents.Guilds | Intents.GuildMessages | Intents.MessageContent,
   events: {
     ready: (_bot, payload) => {
-      console.log(`${payload.user.username} is ready!`);
+      // TODO: Logを出したいけどdomがdenoのcompile optionに含まれない
+      // console.log(`${payload.user.username} is ready!`);
     },
   },
 });
