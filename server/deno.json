@@ -4,12 +4,6 @@
     "start": "deno run -A --watch ./main.ts"
   },
   "fmt": {
-    "lineWidth": 120
-  },
-  "compilerOptions": {
-    "lib": [
-      "deno.window",
-      "dom"
-    ]
+    "lineWidth": 140
   }
 }

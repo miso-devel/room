@@ -1,4 +1,4 @@
-import { Bot } from "../../bot/main.ts";
+import { Bot } from "../../bot/bot.ts";
 import { getAvatarURL, type Member as TInternalMember } from "../../deps.ts";
 import { components } from "../../types/schema.ts";
 
@@ -13,8 +13,8 @@ export const toMember = (member: TInternalMember): TMember => {
   );
 
   return {
-    id: member.user.id.toString(),
-    name: member.user?.username,
+    id: member.user?.id.toString() ?? "",
+    name: member.user?.username ?? "",
     avatar: avatarUrl,
     joinedAt: member.joinedAt,
   };

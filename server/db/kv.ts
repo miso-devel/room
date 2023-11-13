@@ -1,8 +1,4 @@
-// https://github.com/denoland/deno/issues/19035
 /// <reference lib="deno.unstable" />
-/// <reference no-default-lib="true" />
-
-import { ulid } from "../deps.ts";
 
 const kv = await Deno.openKv();
 type id = { id: string };
@@ -29,7 +25,7 @@ type TCreate<T> = data<T> & prefix;
 const createOne = async <T>(
   { data, prefix }: TCreate<T>,
 ): Promise<Deno.KvEntryMaybe<withId<T>>> => {
-  const id = ulid();
+  const id = crypto.randomUUID();
   await kv.set([prefix, id], { id, ...data });
   return await kv.get([prefix, id]) as Deno.KvEntryMaybe<withId<T>>;
 };
