@@ -3,7 +3,7 @@ import { Workshops } from './_components/workshops';
 
 export default async function WorkshopsPage() {
   const workshops: components['schemas']['Workshop'][] = await fetch(`${process.env.SERVER_URL}/workshops`).then(
-    async (data) => data.json()
+    async (data) => await data.json()
   );
 
   return (
