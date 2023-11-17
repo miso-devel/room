@@ -7,7 +7,7 @@ const prefix = "workshop";
 type TWorkshop = components["schemas"]["Workshop"];
 
 const index: WrapHandler<"/workshops"> = async (c) => {
-  const workshops = await DB.fetchAll({ prefix });
+  const workshops = await DB.fetchAll<TWorkshop>({ prefix });
   return c.json(workshops);
 };
 
