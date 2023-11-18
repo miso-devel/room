@@ -1,7 +1,7 @@
 import { SECRET } from "./constants/secret.ts";
 import { Event as _Event } from "./controller/events/index.ts";
 import { Member } from "./controller/members/index.ts";
-import { Workshop } from "./controller/workshop/index.ts";
+import { Workshop } from "./controller/workshops/index.ts";
 import { cors, Hono, logger, poweredBy } from "./deps.ts";
 
 const app = new Hono();
