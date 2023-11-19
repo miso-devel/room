@@ -4,77 +4,60 @@
  */
 
 
-export interface paths {
-  "/members": {
-    /** Members */
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["User"];
-          };
-        };
-      };
-    };
-  };
-  "/members/{userId}": {
-    /** Member */
-    get: {
-      parameters: {
-        path: {
-          userId: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["User"];
-          };
-        };
-      };
-    };
-  };
-}
+export type paths = Record<string, never>;
 
 export type webhooks = Record<string, never>;
 
-export interface components {
+export type components = {
   schemas: {
-    User: {
-      id: string;
-      name: string;
-      avatar: string;
-      joinedAt?: number;
-    };
-    Workshop: {
-      id: string;
-      title: string;
-      description?: string;
-    };
-    Event: {
-      id: string;
-      workshopId?: string;
-      theme: string;
-      date: string;
-      isCronTarget: boolean;
-    };
-    Speaker: {
-      id: string;
-      eventId: string;
-      memberId: string;
-    };
+    User: external["schemas/user/model.json"];
+    Workshop: external["schemas/workshop/model.json"];
+    Event: external["schemas/event/model.json"];
+    EventInput: external["schemas/event/input.json"];
+    EventOutput: external["schemas/event/output.json"];
+    Speaker: external["schemas/speaker/model.json"];
   };
   responses: never;
   parameters: never;
   requestBodies: never;
   headers: never;
   pathItems: never;
-}
+};
 
 export type $defs = Record<string, never>;
 
-export type external = Record<string, never>;
+export type external = {
+  "schemas/event/input.json": {
+    event?: external["schemas/event/model.json"];
+    speakerIds?: string[];
+  };
+  "schemas/event/model.json": {
+    id: string;
+    workshopId?: string;
+    theme: string;
+    date: string;
+    isCronTarget: boolean;
+  };
+  "schemas/event/output.json": {
+    event: external["schemas/event/model.json"];
+    speakers: external["schemas/speaker/model.json"][];
+  };
+  "schemas/speaker/model.json": {
+    id: string;
+    eventId: string;
+    memberId: string;
+  };
+  "schemas/user/model.json": {
+    id: string;
+    name: string;
+    avatar: string;
+    joinedAt?: number;
+  };
+  "schemas/workshop/model.json": {
+    id: string;
+    title: string;
+    description?: string;
+  };
+};
 
 export type operations = Record<string, never>;

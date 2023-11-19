@@ -1,0 +1,4 @@
+{
+  "type": "object",
+  "properties": { "event": { "$ref": "./model.json" }, "speakerIds": { "type": "array", "items": "string" } }
+}

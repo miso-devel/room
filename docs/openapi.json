@@ -1,0 +1,21 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User API",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "http://localhost:8000", "description": "開発環境" }],
+  "components": {
+    "schemas": {
+      "User": { "$ref": "./schemas/user/model.json" },
+
+      "Workshop": { "$ref": "./schemas/workshop/model.json" },
+
+      "Event": { "$ref": "./schemas/event/model.json" },
+      "EventInput": { "$ref": "./schemas/event/input.json" },
+      "EventOutput": { "$ref": "./schemas/event/output.json" },
+
+      "Speaker": { "$ref": "./schemas/speaker/model.json" }
+    }
+  }
+}

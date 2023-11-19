@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "workshopId": { "type": "string" },
+    "theme": { "type": "string" },
+    "date": { "type": "string" },
+    "isCronTarget": { "type": "boolean" }
+  },
+  "required": ["id", "theme", "date", "isCronTarget"]
+}
