@@ -60,7 +60,7 @@ export interface components {
       date: string;
       isCronTarget: boolean;
     };
-    Participant: {
+    Speaker: {
       id: string;
       eventId: string;
       memberId: string;
