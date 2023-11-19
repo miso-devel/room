@@ -3,6 +3,7 @@ import { components } from '@/types/schema';
 import Image from 'next/image';
 import { FC, useState } from 'react';
 import { Members } from '../members';
+import { useRouter } from 'next/navigation';
 
 type TMemberForm = { theme: string; url: string };
 type TProps = { members: components['schemas']['User'][]; workshop: components['schemas']['Workshop'] };
@@ -17,6 +18,7 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
   const [definedMember, setDefinedMember] = useState<Map<string, components['schemas']['User'] & TMemberForm>>(
     new Map()
   );
+  const router = useRouter();
 
   const openModal = () => {
     if (document && document.getElementById('my_modal_1') !== null) {
@@ -32,6 +34,7 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
       mode: 'cors',
       credentials: 'include',
     });
+    router.push('/');
   };
 
   return (

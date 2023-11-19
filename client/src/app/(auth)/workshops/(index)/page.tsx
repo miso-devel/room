@@ -2,10 +2,10 @@ import { components } from '@/types/schema';
 import { Workshops } from './_components/workshops';
 
 export default async function WorkshopsPage() {
-  const workshops: components['schemas']['Workshop'][] = await fetch(`${process.env.SERVER_URL}/workshops`).then(
-    async (data) => await data.json()
-  );
-
+  const workshops: components['schemas']['Workshop'][] = await fetch(`${process.env.SERVER_URL}/workshops`, {
+    cache: 'no-cache',
+  }).then(async (data) => await data.json());
+  console.log(workshops);
   return (
     <div className="prose">
       <div className="flex gap-3">

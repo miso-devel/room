@@ -1,16 +1,21 @@
 'use client';
+import { components } from '@/types/schema';
+import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 
 export const WorkshopForm: FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
+  const router = useRouter();
   const onSubmit = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/workshops`, {
       method: 'POST',
       body: JSON.stringify({ title, description }),
       mode: 'cors',
       credentials: 'include',
+    }).then(async (data) => {
+      const workshop: components['schemas']['Workshop'] = await data.json();
+      router.push(`/workshops/${workshop.id}`);
     });
   };
 

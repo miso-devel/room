@@ -4,7 +4,8 @@ import { Workshop } from './_components/workshop';
 
 export default async function NewEvent({ params }: { params: { workshopId: string } }) {
   const workshop: components['schemas']['Workshop'] = await fetch(
-    `${process.env.SERVER_URL}/workshops/${params.workshopId}`
+    `${process.env.SERVER_URL}/workshops/${params.workshopId}`,
+    { cache: 'no-cache' }
   ).then((data) => data.json());
 
   const members: components['schemas']['User'][] = await fetch(`${process.env.SERVER_URL}/members`).then((data) =>
