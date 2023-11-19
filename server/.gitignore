@@ -19,3 +19,8 @@
 
 # local env files
 .env
+
+local.deno.db
+local.deno.db-shm
+local.deno.db-wal
+local.kv

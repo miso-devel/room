@@ -1,6 +1,6 @@
 /// <reference lib="deno.unstable" />
 
-const kv = await Deno.openKv();
+const kv = await Deno.openKv("local.deno.db");
 type id = { id: string };
 type prefix = { prefix: string };
 type data<T> = { data: T };
