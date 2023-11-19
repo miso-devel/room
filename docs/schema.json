@@ -72,6 +72,16 @@
           "isCronTarget": { "type": "boolean" }
         },
         "required": ["id", "theme", "date", "isCronTarget"]
+      },
+
+      "Participant": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "eventId": { "type": "string" },
+          "memberId": { "type": "string" }
+        },
+        "required": ["id", "eventId", "memberId"]
       }
     }
   }
