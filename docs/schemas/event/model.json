@@ -5,7 +5,9 @@
     "workshopId": { "type": "string" },
     "theme": { "type": "string" },
     "date": { "type": "string" },
-    "isCronTarget": { "type": "boolean" }
+    "isCronTarget": { "type": "boolean" },
+    "createdAt": { "type": "string" },
+    "updatedAt": { "type": "string" }
   },
-  "required": ["id", "theme", "date", "isCronTarget"]
+  "required": ["id", "workshopId", "theme", "date", "isCronTarget", "createdAt", "upDatedAt"]
 }

@@ -3,7 +3,9 @@
   "properties": {
     "id": { "type": "string" },
     "title": { "type": "string" },
-    "description": { "type": "string" }
+    "description": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "updatedAt": { "type": "string" }
   },
-  "required": ["id", "title"]
+  "required": ["id", "title", "createdAt", "upDatedAt"]
 }

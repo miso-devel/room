@@ -3,7 +3,9 @@
   "properties": {
     "id": { "type": "string" },
     "eventId": { "type": "string" },
-    "memberId": { "type": "string" }
+    "memberId": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "updatedAt": { "type": "string" }
   },
   "required": ["id", "eventId", "memberId"]
 }

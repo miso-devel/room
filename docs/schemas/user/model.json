@@ -4,7 +4,8 @@
     "id": { "type": "string" },
     "name": { "type": "string" },
     "avatar": { "type": "string" },
-    "joinedAt": { "type": "integer" }
+    "createdAt": { "type": "string" },
+    "updatedAt": { "type": "string" }
   },
-  "required": ["id", "name", "avatar"]
+  "required": ["id", "name", "avatar", "createdAt", "upDatedAt"]
 }
