@@ -28,15 +28,21 @@ export type $defs = Record<string, never>;
 
 export type external = {
   "schemas/event/input.json": {
-    event?: external["schemas/event/model.json"];
-    speakerIds?: string[];
+    event: {
+      workshopId: external["schemas/event/model.json"]["workshopId"];
+      theme: external["schemas/event/model.json"]["theme"];
+      date: external["schemas/event/model.json"]["date"];
+    };
+    speakerIds: string[];
   };
   "schemas/event/model.json": {
     id: string;
-    workshopId?: string;
+    workshopId: string;
     theme: string;
     date: string;
     isCronTarget: boolean;
+    createdAt: string;
+    upDatedAt: string;
   };
   "schemas/event/output.json": {
     event: external["schemas/event/model.json"];
@@ -46,17 +52,22 @@ export type external = {
     id: string;
     eventId: string;
     memberId: string;
+    createdAt?: string;
+    upDatedAt?: string;
   };
   "schemas/user/model.json": {
     id: string;
     name: string;
     avatar: string;
-    joinedAt?: number;
+    createdAt: string;
+    upDatedAt: string;
   };
   "schemas/workshop/model.json": {
     id: string;
     title: string;
     description?: string;
+    createdAt: string;
+    upDatedAt: string;
   };
 };
 
