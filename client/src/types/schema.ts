@@ -42,7 +42,7 @@ export type external = {
     date: string;
     isCronTarget: boolean;
     createdAt: string;
-    upDatedAt: string;
+    updatedAt?: string;
   };
   "schemas/event/output.json": {
     event: external["schemas/event/model.json"];
@@ -53,21 +53,21 @@ export type external = {
     eventId: string;
     memberId: string;
     createdAt?: string;
-    upDatedAt?: string;
+    updatedAt?: string;
   };
   "schemas/user/model.json": {
     id: string;
     name: string;
     avatar: string;
     createdAt: string;
-    upDatedAt: string;
+    updatedAt?: string;
   };
   "schemas/workshop/model.json": {
     id: string;
     title: string;
     description?: string;
     createdAt: string;
-    upDatedAt: string;
+    updatedAt?: string;
   };
 };
 
