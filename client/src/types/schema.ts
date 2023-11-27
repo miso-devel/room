@@ -41,8 +41,8 @@ export type external = {
     theme: string;
     date: string;
     isCronTarget: boolean;
-    createdAt: string;
-    updatedAt?: string;
+    createdAt: number;
+    updatedAt?: number;
   };
   "schemas/event/output.json": {
     event: external["schemas/event/model.json"];
@@ -52,22 +52,22 @@ export type external = {
     id: string;
     eventId: string;
     memberId: string;
-    createdAt?: string;
-    updatedAt?: string;
+    createdAt?: number;
+    updatedAt?: number;
   };
   "schemas/user/model.json": {
     id: string;
     name: string;
     avatar: string;
-    createdAt: string;
-    updatedAt?: string;
+    createdAt: number;
+    updatedAt?: number;
   };
   "schemas/workshop/model.json": {
     id: string;
     title: string;
     description?: string;
-    createdAt: string;
-    updatedAt?: string;
+    createdAt: number;
+    updatedAt?: number;
   };
 };
 

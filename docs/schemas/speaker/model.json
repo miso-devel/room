@@ -4,8 +4,8 @@
     "id": { "type": "string" },
     "eventId": { "type": "string" },
     "memberId": { "type": "string" },
-    "createdAt": { "type": "string" },
-    "updatedAt": { "type": "string" }
+    "createdAt": { "type": "number" },
+    "updatedAt": { "type": "number" }
   },
   "required": ["id", "eventId", "memberId"]
 }
