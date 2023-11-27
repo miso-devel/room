@@ -59,8 +59,7 @@ export type external = {
     id: string;
     name: string;
     avatar: string;
-    createdAt: number;
-    updatedAt?: number;
+    joinedAt: number;
   };
   "schemas/workshop/model.json": {
     id: string;
