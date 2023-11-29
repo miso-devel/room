@@ -12,6 +12,7 @@ export type components = {
   schemas: {
     User: external["schemas/user/model.json"];
     Workshop: external["schemas/workshop/model.json"];
+    WorkshopInput: external["schemas/workshop/input.json"];
     Event: external["schemas/event/model.json"];
     EventInput: external["schemas/event/input.json"];
     EventOutput: external["schemas/event/output.json"];
@@ -60,6 +61,10 @@ export type external = {
     name: string;
     avatar: string;
     joinedAt: number;
+  };
+  "schemas/workshop/input.json": {
+    title: string;
+    description?: string;
   };
   "schemas/workshop/model.json": {
     id: string;

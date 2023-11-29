@@ -10,6 +10,7 @@
       "User": { "$ref": "./schemas/user/model.json" },
 
       "Workshop": { "$ref": "./schemas/workshop/model.json" },
+      "WorkshopInput": { "$ref": "./schemas/workshop/input.json" },
 
       "Event": { "$ref": "./schemas/event/model.json" },
       "EventInput": { "$ref": "./schemas/event/input.json" },
