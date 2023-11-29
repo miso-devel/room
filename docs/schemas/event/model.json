@@ -9,5 +9,5 @@
     "createdAt": { "type": "number" },
     "updatedAt": { "type": "number" }
   },
-  "required": ["id", "workshopId", "theme", "date", "isCronTarget", "createdAt", "upDatedAt"]
+  "required": ["id", "workshopId", "theme", "date", "isCronTarget", "createdAt", "updatedAt"]
 }

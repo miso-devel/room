@@ -7,5 +7,5 @@
     "createdAt": { "type": "number" },
     "updatedAt": { "type": "number" }
   },
-  "required": ["id", "eventId", "memberId"]
+  "required": ["id", "eventId", "memberId", "createdAt", "updatedAt"]
 }
