@@ -2,23 +2,35 @@ import { toMember } from "./util.ts";
 import { components } from "../../types/schema.ts";
 import { SECRET } from "../../constants/secret.ts";
 import { Bot } from "../../bot/bot.ts";
-import { WrapHandler } from "../../types/common.ts";
+import { Collection, Context, Hono, type Member } from "../../deps.ts";
+import { throwAPIError } from "../../util/throwError.ts";
 
 type TMember = components["schemas"]["User"];
 
-// TODO: Handler<Env, "/members", {}, Promise<Response>>とかの型は結構無理やりしてる感じがあるので修正できるならする
-const index: WrapHandler<"/members"> = async (c) => {
-  const data = await Bot.helpers.getMembers(SECRET.GUILD_ID, { limit: 300 });
-  const members: TMember[] = [];
-  data.forEach((value, _) => members.push(toMember(value)));
+const app = new Hono();
+
+// index
+app.get("/", async (c: Context) => {
+  const members: TMember[] = await Bot.helpers.getMembers(SECRET.GUILD_ID, {
+    limit: 10,
+  })
+    .then((data: Collection<bigint, Member>) =>
+      data.map((member: Member) => toMember(member))
+    )
+    .catch(throwAPIError(401, "discord user error"));
+
   return c.json(members);
-};
+});
 
-const show: WrapHandler<"/members/:id"> = async (c) => {
+// show
+app.get("/:id", async (c: Context) => {
   const id = c.req.param("id");
-  const data = await Bot.helpers.getMember(SECRET.GUILD_ID, BigInt(id));
-  if (!id) return c.json({ error: "メンバーが存在しませんでした" });
-  return c.json(toMember(data));
-};
 
-export const Member = { index, show };
+  const member: Member = await Bot.helpers.getMember(SECRET.GUILD_ID, id)
+    .then((data: Member) => data)
+    .catch(throwAPIError(401, "user not found"));
+
+  return c.json(toMember(member));
+});
+
+export default app;

@@ -1,38 +1,84 @@
 import { DB } from "../../db/kv.ts";
-import { WrapHandler } from "../../types/common.ts";
+import { Context, Hono } from "../../deps.ts";
+import { createSpeaker } from "../../service/speaker/createSpeaker.ts";
+import { schema } from "../../types/common.ts";
+import { addPostRequiredData } from "../../util/addRequiredData.ts";
+import { throwAPIError } from "../../util/throwError.ts";
 
-import { components } from "../../types/schema.ts";
+const prefix = { events: "events", speakers: "speakers" };
 
-const prefix = "events";
+type TEvent = schema["Event"];
+type TSpeaker = schema["Speaker"];
+type TEventInput = schema["EventInput"];
+// type TEventOutput = schema["EventOutput"];
 
-type TEvent = components["schemas"]["Event"];
+const app = new Hono();
 
-const index: WrapHandler<"/events"> = async (c) => {
+// index
+app.get("/", async (c: Context) => {
   const { workshopId } = c.req.query();
-  const events = await DB.fetchAll<TEvent>({ prefix });
-  return c.json(events);
-};
+  const events = await DB.fetchAll<TEvent>({ prefix: prefix["events"] });
+  const workshopEvents = events.filter((event) =>
+    event.workshopId === workshopId
+  );
+  return c.json(workshopEvents);
+});
 
-const show: WrapHandler<"/events/:id"> = async (c) => {
+// show
+app.get("/:id", async (c: Context) => {
   const eventId = c.req.param("id");
-  const event = await DB.fetchOne({ prefix, id: eventId });
+  const event = await DB.fetchOne<TEvent>({
+    prefix: prefix["events"],
+    id: eventId,
+  });
+  if (event === undefined) throwAPIError(401, "event is not found")();
   return c.json(event.value);
-};
+});
 
-// TODO: ここでspeakersも登録できるようにする
-// 受け取るdataをTEventの型とSpeakerの型にする
-const create: WrapHandler<"/events"> = async (c) => {
-  const data: TEvent = await c.req.json();
-  const event = await DB.createOne<TEvent>({ prefix, data });
+// create
+app.post("/", async (c: Context) => {
+  const input: TEventInput = await c.req.json();
+  const eventInput: TEvent = {
+    ...addPostRequiredData(input.event),
+    isCronTarget: false,
+  };
+
+  const event: TEvent =
+    (await DB.createOne<TEvent>({ prefix: prefix["events"], data: eventInput }))
+      .value ??
+      throwAPIError(401, "event create failed")();
+
+  const speakers: TSpeaker[] = await Promise.all(
+    input.speakerIds.map(async (speakerId: string) => {
+      const speaker = await DB.createOne<TSpeaker>({
+        prefix: prefix["speakers"],
+        data: createSpeaker(event.id, speakerId),
+      });
+      return speaker.value ?? throwAPIError(401, "speaker create failed")();
+    }),
+  );
+
+  return c.json({ event, speakers });
+});
+
+// update
+app.patch("/", async (c: Context) => {
+  const input: TEvent = await c.req.json();
+  const eventInput: TEvent = {
+    ...input,
+    isCronTarget: false,
+  };
+  const event = await DB.updateOne<TEvent>({
+    prefix: prefix["events"],
+    data: eventInput,
+  });
   return c.json(event.value);
-};
+});
 
-const update: WrapHandler<"/events"> = async (c) => {
+// delete
+app.delete("/", async (c: Context) => {
+  await DB.deleteOne({ prefix: prefix["events"], id: c.req.param("id") });
   return c.json({});
-};
+});
 
-const remove: WrapHandler<"/events"> = async (c) => {
-  return c.json({});
-};
-
-export const Event = { index, show, create, update, remove };
+export default app;

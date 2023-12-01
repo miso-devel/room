@@ -1,34 +1,53 @@
 import { DB } from "../../db/kv.ts";
-import { WrapHandler } from "../../types/common.ts";
+import { Context, Hono } from "../../deps.ts";
 import { components } from "../../types/schema.ts";
+import {
+  addPostRequiredData,
+  addUpdateRequiredData,
+} from "../../util/addRequiredData.ts";
 
 const prefix = "workshop";
 
 type TWorkshop = components["schemas"]["Workshop"];
+type TWorkshopInput = components["schemas"]["WorkshopInput"];
 
-const index: WrapHandler<"/workshops"> = async (c) => {
+const app = new Hono();
+
+app.get("/", async (c: Context) => {
   const workshops = await DB.fetchAll<TWorkshop>({ prefix });
   return c.json(workshops);
-};
+});
 
-const show: WrapHandler<"/workshops/:id"> = async (c) => {
+app.get("/:id", async (c: Context) => {
   const workshopId = c.req.param("id");
-  const workshop = await DB.fetchOne({ prefix, id: workshopId });
+  const workshop = await DB.fetchOne<TWorkshop>({ prefix, id: workshopId });
   return c.json(workshop.value);
-};
+});
 
-const create: WrapHandler<"/workshops"> = async (c) => {
-  const data: TWorkshop = await c.req.json();
-  const workshop = await DB.createOne<TWorkshop>({ prefix, data });
+app.post("/", async (c: Context) => {
+  const input: TWorkshopInput = await c.req.json();
+  const workshopInput: TWorkshop = addPostRequiredData(input);
+  const workshop = await DB.createOne<TWorkshop>({
+    prefix,
+    data: workshopInput,
+  });
   return c.json(workshop.value);
-};
+});
 
-const update: WrapHandler<"/workshops"> = async (c) => {
+app.patch("/", async (c: Context) => {
+  const input: TWorkshop = await c.req.json();
+  const workshopInput: TWorkshop = addUpdateRequiredData(input);
+  const workshop = await DB.updateOne<TWorkshop>({
+    prefix,
+    data: workshopInput,
+  });
+  return c.json(workshop.value);
+});
+
+app.delete("/", async (c: Context) => {
+  const id: string = await c.req.json();
+  await DB.deleteOne({ prefix, id });
   return c.json({});
-};
+});
 
-const remove: WrapHandler<"/workshops"> = async (c) => {
-  return c.json({});
-};
-
-export const Workshop = { index, show, create, update, remove };
+export default app;
