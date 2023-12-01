@@ -5,4 +5,5 @@ export const SECRET = {
   DISCORD_TOKEN: Deno.env.get("DISCORD_TOKEN")!,
   GUILD_ID: Deno.env.get("GUILD_ID")!,
   MY_CHANNEL_ID: Deno.env.get("MY_CHANNEL_ID")!,
+  ENV: Deno.env.get("DENO_ENV")!,
 };

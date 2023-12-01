@@ -20,7 +20,7 @@
 # local env files
 .env
 
-local.deno.db
-local.deno.db-shm
-local.deno.db-wal
-local.kv
+dev.db
+dev.db-shm
+dev.db-wal
+dev.kv
