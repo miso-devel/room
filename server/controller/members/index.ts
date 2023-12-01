@@ -1,11 +1,11 @@
 import { toMember } from "./util.ts";
-import { components } from "../../types/schema.ts";
 import { SECRET } from "../../constants/secret.ts";
 import { Bot } from "../../bot/bot.ts";
 import { Collection, Context, Hono, type Member } from "../../deps.ts";
 import { throwAPIError } from "../../util/throwError.ts";
+import { schema } from "../../types/common.ts";
 
-type TMember = components["schemas"]["User"];
+type TMember = schema["User"];
 
 const app = new Hono();
 

@@ -1,11 +1,10 @@
+import { PREFIX_MAP } from "../../constants/prefix.ts";
 import { DB } from "../../db/kv.ts";
 import { Context, Hono } from "../../deps.ts";
 import { createSpeaker } from "../../service/speaker/createSpeaker.ts";
 import { schema } from "../../types/common.ts";
 import { addPostRequiredData } from "../../util/addRequiredData.ts";
 import { throwAPIError } from "../../util/throwError.ts";
-
-const prefix = { events: "events", speakers: "speakers" };
 
 type TEvent = schema["Event"];
 type TSpeaker = schema["Speaker"];
@@ -17,7 +16,7 @@ const app = new Hono();
 // index
 app.get("/", async (c: Context) => {
   const { workshopId } = c.req.query();
-  const events = await DB.fetchAll<TEvent>({ prefix: prefix["events"] });
+  const events = await DB.fetchAll<TEvent>({ prefix: PREFIX_MAP["event"] });
   const workshopEvents = events.filter((event) =>
     event.workshopId === workshopId
   );
@@ -28,7 +27,7 @@ app.get("/", async (c: Context) => {
 app.get("/:id", async (c: Context) => {
   const eventId = c.req.param("id");
   const event = await DB.fetchOne<TEvent>({
-    prefix: prefix["events"],
+    prefix: PREFIX_MAP["event"],
     id: eventId,
   });
   if (event === undefined) throwAPIError(401, "event is not found")();
@@ -43,15 +42,17 @@ app.post("/", async (c: Context) => {
     isCronTarget: false,
   };
 
-  const event: TEvent =
-    (await DB.createOne<TEvent>({ prefix: prefix["events"], data: eventInput }))
-      .value ??
-      throwAPIError(401, "event create failed")();
+  const event: TEvent = (await DB.createOne<TEvent>({
+    prefix: PREFIX_MAP["event"],
+    data: eventInput,
+  }))
+    .value ??
+    throwAPIError(401, "event create failed")();
 
   const speakers: TSpeaker[] = await Promise.all(
     input.speakerIds.map(async (speakerId: string) => {
       const speaker = await DB.createOne<TSpeaker>({
-        prefix: prefix["speakers"],
+        prefix: PREFIX_MAP["event"],
         data: createSpeaker(event.id, speakerId),
       });
       return speaker.value ?? throwAPIError(401, "speaker create failed")();
@@ -69,7 +70,7 @@ app.patch("/", async (c: Context) => {
     isCronTarget: false,
   };
   const event = await DB.updateOne<TEvent>({
-    prefix: prefix["events"],
+    prefix: PREFIX_MAP["event"],
     data: eventInput,
   });
   return c.json(event.value);
@@ -77,7 +78,7 @@ app.patch("/", async (c: Context) => {
 
 // delete
 app.delete("/", async (c: Context) => {
-  await DB.deleteOne({ prefix: prefix["events"], id: c.req.param("id") });
+  await DB.deleteOne({ prefix: PREFIX_MAP["event"], id: c.req.param("id") });
   return c.json({});
 });
 
