@@ -1,8 +1,8 @@
 import { SECRET } from "./constants/secret.ts";
-import { Event as _Event } from "./controller/events/index.ts";
-import { Member } from "./controller/members/index.ts";
-import { Workshop } from "./controller/workshops/index.ts";
+import Event from "./controller/events/index.ts";
 import { cors, Hono, logger, poweredBy } from "./deps.ts";
+import Workshop from "./controller/workshops/index.ts";
+import Member from "./controller/members/index.ts";
 
 const app = new Hono();
 
@@ -26,22 +26,8 @@ app.use(
   poweredBy(),
 );
 
-// members API
-app.get("/members", Member.index);
-app.get("/members/:id", Member.show);
-
-// workshops API
-app.get("/workshops", Workshop.index);
-app.get("/workshops/:id", Workshop.show);
-app.post("/workshops", Workshop.create);
-app.patch("/workshops", Workshop.update);
-app.delete("/workshops", Workshop.remove);
-
-// events API
-app.get("/events", _Event.index);
-app.get("/events/:id", _Event.show);
-app.post("/events", _Event.create);
-app.patch("/events", _Event.update);
-app.delete("/events", _Event.remove);
+app.route("/members", Member);
+app.route("/workshops", Workshop);
+app.route("/events", Event);
 
 Deno.serve(app.fetch);
