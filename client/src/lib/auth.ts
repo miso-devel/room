@@ -38,19 +38,13 @@ export const authOptions: NextAuthOptions = {
 
     session: async ({ session, token }) => {
       session.accessToken = token.accessToken;
-      if (session.user) {
-        session.user.id = token.id;
-      }
+      if (session.user) session.user.id = token.id;
       return session;
     },
 
     jwt: async ({ token, account, profile }) => {
-      if (account && account.access_token) {
-        token.accessToken = account.access_token;
-      }
-      if (profile) {
-        token.id = profile.id;
-      }
+      if (account && account.access_token) token.accessToken = account.access_token;
+      if (profile) token.id = profile.id;
       return token;
     },
   },
