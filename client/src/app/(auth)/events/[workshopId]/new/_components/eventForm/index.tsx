@@ -4,20 +4,17 @@ import Image from 'next/image';
 import { FC, useState } from 'react';
 import { Members } from '../members';
 import { useRouter } from 'next/navigation';
+import { schema } from '@/types/common';
 
 type TMemberForm = { theme: string; url: string };
-type TProps = { members: components['schemas']['User'][]; workshop: components['schemas']['Workshop'] };
+type TProps = { members: schema['User'][]; workshop: schema['Workshop'] };
 
 export const EventForm: FC<TProps> = ({ members, workshop }) => {
   // TODO: 初期値は 1. とか何番目のイベントなのかわかる状態をもらっておきたい
   const [theme, setTheme] = useState(workshop.title);
   const [date, setDate] = useState('');
-  const [checkedMember, setCheckedMember] = useState<Map<string, components['schemas']['User'] & TMemberForm>>(
-    new Map()
-  );
-  const [definedMember, setDefinedMember] = useState<Map<string, components['schemas']['User'] & TMemberForm>>(
-    new Map()
-  );
+  const [checkedMember, setCheckedMember] = useState<Map<string, schema['User'] & TMemberForm>>(new Map());
+  const [definedMember, setDefinedMember] = useState<Map<string, schema['User'] & TMemberForm>>(new Map());
   const router = useRouter();
 
   const openModal = () => {
@@ -28,9 +25,13 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
   };
 
   const onSubmit = async () => {
+    const eventInput: schema['EventInput'] = {
+      event: { workshopId: workshop.id, theme, date },
+      speakerIds: [],
+    };
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`, {
       method: 'POST',
-      body: JSON.stringify({ workshopId: workshop.id, theme, date, isCronTarget: false }),
+      body: JSON.stringify(eventInput),
       mode: 'cors',
       credentials: 'include',
     });
