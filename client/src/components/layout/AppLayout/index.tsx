@@ -7,7 +7,7 @@ type AppLayoutProps = { children: ReactNode; session: Session };
 
 export const AppLayout: FC<AppLayoutProps> = ({ children, session }) => {
   return (
-    <div className="bg-primary w-screen min-h-screen flex">
+    <div className="w-screen min-h-screen flex text-bright">
       <SideBar />
       <PageContent>{children}</PageContent>
     </div>

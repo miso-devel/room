@@ -13,7 +13,7 @@ const AppTitle = () => {
 
 export const SideBar: FC = () => {
   return (
-    <div className="w-[15%] h-screen px-5 bg-secondary flex flex-col shadow-2xl rounded-r-3xl gap-1">
+    <div className="w-[15%] h-screen px-5 bg-secondary flex flex-col shadow-inner rounded-r-3xl gap-1 sticky top-0">
       <AppTitle />
       <NavLinks />
     </div>
