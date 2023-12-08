@@ -1,12 +1,9 @@
-import { components } from '@/types/schema';
 import { WorkshopForm } from './_components/workshopForm';
-
-type TMember = components['schemas']['User'][];
 
 export default async function NewWorkshop() {
   return (
-    <div className="prose max-w-full">
-      <h1>workshop new</h1>
+    <div className="w-[60%] mx-auto">
+      <h1 className="text-3xl mb-5">新しい勉強会を作成する</h1>
       <WorkshopForm />
     </div>
   );

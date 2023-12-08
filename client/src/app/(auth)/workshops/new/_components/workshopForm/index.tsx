@@ -1,55 +1,32 @@
-'use client';
-import { components } from '@/types/schema';
-import { useRouter } from 'next/navigation';
-import { FC, useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { FormWrapper } from '@/components/ui/Form/FormWrapper';
+import { Input } from '@/components/ui/Form/Input';
+import { Textarea } from '@/components/ui/Form/Textarea';
+import { schema } from '@/types/common';
+import { redirect } from 'next/navigation';
+import { FC } from 'react';
 
 export const WorkshopForm: FC = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const router = useRouter();
-  const onSubmit = async () => {
+  const submit = async (formData: FormData) => {
+    'use server';
+    const title = formData.get('title');
+    const description = formData.get('description');
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/workshops`, {
       method: 'POST',
       body: JSON.stringify({ title, description }),
       mode: 'cors',
       credentials: 'include',
     }).then(async (data) => {
-      const workshop: components['schemas']['Workshop'] = await data.json();
-      router.push(`/workshops/${workshop.id}`);
+      const workshop: schema['Workshop'] = await data.json();
+      redirect(`/workshops/${workshop.id}`);
     });
   };
 
   return (
-    <div className="flex gap-5 flex-col">
-      <div className="flex flex-col">
-        <label htmlFor="workshop_name" className="pb-2">
-          勉強会名
-        </label>
-        <input
-          id="workshop_name"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="workshop name here"
-          className="input input-bordered input-secondary w-full max-w-xs"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="workshop_name" className="pb-2">
-          説明
-        </label>
-        <textarea
-          className="textarea textarea-secondary"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-
-      <div className="flex justify-center">
-        <button className="btn btn-outline btn-secondary w-full" onClick={onSubmit}>
-          作成
-        </button>
-      </div>
-    </div>
+    <FormWrapper action={submit}>
+      <Input label="勉強会名" name="title" placeholder="workshop name here" type="text" />
+      <Textarea label="説明" name="description" placeholder="workshop description here" />
+      <Button>作成</Button>
+    </FormWrapper>
   );
 };
