@@ -5,16 +5,16 @@ type TProps = { workshops: components['schemas']['Workshop'][] };
 
 export const Workshops: FC<TProps> = ({ workshops }) => {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="grid grid-cols-3 gap-5 my-5">
       {workshops.map((workshop) => {
         return (
           <a
             key={workshop.id}
-            className="border-2 border-secondary p-3 rounded-md no-underline hover:bg-secondary hover:scale-105 transition-all"
+            className="p-3 rounded-md transition-all bg-secondary hover:bg-accent hover:text-dark shadow-2xl"
             href={`/workshops/${workshop.id}`}
           >
-            <h2 className="m-0 mb-2">{workshop.title}</h2>
-            <p className="m-0">{workshop.description}</p>
+            <h2 className="text-xl mb-2">{workshop.title}</h2>
+            <p className="text-xs">{workshop.description}</p>
           </a>
         );
       })}
