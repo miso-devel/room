@@ -1,12 +1,14 @@
 import { FC, ReactNode } from 'react';
 
-type TButtonProps = { children: ReactNode; onClick?: () => void };
+type TButtonProps = { children: ReactNode; onClick?: () => void; onDark?: boolean };
 
-export const Button: FC<TButtonProps> = ({ children, onClick }) => {
+export const Button: FC<TButtonProps> = ({ children, onClick, onDark }) => {
   return (
     <button
       onClick={onClick}
-      className="border-bright border-2 p-2 hover:bg-accent hover:text-dark transition-all rounded-md"
+      className={`${
+        onDark ? 'hover:text-dark border-bright' : 'hover:text-bright border-dark'
+      } border-2 p-2 transition-all rounded-md hover:bg-accent`}
     >
       {children}
     </button>
