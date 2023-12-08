@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { BIZ_UDGothic, Inter, M_PLUS_1 } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = M_PLUS_1({ subsets: ['latin'], display: 'swap', weight: '700' });
 
 export const metadata: Metadata = {
   title: 'Doer room',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} text-bright`}>{children}</body>
     </html>
   );
 }
