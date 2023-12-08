@@ -5,7 +5,7 @@ export const LoginButton = async () => {
   return (
     <button
       onClick={() => signIn('discord', { callbackUrl: `${process.env.NEXT_PUBLIC_CLIENT_URL}/home` })}
-      className="btn btn-outline btn-secondary"
+      className=" rounded-md hover:bg-white hover:text-black transition-all p-2 my-5"
     >
       Login with Discord
     </button>
