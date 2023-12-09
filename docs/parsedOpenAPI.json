@@ -1,0 +1,240 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "開発環境"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "joinedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "avatar",
+          "joinedAt"
+        ]
+      },
+      "Workshop": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "WorkshopInput": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "workshopId": {
+            "type": "string"
+          },
+          "theme": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "isCronTarget": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "workshopId",
+          "theme",
+          "date",
+          "isCronTarget",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "EventInput": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "object",
+            "properties": {
+              "workshopId": {
+                "type": "string"
+              },
+              "theme": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "workshopId",
+              "theme",
+              "date"
+            ]
+          },
+          "speakerIds": {
+            "type": "array",
+            "items": "string"
+          }
+        },
+        "required": [
+          "event",
+          "speakerIds",
+          "id",
+          "workshopId",
+          "theme",
+          "date",
+          "isCronTarget",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "EventOutput": {
+        "type": "object",
+        "properties": {
+          "speakers": {
+            "type": "array",
+            "items": {
+              "id": {
+                "type": "string"
+              },
+              "eventId": {
+                "type": "string"
+              },
+              "memberId": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number"
+              },
+              "updatedAt": {
+                "type": "number"
+              }
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "workshopId": {
+            "type": "string"
+          },
+          "theme": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "isCronTarget": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "event",
+          "speakers",
+          "id",
+          "workshopId",
+          "theme",
+          "date",
+          "isCronTarget",
+          "createdAt",
+          "updatedAt",
+          "eventId",
+          "memberId"
+        ]
+      },
+      "Speaker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "eventId",
+          "memberId",
+          "createdAt",
+          "updatedAt"
+        ]
+      }
+    }
+  }
+}

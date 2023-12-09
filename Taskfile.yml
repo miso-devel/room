@@ -14,4 +14,4 @@ tasks:
   generate-type:
     dir: "./docs"
     cmds:
-      - pnpm run generate-client && pnpm run generate-server
+      - pnpm run parseOpenAPI && pnpm run generate-client && pnpm run generate-server
