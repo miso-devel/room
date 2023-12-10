@@ -155,21 +155,31 @@
           "speakers": {
             "type": "array",
             "items": {
-              "id": {
-                "type": "string"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "eventId": {
+                  "type": "string"
+                },
+                "memberId": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "number"
+                },
+                "updatedAt": {
+                  "type": "number"
+                }
               },
-              "eventId": {
-                "type": "string"
-              },
-              "memberId": {
-                "type": "string"
-              },
-              "createdAt": {
-                "type": "number"
-              },
-              "updatedAt": {
-                "type": "number"
-              }
+              "required": [
+                "id",
+                "eventId",
+                "memberId",
+                "createdAt",
+                "updatedAt"
+              ]
             }
           },
           "id": {
@@ -203,9 +213,7 @@
           "date",
           "isCronTarget",
           "createdAt",
-          "updatedAt",
-          "eventId",
-          "memberId"
+          "updatedAt"
         ]
       },
       "Speaker": {
