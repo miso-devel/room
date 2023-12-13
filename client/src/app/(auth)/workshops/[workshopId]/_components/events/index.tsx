@@ -1,5 +1,3 @@
-import { ButtonLink } from '@/components/ui/Link/ButtonLink';
-import { TextLink } from '@/components/ui/Link/TextLink';
 import { schema } from '@/types/common';
 import { cdate } from 'cdate';
 import { FC, ReactNode } from 'react';
@@ -31,7 +29,7 @@ const Event: FC<TEventProps> = ({ event, index }) => {
 export const Events: FC<TEventsProps> = ({ events }) => {
   return (
     <>
-      <h2 className="text-xl my-3">勉強会に基づくイベント一覧</h2>
+      <h2 className="text-xl my-3">イベント一覧</h2>
       <table className="table-auto text-left rounded-md">
         <thead>
           <tr>

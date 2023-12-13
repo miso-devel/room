@@ -7,7 +7,7 @@ type TWorkshop = { workshop: schema['Workshop'] };
 
 export const Workshops: FC<TWorkshops> = ({ workshops }) => {
   return (
-    <div className="border-white rounded-md bg-secondary shadow-2xl">
+    <div className="rounded-md border-middle border-2 shadow-md">
       <h1 className="text-2xl p-3">最近のworkshop</h1>
       <div className="flex flex-col gap-1 p-3">
         {workshops.map((workshop) => {

@@ -12,7 +12,7 @@ export const WorkshopInfo: FC<TWorkshopInfoProps> = ({ workshop }) => {
         <h1 className=" text-3xl">{workshop.title}</h1>
         <ButtonLink href={`/events/${workshop.id}/new`}>イベントの作成</ButtonLink>
       </div>
-      <div className="break-all p-3 bg-secondary rounded-md my-3">
+      <div className="break-all p-3 bg-middle rounded-md my-3">
         <p>{workshop.description}</p>
       </div>
     </div>
