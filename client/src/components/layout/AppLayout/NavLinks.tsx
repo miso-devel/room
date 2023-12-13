@@ -11,10 +11,13 @@ const paths = [
 ];
 
 const NavLink: FC<TNavLink> = ({ link, text, isCurrent }) => {
-  return isCurrent ? (
-    <span className="opacity-70 p-2">{text}</span>
-  ) : (
-    <a href={link} className="hover:bg-accent hover:text-dark p-2 font-medium transition-all rounded-md">
+  return (
+    <a
+      href={link ?? ''}
+      className={`p-2 font-medium transition-all rounded-md ${
+        isCurrent ? 'text-accent cursor-not-allowed' : 'hover:opacity-70'
+      }`}
+    >
       {text}
     </a>
   );
