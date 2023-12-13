@@ -4,5 +4,5 @@
     "$ref": "./model.json",
     "speakers": { "type": "array", "items": { "$ref": "../speaker/model.json" } }
   },
-  "required": ["event", "speakers"]
+  "required": ["speakers"]
 }
