@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@svgr/webpack": "^7.0.0",
     "cdate": "^0.0.7",
     "next": "13.5.4",
     "next-auth": "^4.23.2",
