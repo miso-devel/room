@@ -9,7 +9,7 @@ import { throwAPIError } from "../../util/throwError.ts";
 type TEvent = schema["Event"];
 type TSpeaker = schema["Speaker"];
 type TEventInput = schema["EventInput"];
-// type TEventOutput = schema["EventOutput"];
+type TEventOutput = schema["EventOutput"];
 
 const app = new Hono();
 
