@@ -1,20 +1,16 @@
-import { WorkshopInfo } from './_components/workshop';
 import { schema } from '../../../../types/common';
-import { Events } from './_components/events';
+import { EventsInfo } from './_components/EventsInfo';
+import { fetcher } from '../../../../util/fetcher';
+import { WorkshopPageTitle } from './_components/WorkshopPageTitle';
 
 export default async function WorkshopsShowPage({ params }: { params: { workshopId: string } }) {
-  const workshop: schema['Workshop'] = await fetch(`${process.env.SERVER_URL}/workshops/${params.workshopId}`).then(
-    (data) => data.json()
-  );
-
-  const events: schema['Event'][] = await fetch(
-    `${process.env.SERVER_URL}/events?workshopId=${params.workshopId}`
-  ).then((data) => data.json());
+  const workshop = await fetcher<schema['Workshop']>(`/workshops/${params.workshopId}`);
+  const events = await fetcher<schema['Event'][]>(`/events?workshopId=${params.workshopId}`);
 
   return (
     <>
-      <WorkshopInfo workshop={workshop} />
-      <Events events={events} />
+      <WorkshopPageTitle workshop={workshop} />
+      <EventsInfo events={events} workshopId={workshop.id} />
     </>
   );
 }
