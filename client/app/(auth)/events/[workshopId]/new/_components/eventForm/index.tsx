@@ -32,7 +32,7 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
       <Input label="テーマ" name="theme" placeholder="theme here" type="text" />
       <Input label="時間" name="date" placeholder="date here" type="datetime-local" />
       <MemberSelectModal members={members} />
-      <Button>イベントの作成です</Button>
+      <Button>作成する</Button>
     </FormWrapper>
   );
 };

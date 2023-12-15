@@ -1,16 +1,18 @@
 import { schema } from '../../../../../../types/common';
 import { cdate } from 'cdate';
 import { FC, ReactNode } from 'react';
+import { SvgLink } from '../../../../../../components/ui/Link/SvgLink';
+import Add from 'public/svg/add.svg';
 
 type TEventProps = { event: schema['Event']; index: number };
-type TEventsProps = { events: schema['Event'][] };
+type TEventsProps = { events: schema['Event'][]; workshopId: string };
 
 type TEventTableElement = { tableDataKind: 'td' | 'th'; children?: ReactNode };
 const EventTableElement: FC<TEventTableElement> = ({ tableDataKind, children }) => {
   return tableDataKind === 'th' ? (
-    <th className="px-4 py-4 border-2">{children}</th>
+    <th className="border-2 px-4 py-4">{children}</th>
   ) : (
-    <td className="px-4 py-4 border-2">{children}</td>
+    <td className="border-2 px-4 py-4">{children}</td>
   );
 };
 
@@ -26,11 +28,17 @@ const Event: FC<TEventProps> = ({ event, index }) => {
   );
 };
 
-export const Events: FC<TEventsProps> = ({ events }) => {
+export const EventsInfo: FC<TEventsProps> = ({ events, workshopId }) => {
   return (
     <>
-      <h2 className="text-xl my-3">イベント一覧</h2>
-      <table className="table-auto text-left rounded-md">
+      <div className="flex items-center gap-3">
+        <h2 className="my-3 text-xl">イベント一覧</h2>
+        <SvgLink href={`/events/${workshopId}/new`} ariaLabel="イベントの作成">
+          <Add className="h-6 w-6 rounded-md bg-middle fill-dark hover:bg-dark hover:fill-bright" />
+        </SvgLink>
+      </div>
+
+      <table className="table-auto rounded-md text-left">
         <thead>
           <tr>
             <EventTableElement tableDataKind="th"></EventTableElement>

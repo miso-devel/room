@@ -10,7 +10,7 @@ const AddSvg: FC = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="22"
-      className="fill-bright hover:fill-dark hover:bg-accent hover:text-dark transition-all"
+      className="fill-dark hover:fill-dark bg-middle rounded-md hover:bg-accent hover:text-dark transition-all"
       viewBox="0 -960 960 960"
       width="22"
     >
@@ -36,7 +36,7 @@ export const MemberSelectModal: FC<TMemberSelectModalProps> = ({ members }) => {
         </button>
       </div>
       {modalState && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 text-dark">
           {members.map((member) => {
             return (
               <Checkbox label={member.id} name="members" value={member.id} key={member.id}>
