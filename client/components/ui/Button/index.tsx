@@ -7,8 +7,8 @@ export const Button: FC<TButtonProps> = ({ children, onClick, onDark }) => {
     <button
       onClick={onClick}
       className={`${
-        onDark ? 'hover:text-dark border-bright' : 'hover:text-bright border-dark'
-      } border-2 p-2 transition-all rounded-md hover:bg-accent`}
+        onDark ? 'hover:text-dark border-bright' : 'hover:border-dark'
+      } border-2 border-dark p-2 transition-all rounded-md hover:bg-accent`}
     >
       {children}
     </button>
