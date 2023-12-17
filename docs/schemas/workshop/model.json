@@ -4,8 +4,10 @@
     "id": { "type": "string" },
     "title": { "type": "string" },
     "description": { "type": "string" },
+    "eventCount": { "type": "number" },
+    "latestEventDate": { "type": "number" },
     "createdAt": { "type": "number" },
     "updatedAt": { "type": "number" }
   },
-  "required": ["id", "title", "createdAt", "updatedAt"]
+  "required": ["id", "title", "description", "eventCount", "createdAt", "updatedAt"]
 }

@@ -4,7 +4,7 @@
     "id": { "type": "string" },
     "workshopId": { "type": "string" },
     "theme": { "type": "string" },
-    "date": { "type": "string" },
+    "date": { "type": "number" },
     "isCronTarget": { "type": "boolean" },
     "createdAt": { "type": "number" },
     "updatedAt": { "type": "number" }

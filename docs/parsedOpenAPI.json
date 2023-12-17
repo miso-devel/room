@@ -47,6 +47,12 @@
           "description": {
             "type": "string"
           },
+          "eventCount": {
+            "type": "number"
+          },
+          "latestEventDate": {
+            "type": "number"
+          },
           "createdAt": {
             "type": "number"
           },
@@ -57,6 +63,8 @@
         "required": [
           "id",
           "title",
+          "description",
+          "eventCount",
           "createdAt",
           "updatedAt"
         ]
@@ -88,7 +96,7 @@
             "type": "string"
           },
           "date": {
-            "type": "string"
+            "type": "number"
           },
           "isCronTarget": {
             "type": "boolean"
@@ -123,7 +131,7 @@
                 "type": "string"
               },
               "date": {
-                "type": "string"
+                "type": "number"
               }
             },
             "required": [
@@ -160,10 +168,13 @@
                 "id": {
                   "type": "string"
                 },
-                "eventId": {
+                "memberId": {
                   "type": "string"
                 },
-                "memberId": {
+                "workshopId": {
+                  "type": "string"
+                },
+                "eventId": {
                   "type": "string"
                 },
                 "createdAt": {
@@ -175,8 +186,9 @@
               },
               "required": [
                 "id",
-                "eventId",
                 "memberId",
+                "workshopId",
+                "eventId",
                 "createdAt",
                 "updatedAt"
               ]
@@ -192,7 +204,7 @@
             "type": "string"
           },
           "date": {
-            "type": "string"
+            "type": "number"
           },
           "isCronTarget": {
             "type": "boolean"
@@ -221,10 +233,13 @@
           "id": {
             "type": "string"
           },
-          "eventId": {
+          "memberId": {
             "type": "string"
           },
-          "memberId": {
+          "workshopId": {
+            "type": "string"
+          },
+          "eventId": {
             "type": "string"
           },
           "createdAt": {
@@ -236,8 +251,9 @@
         },
         "required": [
           "id",
-          "eventId",
           "memberId",
+          "workshopId",
+          "eventId",
           "createdAt",
           "updatedAt"
         ]

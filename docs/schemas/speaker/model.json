@@ -2,10 +2,11 @@
   "type": "object",
   "properties": {
     "id": { "type": "string" },
-    "eventId": { "type": "string" },
     "memberId": { "type": "string" },
+    "workshopId": { "type": "string" },
+    "eventId": { "type": "string" },
     "createdAt": { "type": "number" },
     "updatedAt": { "type": "number" }
   },
-  "required": ["id", "eventId", "memberId", "createdAt", "updatedAt"]
+  "required": ["id", "memberId", "workshopId", "eventId", "createdAt", "updatedAt"]
 }

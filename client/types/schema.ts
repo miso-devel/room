@@ -19,7 +19,9 @@ export type components = {
     Workshop: {
       id: string;
       title: string;
-      description?: string;
+      description: string;
+      eventCount: number;
+      latestEventDate?: number;
       createdAt: number;
       updatedAt: number;
     };
@@ -31,7 +33,7 @@ export type components = {
       id: string;
       workshopId: string;
       theme: string;
-      date: string;
+      date: number;
       isCronTarget: boolean;
       createdAt: number;
       updatedAt: number;
@@ -40,30 +42,32 @@ export type components = {
       event: {
         workshopId: string;
         theme: string;
-        date: string;
+        date: number;
       };
       speakerIds: string[];
     };
     EventOutput: {
       speakers: {
           id: string;
-          eventId: string;
           memberId: string;
+          workshopId: string;
+          eventId: string;
           createdAt: number;
           updatedAt: number;
         }[];
       id: string;
       workshopId: string;
       theme: string;
-      date: string;
+      date: number;
       isCronTarget: boolean;
       createdAt: number;
       updatedAt: number;
     };
     Speaker: {
       id: string;
-      eventId: string;
       memberId: string;
+      workshopId: string;
+      eventId: string;
       createdAt: number;
       updatedAt: number;
     };
