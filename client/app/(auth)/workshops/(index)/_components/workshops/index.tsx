@@ -1,24 +1,25 @@
 import { schema } from '../../../../../../types/common';
 import { FC } from 'react';
-import { fetcher } from '../../../../../../util/fetcher';
+import Link from 'next/link';
 
-type TProps = { workshops: schema['Workshop'][] };
+type TWorkshopsProps = { workshops: schema['Workshop'][] };
+type TWorkshopProps = { workshop: schema['Workshop'] };
 
-export const Workshops: FC<TProps> = async ({ workshops }) => {
-  const events = await fetcher<schema['Event'][]>('/events');
-
+export const Workshops: FC<TWorkshopsProps> = async ({ workshops }) => {
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 gap-3">
       {workshops.map((workshop) => {
-        return (
-          <div key={workshop.id} className="rounded-md border-2 border-middle p-2">
-            <a className="p-3" href={`/workshops/${workshop.id}`}>
-              <h2 className="mb-2 text-xl">{workshop.title}</h2>
-              <p className="text-xs">{workshop.description}</p>
-            </a>
-          </div>
-        );
+        return <Workshop key={workshop.id} workshop={workshop} />;
       })}
     </div>
+  );
+};
+
+const Workshop: FC<TWorkshopProps> = ({ workshop }) => {
+  return (
+    <Link href={`/workshops/${workshop.id}`} className="border-b-2 py-2 transition-all hover:border-b-primary">
+      <h2 className="mb-2 text-xl">{workshop.title}</h2>
+      <p>{workshop.description}</p>
+    </Link>
   );
 };
