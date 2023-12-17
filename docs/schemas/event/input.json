@@ -6,9 +6,9 @@
       "properties": {
         "workshopId": { "$ref": "./model.json#/workshopId" },
         "theme": { "$ref": "./model.json#/theme" },
-        "date": { "$ref": "./model.json#/date" }
+        "datetime": { "$ref": "./model.json#/datetime" }
       },
-      "required": ["workshopId", "theme", "date"]
+      "required": ["workshopId", "theme", "datetime"]
     },
     "speakerIds": { "type": "array", "items": "string" }
   },

@@ -95,8 +95,8 @@
           "theme": {
             "type": "string"
           },
-          "date": {
-            "type": "number"
+          "datetime": {
+            "type": "string"
           },
           "isCronTarget": {
             "type": "boolean"
@@ -112,7 +112,7 @@
           "id",
           "workshopId",
           "theme",
-          "date",
+          "datetime",
           "isCronTarget",
           "createdAt",
           "updatedAt"
@@ -130,14 +130,14 @@
               "theme": {
                 "type": "string"
               },
-              "date": {
-                "type": "number"
+              "datetime": {
+                "type": "string"
               }
             },
             "required": [
               "workshopId",
               "theme",
-              "date"
+              "datetime"
             ]
           },
           "speakerIds": {
@@ -151,7 +151,7 @@
           "id",
           "workshopId",
           "theme",
-          "date",
+          "datetime",
           "isCronTarget",
           "createdAt",
           "updatedAt"
@@ -203,8 +203,8 @@
           "theme": {
             "type": "string"
           },
-          "date": {
-            "type": "number"
+          "datetime": {
+            "type": "string"
           },
           "isCronTarget": {
             "type": "boolean"
@@ -221,7 +221,7 @@
           "id",
           "workshopId",
           "theme",
-          "date",
+          "datetime",
           "isCronTarget",
           "createdAt",
           "updatedAt"

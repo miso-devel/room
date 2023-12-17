@@ -33,7 +33,7 @@ export type components = {
       id: string;
       workshopId: string;
       theme: string;
-      date: number;
+      datetime: string;
       isCronTarget: boolean;
       createdAt: number;
       updatedAt: number;
@@ -42,7 +42,7 @@ export type components = {
       event: {
         workshopId: string;
         theme: string;
-        date: number;
+        datetime: string;
       };
       speakerIds: string[];
     };
@@ -58,7 +58,7 @@ export type components = {
       id: string;
       workshopId: string;
       theme: string;
-      date: number;
+      datetime: string;
       isCronTarget: boolean;
       createdAt: number;
       updatedAt: number;
