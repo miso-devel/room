@@ -5,21 +5,15 @@ import { Textarea } from '../../../../../../components/ui/Form/Textarea';
 import { schema } from '../../../../../../types/common';
 import { redirect } from 'next/navigation';
 import { FC } from 'react';
+import { fetcher } from '../../../../../../util/fetcher';
 
 export const WorkshopForm: FC = () => {
   const submit = async (formData: FormData) => {
     'use server';
-    const title = formData.get('title');
-    const description = formData.get('description');
-    await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/workshops`, {
-      method: 'POST',
-      body: JSON.stringify({ title, description }),
-      mode: 'cors',
-      credentials: 'include',
-    }).then(async (data) => {
-      const workshop: schema['Workshop'] = await data.json();
-      redirect(`/workshops/${workshop.id}`);
-    });
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const res = await fetcher.post<schema['WorkshopInput'], schema['Workshop']>('/workshops', { title, description });
+    res && redirect(`/workshops/${res.id}`);
   };
 
   return (
