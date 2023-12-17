@@ -1,3 +1,6 @@
+// Deno std
+export * as collections from "https://deno.land/std@0.209.0/collections/mod.ts";
+
 // discordeno
 export * from "https://deno.land/x/discordeno@18.0.1/mod.ts";
 export {
