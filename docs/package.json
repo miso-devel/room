@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "parseOpenAPI": "ts-node parseOpenAPIReFScript.ts --resolveJsonModule",
-    "generate-client": "npx openapi-typescript parsedOpenAPI.json -t -o ../client/src/types/schema.ts",
+    "generate-client": "npx openapi-typescript parsedOpenAPI.json -t -o ../client/types/schema.ts",
     "generate-server": "npx openapi-typescript parsedOpenAPI.json -t -o ../server/types/schema.ts"
   },
   "keywords": [],
