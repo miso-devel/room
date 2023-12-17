@@ -21,7 +21,7 @@ export type components = {
       title: string;
       description: string;
       eventCount: number;
-      latestEventDate?: number;
+      latestEventDatetime?: string;
       createdAt: number;
       updatedAt: number;
     };

@@ -5,7 +5,7 @@
     "title": { "type": "string" },
     "description": { "type": "string" },
     "eventCount": { "type": "number" },
-    "latestEventDate": { "type": "number" },
+    "latestEventDatetime": { "type": "string" },
     "createdAt": { "type": "number" },
     "updatedAt": { "type": "number" }
   },
