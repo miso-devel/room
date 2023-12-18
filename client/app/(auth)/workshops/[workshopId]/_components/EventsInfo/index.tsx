@@ -17,7 +17,7 @@ const EventTableElement: FC<TEventTableElement> = ({ tableDataKind, children }) 
 };
 
 const Event: FC<TEventProps> = ({ event, index }) => {
-  const now = cdate(event.date);
+  const now = cdate(event.datetime);
   const createdDate = now.format('YYYY/MM/DD HH:mm');
   return (
     <tr>

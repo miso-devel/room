@@ -12,8 +12,8 @@ const post = async <I, T>(url: string, data: I): Promise<T> => {
     body: JSON.stringify(data),
     mode: 'cors',
     credentials: 'include',
-  });
-  return res.json();
+  }).then((res) => res.json());
+  return res;
 };
 
 export const fetcher = {
