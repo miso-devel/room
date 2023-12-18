@@ -34,7 +34,8 @@ app.get("/:id", async (c: Context) => {
 app.post("/", async (c: Context) => {
   const input: TEventInput = await c.req.json();
   const eventInput: TEvent = createEventFromInput(input);
-  console.log(eventInput, "eventInput");
+
+  // TODO: eventの日付が現在よりも前の場合はエラーを返すようにしたい
   const event = await DB.createOne<TEvent>(PREFIX_MAP["event"], eventInput);
   if (!event) throwAPIError(401, "event create failed")();
 

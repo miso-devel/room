@@ -1,6 +1,6 @@
 import { PREFIX_MAP } from "../../constants/prefix.ts";
 import { DB } from "../../db/kv.ts";
-import { Context, Hono } from "../../deps.ts";
+import { collections, Context, Hono } from "../../deps.ts";
 import { addWorkshopRequiredData } from "../../service/workshop/index.ts";
 import { schema } from "../../types/common.ts";
 import { addUpdateRequiredData } from "../../util/addRequiredData.ts";
@@ -12,7 +12,16 @@ const app = new Hono();
 
 app.get("/", async (c: Context) => {
   const workshops = await DB.fetchAll<TWorkshop>(PREFIX_MAP["workshop"]);
-  return c.json(workshops);
+  // eventgがない場合はcreatedAtでsortする
+  const sortedWorkshop = collections.sortBy(
+    workshops,
+    (w) => {
+      console.log(w.title, new Date(w.latestEventDatetime ?? w.createdAt));
+      return new Date(w.latestEventDatetime ?? w.createdAt);
+    },
+  ).reverse();
+  console.log(sortedWorkshop);
+  return c.json(sortedWorkshop);
 });
 
 app.get("/:id", async (c: Context) => {

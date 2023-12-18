@@ -26,8 +26,14 @@ export const updateWorkshopEventInfo = async (workshopId: string) => {
   const events = await DB.fetchAll<TEvent>(PREFIX_MAP["event"]);
   const workshopEvents = events.filter((e) => e.workshopId === workshopId);
   const eventCount = workshopEvents.length;
-  const latestEventDate =
-    collections.sortBy(workshopEvents, (e) => e.date)[0].date ?? 0;
-  const updatedWorkshop = { ...workshop, eventCount, latestEventDate };
+  // TODO: 現在は最新のものを取ってきているが、本当は現在の日時より先かつ一番近いものを取ってきたい
+  // TODO: また、これはまだほぼ実装できていないが、イベントが来た日にcron処理でdiscordの通知を飛ばすとともにlatestEventDateを更新したい
+  const latestEventDatetime =
+    collections.sortBy(workshopEvents, (e) => e.datetime)[0].datetime ?? 0;
+  const updatedWorkshop: TWorkshop = {
+    ...workshop,
+    eventCount,
+    latestEventDatetime,
+  };
   await DB.updateOne<TWorkshop>(PREFIX_MAP["workshop"], updatedWorkshop);
 };
