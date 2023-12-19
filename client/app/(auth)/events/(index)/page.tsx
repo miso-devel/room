@@ -15,7 +15,6 @@ export default async function EventsPage() {
               className="border-b-2 py-2 transition-all hover:border-b-primary"
             >
               <h2 className="mb-2 text-xl">{event.theme}</h2>
-              {/* <p>event</p> */}
             </Link>
           );
         })}
