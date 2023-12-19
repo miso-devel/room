@@ -6,7 +6,7 @@ export const WithTitleWrapper: FC<TThemeProps> = ({ title, additionalElms, child
     <>
       {title && (
         <div className="flex items-center gap-3 pb-5">
-          <h1 className="text-3xl">{title}</h1>
+          <h1 className="text-3xl font-bold">{title}</h1>
           {additionalElms}
         </div>
       )}
