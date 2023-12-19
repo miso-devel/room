@@ -17,9 +17,12 @@ export const Workshops: FC<TWorkshopsProps> = async ({ workshops }) => {
 
 const Workshop: FC<TWorkshopProps> = ({ workshop }) => {
   return (
-    <Link href={`/workshops/${workshop.id}`} className="border-b-2 py-2 transition-all hover:border-b-primary">
+    <Link
+      href={`/workshops/${workshop.id}`}
+      className="border-b-2 py-2 transition-all hover:border-b-primary hover:opacity-80"
+    >
       <h2 className="mb-2 text-xl">{workshop.title}</h2>
-      <p>{workshop.description}</p>
+      <p className="text-sm">{workshop.description}</p>
     </Link>
   );
 };
