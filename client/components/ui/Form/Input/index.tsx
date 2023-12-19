@@ -6,9 +6,10 @@ type TInputProps = {
   placeholder: string;
   type: HTMLInputTypeAttribute;
   value?: string | number;
+  required?: boolean;
 };
 
-export const Input: FC<TInputProps> = ({ label, name, placeholder, type, value }) => {
+export const Input: FC<TInputProps> = ({ label, name, placeholder, type, value, required }) => {
   return (
     <div>
       <label htmlFor={label} className="block pb-1">
@@ -19,9 +20,10 @@ export const Input: FC<TInputProps> = ({ label, name, placeholder, type, value }
         type={type}
         id={label}
         name={name}
+        required={required}
         value={value}
         placeholder={placeholder}
-        className="border-2 p-2 rounded-md w-full bg-bright text-dark"
+        className="w-full rounded-md border-2 bg-bright p-2 text-dark"
       />
     </div>
   );

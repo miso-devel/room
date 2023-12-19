@@ -26,8 +26,8 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
 
   return (
     <FormWrapper action={submit}>
-      <Input label="テーマ" name="theme" placeholder="theme here" type="text" />
-      <Input label="時間" name="datetime" placeholder="date here" type="datetime-local" />
+      <Input label="テーマ" name="theme" placeholder="theme here" type="text" required />
+      <Input label="時間" name="datetime" placeholder="date here" type="datetime-local" required />
       <MemberSelectModal members={members} />
       <Button>作成する</Button>
     </FormWrapper>

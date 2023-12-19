@@ -18,7 +18,7 @@ export const WorkshopForm: FC = () => {
 
   return (
     <FormWrapper action={submit}>
-      <Input label="勉強会名" name="title" placeholder="workshop name here" type="text" />
+      <Input label="勉強会名" name="title" placeholder="workshop name here" type="text" required />
       <Textarea label="説明" name="description" placeholder="workshop description here" />
       <Button>作成</Button>
     </FormWrapper>
