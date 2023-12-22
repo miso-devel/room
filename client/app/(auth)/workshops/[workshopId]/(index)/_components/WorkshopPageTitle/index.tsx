@@ -1,8 +1,6 @@
-import { WithTitleWrapper } from '../../../../../../components/layout/WithTitleWrapper';
-import { SvgLink } from '../../../../../../components/ui/Link/SvgLink';
-import { schema } from '../../../../../../types/common';
+import { WithTitleWrapper } from '../../../../../../../components/layout/WithTitleWrapper';
+import { schema } from '../../../../../../../types/common';
 import { FC } from 'react';
-import Add from 'public/svg/add.svg';
 
 type TWorkshopInfoProps = { workshop: schema['Workshop'] };
 

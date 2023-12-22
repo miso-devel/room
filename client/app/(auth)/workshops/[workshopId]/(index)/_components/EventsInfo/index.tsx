@@ -1,7 +1,7 @@
-import { schema } from '../../../../../../types/common';
+import { schema } from '../../../../../../../types/common';
 import { cdate } from 'cdate';
 import { FC, ReactNode } from 'react';
-import { SvgLink } from '../../../../../../components/ui/Link/SvgLink';
+import { SvgLink } from '../../../../../../../components/ui/Link/SvgLink';
 import Add from 'public/svg/add.svg';
 
 type TEventProps = { event: schema['Event']; index: number };
