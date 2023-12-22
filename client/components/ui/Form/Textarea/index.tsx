@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-type TTextareaProps = { label: string; name: string; placeholder: string };
+type TTextareaProps = { label: string; name: string; defaultValue?: string; placeholder: string };
 
-export const Textarea: FC<TTextareaProps> = ({ label, name, placeholder }) => {
+export const Textarea: FC<TTextareaProps> = ({ label, name, defaultValue, placeholder }) => {
   return (
     <div>
       <label htmlFor={label} className="block pb-1">
@@ -12,7 +12,8 @@ export const Textarea: FC<TTextareaProps> = ({ label, name, placeholder }) => {
       <textarea
         id={label}
         name={name}
-        className="p-2 rounded-md w-full text-dark bg-bright h-32 resize-none"
+        defaultValue={defaultValue}
+        className="h-32 w-full resize-none rounded-md bg-bright p-2 text-dark"
         placeholder={placeholder}
       ></textarea>
     </div>
