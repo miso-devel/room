@@ -9,7 +9,7 @@ export default async function PageLayout({ children }: { children: ReactNode }) 
       title="勉強会一覧"
       additionalElms={
         <SvgLink href="/workshops/new" ariaLabel="勉強会作成">
-          <Add className="h-6 w-6 rounded-md bg-middle fill-dark hover:bg-dark hover:fill-bright" />
+          <Add className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright" />
         </SvgLink>
       }
     >

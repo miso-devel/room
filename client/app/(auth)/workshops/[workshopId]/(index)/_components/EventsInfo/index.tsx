@@ -34,7 +34,7 @@ export const EventsInfo: FC<TEventsProps> = ({ events, workshopId }) => {
       <div className="flex items-center gap-3">
         <h2 className="my-3 text-xl">イベント一覧</h2>
         <SvgLink href={`/events/${workshopId}/new`} ariaLabel="イベントの作成">
-          <Add className="h-6 w-6 rounded-md bg-middle fill-dark hover:bg-dark hover:fill-bright" />
+          <Add className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright" />
         </SvgLink>
       </div>
 
