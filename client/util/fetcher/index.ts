@@ -47,5 +47,5 @@ export const fetcher = {
   get,
   post,
   patch,
-  _delete,
+  delete: _delete,
 };
