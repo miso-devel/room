@@ -15,12 +15,8 @@ app.get("/", async (c: Context) => {
   // eventgがない場合はcreatedAtでsortする
   const sortedWorkshop = collections.sortBy(
     workshops,
-    (w) => {
-      console.log(w.title, new Date(w.latestEventDatetime ?? w.createdAt));
-      return new Date(w.latestEventDatetime ?? w.createdAt);
-    },
+    (w) => new Date(w.latestEventDatetime ?? w.createdAt),
   ).reverse();
-  console.log(sortedWorkshop);
   return c.json(sortedWorkshop);
 });
 
@@ -54,7 +50,7 @@ app.patch("/", async (c: Context) => {
 });
 
 app.delete("/", async (c: Context) => {
-  const id: string = await c.req.json();
+  const { id }: { id: string } = await c.req.json();
   await DB.deleteOne(PREFIX_MAP["workshop"], id);
   return c.json({});
 });
