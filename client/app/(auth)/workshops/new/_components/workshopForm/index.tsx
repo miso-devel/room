@@ -12,7 +12,11 @@ export const WorkshopForm: FC = () => {
     'use server';
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
-    const res = await fetcher.post<schema['WorkshopInput'], schema['Workshop']>('/workshops', { title, description });
+    const res = await fetcher.post<schema['WorkshopInput'], schema['Workshop']>(
+      '/workshops',
+      { title, description },
+      { cache: 'no-cache' },
+    );
     res && redirect(`/workshops/${res.id}`);
   };
 
