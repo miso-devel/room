@@ -20,7 +20,7 @@
 # local env files
 .env
 
-dev.db
-dev.db-shm
-dev.db-wal
+dev.db.sqlite
+dev.db.sqlite-shm
+dev.db.sqlite-wal
 dev.kv

@@ -4,7 +4,9 @@ import { PREFIX } from "../constants/prefix.ts";
 import { SECRET } from "../constants/secret.ts";
 import { throwAPIError } from "../util/throwError.ts";
 
-const kv = await Deno.openKv(SECRET.ENV === "dev" ? "dev.db" : "prod.db");
+const kv = await Deno.openKv(
+  SECRET.ENV === "dev" ? "dev.db.sqlite" : "prod.db.sqlite",
+);
 type basic = { id: string; createdAt: number; updatedAt: number };
 
 const fetchAll = async <T>(prefix: PREFIX): Promise<T[]> => {
