@@ -7,11 +7,12 @@ import Edit from 'public/svg/edit.svg';
 import Delete from 'public/svg/delete.svg';
 import { FC } from 'react';
 import { fetcher } from '../../../../../../../util/fetcher';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 type TWorkshopInfoProps = { workshop: schema['Workshop'] };
 
 export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
+  const router = useRouter();
   return (
     <WithTitleWrapper
       title={workshop.title}
@@ -24,7 +25,7 @@ export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
             onClick={async () => {
               if (confirm('本当に削除しますか？')) {
                 await fetcher.delete('/workshops', { id: workshop.id });
-                redirect('/workshops');
+                router.push('/workshops');
               }
             }}
           >

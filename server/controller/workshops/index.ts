@@ -52,6 +52,11 @@ app.patch("/", async (c: Context) => {
 app.delete("/", async (c: Context) => {
   const { id }: { id: string } = await c.req.json();
   await DB.deleteOne(PREFIX_MAP["workshop"], id);
+  const events = await DB.fetchAll<schema["Event"]>(PREFIX_MAP["event"]);
+  const filteredEvents = events.filter((e) => e.workshopId !== id);
+  for (const event of filteredEvents) {
+    await DB.deleteOne(PREFIX_MAP["event"], event.id);
+  }
   return c.json({});
 });
 
