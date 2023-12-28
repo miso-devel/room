@@ -28,3 +28,14 @@ export const createSpeakers = async (
   );
   return speakers;
 };
+
+export const speakersByEventId = async (
+  eventId: string,
+): Promise<TSpeaker[]> => {
+  const speakers = await DB.fetchAll<TSpeaker>(PREFIX_MAP["speaker"]);
+  const filteredSpeakers = speakers.filter((speaker) =>
+    speaker.eventId === eventId
+  );
+
+  return filteredSpeakers;
+};

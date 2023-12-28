@@ -1,8 +1,10 @@
 import { PREFIX_MAP } from "../../constants/prefix.ts";
 import { DB } from "../../db/kv.ts";
-import { collections, Context, Hono } from "../../deps.ts";
+import { Context, Hono } from "../../deps.ts";
 import {
   createEventFromInput,
+  getAllEvents,
+  toEventsOutputs,
   updateWorkshopEventInfo,
 } from "../../service/event/index.ts";
 import { createSpeakers } from "../../service/speaker/index.ts";
@@ -18,13 +20,11 @@ const app = new Hono();
 // queryにworkshopIdがある場合はそのworkshopのeventのみを返す
 app.get("/", async (c: Context) => {
   const { workshopId } = c.req.query();
-  const events = await DB.fetchAll<TEvent>(PREFIX_MAP["event"]);
-  const sortedEvents = collections.sortBy(events, (e) => new Date(e.updatedAt))
-    .reverse();
-  const workshopEvents = sortedEvents.filter((e) =>
-    e.workshopId === workshopId
-  );
-  return workshopId ? c.json(workshopEvents) : c.json(sortedEvents);
+  const events = await getAllEvents();
+  if (workshopId === undefined) return c.json(events);
+  const workshopEvents = events.filter((e) => e.workshopId === workshopId);
+  const eventOuputs = await toEventsOutputs(workshopEvents);
+  return c.json(eventOuputs);
 });
 
 // show

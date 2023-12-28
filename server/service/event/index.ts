@@ -3,6 +3,7 @@ import { DB } from "../../db/kv.ts";
 import { collections } from "../../deps.ts";
 import { schema } from "../../types/common.ts";
 import { addPostRequiredData } from "../../util/addRequiredData.ts";
+import { speakersByEventId } from "../speaker/index.ts";
 
 type TEvent = schema["Event"];
 type TWorkshop = schema["Workshop"];
@@ -36,4 +37,31 @@ export const updateWorkshopEventInfo = async (workshopId: string) => {
     latestEventDatetime,
   };
   await DB.updateOne<TWorkshop>(PREFIX_MAP["workshop"], updatedWorkshop);
+};
+
+/**
+ * 全てのeventを降順で取得する
+ */
+export const getAllEvents = async (): Promise<schema["Event"][]> => {
+  const events = await DB.fetchAll<TEvent>(PREFIX_MAP["event"]);
+  const sortedEvents = collections.sortBy(events, (e) => new Date(e.datetime))
+    .reverse();
+  return sortedEvents;
+};
+
+type TGetAllEventsOutputs = (
+  events: schema["Event"][],
+) => Promise<schema["EventOutput"][]>;
+
+/**
+ * eventからeventOutputへ変換する
+ */
+export const toEventsOutputs: TGetAllEventsOutputs = async (events) => {
+  const eventOutputs: schema["EventOutput"][] = await Promise.all(events.map(
+    async (event) => {
+      const speakers: schema["Speaker"][] = await speakersByEventId(event.id);
+      return { ...event, speakers };
+    },
+  ));
+  return eventOutputs;
 };
