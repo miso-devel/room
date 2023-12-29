@@ -4,8 +4,8 @@ import { FC, ReactNode } from 'react';
 import { SvgLink } from '../../../../../../../components/ui/Link/SvgLink';
 import Add from 'public/svg/add.svg';
 
-type TEventProps = { event: schema['Event']; index: number };
-type TEventsProps = { events: schema['Event'][]; workshopId: string };
+type TEventProps = { event: schema['EventOutput']; index: number };
+type TEventsProps = { events: schema['EventOutput'][]; workshopId: string };
 
 type TEventTableElement = { tableDataKind: 'td' | 'th'; children?: ReactNode };
 const EventTableElement: FC<TEventTableElement> = ({ tableDataKind, children }) => {
@@ -24,6 +24,13 @@ const Event: FC<TEventProps> = ({ event, index }) => {
       <EventTableElement tableDataKind="td">{index}</EventTableElement>
       <EventTableElement tableDataKind="td">{createdDate} ~ </EventTableElement>
       <EventTableElement tableDataKind="td">{event.theme}</EventTableElement>
+      <EventTableElement tableDataKind="td">
+        <div className="flex">
+          {event.speakers.map((speaker) => {
+            return <div key={speaker.id}>{<p>{speaker.memberId},</p>}</div>;
+          })}
+        </div>
+      </EventTableElement>
     </tr>
   );
 };
@@ -41,9 +48,10 @@ export const EventsInfo: FC<TEventsProps> = ({ events, workshopId }) => {
       <table className="table-auto rounded-md text-left">
         <thead>
           <tr>
-            <EventTableElement tableDataKind="th"></EventTableElement>
+            <EventTableElement tableDataKind="th" />
             <EventTableElement tableDataKind="th">開催日時</EventTableElement>
             <EventTableElement tableDataKind="th">テーマ</EventTableElement>
+            <EventTableElement tableDataKind="th">参加者</EventTableElement>
           </tr>
         </thead>
         <tbody>
