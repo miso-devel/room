@@ -1,5 +1,6 @@
 // Deno std
 export * as collections from "https://deno.land/std@0.209.0/collections/mod.ts";
+export * as webcrypto from "https://deno.land/std@0.210.0/crypto/mod.ts";
 
 // discordeno
 export {
