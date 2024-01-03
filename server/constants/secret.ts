@@ -10,5 +10,6 @@ export const SECRET = {
   AUTH_ENDPOINT: Deno.env.get("AUTH_ENDPOINT")!,
   DISCORD_CLIENT_ID: Deno.env.get("DISCORD_CLIENT_ID")!,
   DISCORD_CLIENT_SECRET: Deno.env.get("DISCORD_CLIENT_SECRET")!,
-  CRYPTO_KEY: Deno.env.get("CRYPTO_KEY")!,
+  CRYPTO_SALT: Deno.env.get("CRYPTO_SALT")!,
+  CRYPTO_PASSWORD: Deno.env.get("CRYPTO_PASSWORD")!,
 };
