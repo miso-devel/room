@@ -2,6 +2,10 @@
 export * as collections from "https://deno.land/std@0.209.0/collections/mod.ts";
 export * as webcrypto from "https://deno.land/std@0.210.0/crypto/mod.ts";
 
+// node
+export * as crypto from "node:crypto";
+export { Buffer } from "node:buffer";
+
 // discordeno
 export {
   Collection,
