@@ -1,6 +1,11 @@
 import { SECRET } from "../../constants/secret.ts";
 import { Context, getCookie, Hono, setCookie } from "../../deps.ts";
-import { checkToken, getAccessToken } from "../../service/auth/index.ts";
+import {
+  checkToken,
+  decrypt,
+  encrypt,
+  getAccessToken,
+} from "../../service/auth/index.ts";
 import { throwAPIError } from "../../util/throwError.ts";
 
 const app = new Hono();
@@ -20,11 +25,14 @@ app.get("/", (c: Context) => {
  * トークンは、access_token, refresh_token, expires_in, token_type, scopeの5つの情報を持つ
  */
 app.get("/token", async (c: Context) => {
-  const accessToken = await getAccessToken(c.req.param("code"));
+  const code = c.req.query("code");
+  if (!code) return throwAPIError(401, "code is not found")();
+  const accessToken = await getAccessToken(code);
+  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
+  console.log("token", accessToken);
 
-  // TODO:トークンを暗号化してからcookieにセットする
-
-  setCookie(c, "accessToken", accessToken.access_token, {
+  // TODO:アクセストークンだけではなく他の情報も保存できるようにする
+  setCookie(c, "accessToken", encrypt(accessToken.access_token), {
     httpOnly: true,
     secure: true,
     sameSite: "Strict",
@@ -41,7 +49,8 @@ app.get("/token", async (c: Context) => {
 app.get("/token/check", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
   if (!accessToken) return throwAPIError(401, "accessToken is not found")();
-  const isValidToken = await checkToken(accessToken);
+  const decryptedAccessToken = decrypt(accessToken);
+  const isValidToken = await checkToken(decryptedAccessToken);
   return isValidToken
     ? c.json({ hasValidToken: true })
     : c.json({ hasValidToken: false });
