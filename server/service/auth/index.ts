@@ -1,13 +1,6 @@
 import { SECRET } from "../../constants/secret.ts";
 import { Buffer, crypto } from "../../deps.ts";
-
-type TAccessToken = {
-  access_token: string;
-  refresh_token: string;
-  expires_in: number;
-  token_type: string;
-  scope: string;
-};
+import { TAccessToken, TEncryptedData, TRequiredAccessToken } from "./type.ts";
 
 const ALGO = "aes-128-cbc";
 const PASSWORD = SECRET.CRYPTO_PASSWORD;
@@ -64,8 +57,6 @@ export const encrypt = (data: string): string => {
   );
 };
 
-type TEncryptedData = { iv: string; encryptedData: string };
-
 /**
  * cookieから取り出したデータを復号化するための関数
  * cookieに保存するときに暗号化したデータとivをbase64化しているので、parseしてivと暗号化したデータを取り出している
@@ -80,4 +71,15 @@ export const decrypt = (data: string): string => {
   let decryptedData = decipher.update(decodedEncryptedData);
   decryptedData = Buffer.concat([decryptedData, decipher.final()]);
   return decryptedData.toString("utf-8");
+};
+
+export const stringifyTokenData = (accessToken: TAccessToken): string => {
+  return JSON.stringify({
+    accessToken: accessToken.access_token,
+    refreshToken: accessToken.refresh_token,
+  });
+};
+
+export const parseTokenData = (tokenData: string): TRequiredAccessToken => {
+  return JSON.parse(tokenData);
 };

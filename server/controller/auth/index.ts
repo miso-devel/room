@@ -5,6 +5,8 @@ import {
   decrypt,
   encrypt,
   getAccessToken,
+  parseTokenData,
+  stringifyTokenData,
 } from "../../service/auth/index.ts";
 import { throwAPIError } from "../../util/throwError.ts";
 
@@ -29,10 +31,9 @@ app.get("/token", async (c: Context) => {
   if (!code) return throwAPIError(401, "code is not found")();
   const accessToken = await getAccessToken(code);
   if (!accessToken) return throwAPIError(401, "accessToken is not found")();
-  console.log("token", accessToken);
+  const requiredTokenData = stringifyTokenData(accessToken);
 
-  // TODO:アクセストークンだけではなく他の情報も保存できるようにする
-  setCookie(c, "accessToken", encrypt(accessToken.access_token), {
+  setCookie(c, "accessToken", encrypt(requiredTokenData), {
     httpOnly: true,
     secure: true,
     sameSite: "Strict",
@@ -50,7 +51,10 @@ app.get("/token/check", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
   if (!accessToken) return throwAPIError(401, "accessToken is not found")();
   const decryptedAccessToken = decrypt(accessToken);
-  const isValidToken = await checkToken(decryptedAccessToken);
+  const requiredTokenData = parseTokenData(decryptedAccessToken);
+
+  // TODO: トークンの有効期限が切れているかどうかも見る処理も追加する
+  const isValidToken = await checkToken(requiredTokenData.access_token);
   return isValidToken
     ? c.json({ hasValidToken: true })
     : c.json({ hasValidToken: false });
