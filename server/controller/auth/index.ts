@@ -1,11 +1,18 @@
 import { SECRET } from "../../constants/secret.ts";
-import { Context, getCookie, Hono, setCookie } from "../../deps.ts";
+import {
+  Context,
+  deleteCookie,
+  getCookie,
+  Hono,
+  setCookie,
+} from "../../deps.ts";
 import {
   checkToken,
   decrypt,
   encrypt,
   getAccessToken,
   parseTokenData,
+  revokeAccessToken,
   stringifyTokenData,
 } from "../../service/auth/index.ts";
 import { throwAPIError } from "../../util/throwError.ts";
@@ -16,7 +23,7 @@ const app = new Hono();
  * OAuth2.0の認可エンドポイント
  * Discordの認可画面にリダイレクトするようにする
  */
-app.get("/", (c: Context) => {
+app.get("/login", (c: Context) => {
   return c.redirect(SECRET.AUTH_ENDPOINT);
 });
 
@@ -61,9 +68,17 @@ app.get("/token/check", async (c: Context) => {
 });
 
 /**
- * トークンをリフレッシュするエンドポイント
+ * アクセストークンを無効化し、cookieに入っているアクセストークンを破棄するエンドポイント
  */
-app.get("/token/refresh", async (c: Context) => {
+app.get("/logout", async (c: Context) => {
+  const accessToken = getCookie(c, "accessToken");
+  if (!accessToken) return c.redirect(SECRET.CLIENT_URL + "/home");
+  const decryptedAccessToken = decrypt(accessToken);
+  const requiredTokenData = parseTokenData(decryptedAccessToken);
+  const isRevoked = await revokeAccessToken(requiredTokenData.access_token);
+  if (isRevoked) return c.redirect(SECRET.CLIENT_URL + "/home");
+  deleteCookie(c, "accessToken");
+  return c.json({ isRevoked });
 });
 
 export default app;
