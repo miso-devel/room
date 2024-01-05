@@ -33,7 +33,29 @@ export const checkToken = async (accessToken: string): Promise<boolean> => {
   const res = await fetch("https://discord.com/api/users/@me", {
     headers: { Authorization: `Bearer ${accessToken}` },
   }).then((res) => res.json());
-  return res.user ? true : false;
+  return res.id ? true : false;
+};
+
+/**
+ * トークンを無効化する
+ * https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-token-revocation-example
+ */
+export const revokeAccessToken = async (
+  accessToken: string,
+): Promise<TAccessToken> => {
+  const isTokenRevoked = await fetch(
+    "https://discord.com/api/oauth2/token/revoke",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        token: accessToken,
+        token_type_hint: "access_token",
+      }),
+    },
+  ).then((res) => res.json());
+
+  return isTokenRevoked;
 };
 
 /**
@@ -75,8 +97,8 @@ export const decrypt = (data: string): string => {
 
 export const stringifyTokenData = (accessToken: TAccessToken): string => {
   return JSON.stringify({
-    accessToken: accessToken.access_token,
-    refreshToken: accessToken.refresh_token,
+    access_token: accessToken.access_token,
+    refresh_token: accessToken.refresh_token,
   });
 };
 
