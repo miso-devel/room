@@ -1,9 +1,17 @@
 import { toMember } from "./util.ts";
 import { SECRET } from "../../constants/secret.ts";
 import { Bot } from "../../bot/bot.ts";
-import { Collection, Context, Hono, type Member } from "../../deps.ts";
+import {
+  Collection,
+  Context,
+  getCookie,
+  Hono,
+  type Member,
+} from "../../deps.ts";
 import { throwAPIError } from "../../util/throwError.ts";
 import { schema } from "../../types/common.ts";
+import { decrypt, parseTokenData } from "../../service/auth/index.ts";
+import { getUserByAccessToken } from "../../service/member/index.ts";
 
 type TMember = schema["User"];
 
@@ -22,15 +30,17 @@ app.get("/", async (c: Context) => {
   return c.json(members);
 });
 
-// show
-app.get("/:id", async (c: Context) => {
-  const id = c.req.param("id");
+/**
+ * ユーザーのcookieからユーザー情報を取得する
+ */
+app.get("/me", async (c: Context) => {
+  const accessToken = getCookie(c, "accessToken");
+  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
+  const decryptedAccessToken = decrypt(accessToken);
+  const requiredTokenData = parseTokenData(decryptedAccessToken);
+  const user = await getUserByAccessToken(requiredTokenData.access_token);
 
-  const member: Member = await Bot.helpers.getMember(SECRET.GUILD_ID, id)
-    .then((data: Member) => data)
-    .catch(throwAPIError(401, "user not found"));
-
-  return c.json(toMember(member));
+  return c.json(user);
 });
 
 export default app;
