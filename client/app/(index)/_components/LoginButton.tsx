@@ -1,10 +1,17 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { Button } from '../../../components/ui/Button';
-import { signIn } from 'next-auth/react';
+
+import { fetcher } from '../../../util/fetcher';
 
 export const LoginButton = async () => {
+  const router = useRouter();
+  const signIn = async () => {
+    const res: { redirectUrl: string } = await fetcher.get('/auth/signin');
+    router.push(res.redirectUrl);
+  };
   return (
-    <Button onClick={() => signIn('discord', { callbackUrl: `${process.env.NEXT_PUBLIC_CLIENT_URL}/home` })} onDark>
+    <Button onClick={signIn} onDark>
       Login with Discord
     </Button>
   );
