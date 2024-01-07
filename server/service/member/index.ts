@@ -14,3 +14,21 @@ export const getMemberByUserId = async (
 
   return toMember(member);
 };
+
+export const getUserByAccessToken = async (
+  accessToken: string,
+): Promise<schema["User"]> => {
+  const user = await fetch(
+    "https://discord.com/api/oauth2/@me",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        token: accessToken,
+        token_type_hint: "access_token",
+      }),
+    },
+  ).then((res) => res.json());
+
+  return user;
+};
