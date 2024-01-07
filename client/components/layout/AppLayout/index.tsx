@@ -1,10 +1,9 @@
-import { Session } from 'next-auth';
 import { FC, ReactNode } from 'react';
 import { SideBar } from './SideBar';
 
-type AppLayoutProps = { children: ReactNode; session: Session };
+type AppLayoutProps = { children: ReactNode };
 
-export const AppLayout: FC<AppLayoutProps> = ({ children, session }) => {
+export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen w-screen text-dark">
       <SideBar />
