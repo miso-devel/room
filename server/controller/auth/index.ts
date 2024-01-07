@@ -23,8 +23,8 @@ const app = new Hono();
  * OAuth2.0の認可エンドポイント
  * Discordの認可画面にリダイレクトするようにする
  */
-app.get("/login", (c: Context) => {
-  return c.redirect(SECRET.AUTH_ENDPOINT);
+app.get("/signin", (c: Context) => {
+  return c.json({ redirectUrl: SECRET.AUTH_ENDPOINT });
 });
 
 /**
@@ -47,6 +47,7 @@ app.get("/token", async (c: Context) => {
     maxAge: accessToken.expires_in,
   });
 
+  // TODO: これ別に動いてないので、他の手段を使う必要がありそう
   return c.redirect(SECRET.CLIENT_URL + "/home");
 });
 
@@ -56,7 +57,7 @@ app.get("/token", async (c: Context) => {
  */
 app.get("/token/check", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
-  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
+  if (!accessToken) return c.json({ hasValidToken: false });
   const decryptedAccessToken = decrypt(accessToken);
   const requiredTokenData = parseTokenData(decryptedAccessToken);
 
