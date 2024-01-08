@@ -2,7 +2,7 @@ import { SECRET } from "./constants/secret.ts";
 import { cors, Hono, logger, poweredBy } from "./deps.ts";
 import Auth from "./controller/auth/index.ts";
 import Workshop from "./controller/workshops/index.ts";
-import Member from "./controller/members/index.ts";
+import User from "./controller/users/index.ts";
 import Event from "./controller/events/index.ts";
 
 const app = new Hono();
@@ -28,7 +28,7 @@ app.use(
 );
 
 app.route("/auth", Auth);
-app.route("/members", Member);
+app.route("/users", User);
 app.route("/workshops", Workshop);
 app.route("/events", Event);
 
