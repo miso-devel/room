@@ -63,20 +63,22 @@ export const checkToken = async (accessToken: string): Promise<boolean> => {
  */
 export const revokeAccessToken = async (
   accessToken: string,
-): Promise<TAccessToken> => {
-  const isTokenRevoked = await fetch(
+): Promise<{ revoked: boolean }> => {
+  await fetch(
     "https://discord.com/api/oauth2/token/revoke",
     {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
+        client_id: SECRET.DISCORD_CLIENT_ID,
+        client_secret: SECRET.DISCORD_CLIENT_SECRET,
         token: accessToken,
-        token_type_hint: "access_token",
       }),
     },
-  ).then((res) => res.json());
-
-  return isTokenRevoked;
+  );
+  // fetch結果が成功でも失敗でもobjectは{}を返すので、ここでアクセストークンが本当に使えなくなったのか見ている
+  const checkResult = await checkToken(accessToken);
+  return { revoked: !checkResult };
 };
 
 /**

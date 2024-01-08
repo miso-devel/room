@@ -71,15 +71,14 @@ app.get("/token/check", async (c: Context) => {
 /**
  * アクセストークンを無効化し、cookieに入っているアクセストークンを破棄するエンドポイント
  */
-app.get("/logout", async (c: Context) => {
+app.post("/logout", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
-  if (!accessToken) return c.redirect(SECRET.CLIENT_URL + "/home");
+  if (!accessToken) return c.json({ isRevoked: false });
   const decryptedAccessToken = decrypt(accessToken);
   const requiredTokenData = parseTokenData(decryptedAccessToken);
-  const isRevoked = await revokeAccessToken(requiredTokenData.access_token);
-  if (isRevoked) return c.redirect(SECRET.CLIENT_URL + "/home");
+  const revoked = await revokeAccessToken(requiredTokenData.access_token);
   deleteCookie(c, "accessToken");
-  return c.json({ isRevoked });
+  return c.json(revoked);
 });
 
 export default app;
