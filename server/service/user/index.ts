@@ -30,8 +30,9 @@ export const getUserByAccessToken = async (
     { method: "GET", headers: { Authorization: `Bearer ${accessToken}` } },
   ).then((res) => res.json());
 
+  // 二度手間だが、joinedAtをUser情報に含めるためにAPIでUserを取得してからBotを使って再取得している
   const discordUser = await getMemberByUserId(data.user.id);
-  if (!discordUser) throwAPIError(401, "user not found")();
+  if (!discordUser) throwAPIError(404, "user not found")();
 
   return discordUser;
 };
