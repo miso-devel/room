@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Navigations } from './Navigations';
 import Link from 'next/link';
-import { Profile } from './profile';
+import { Profile } from './Profill';
 
 export const SideBar: FC = () => {
   return (
