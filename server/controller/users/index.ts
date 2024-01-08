@@ -1,4 +1,3 @@
-import { toMember } from "./util.ts";
 import { SECRET } from "../../constants/secret.ts";
 import { Bot } from "../../bot/bot.ts";
 import {
@@ -11,19 +10,24 @@ import {
 import { throwAPIError } from "../../util/throwError.ts";
 import { schema } from "../../types/common.ts";
 import { decrypt, parseTokenData } from "../../service/auth/index.ts";
-import { getUserByAccessToken } from "../../service/member/index.ts";
+import {
+  botUserToUser,
+  getUserByAccessToken,
+} from "../../service/user/index.ts";
 
 type TMember = schema["User"];
 
 const app = new Hono();
 
-// index
+/**
+ * Botからメンバー一覧を取得する
+ */
 app.get("/", async (c: Context) => {
   const members: TMember[] = await Bot.helpers.getMembers(SECRET.GUILD_ID, {
     limit: 10,
   })
     .then((data: Collection<bigint, Member>) =>
-      data.map((member: Member) => toMember(member))
+      data.map((member: Member) => botUserToUser(member))
     )
     .catch(throwAPIError(401, "discord user error"));
 
@@ -31,7 +35,7 @@ app.get("/", async (c: Context) => {
 });
 
 /**
- * ユーザーのcookieからユーザー情報を取得する
+ * cookieに入ってるアクセストークンからユーザー情報を取得する
  */
 app.get("/me", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
