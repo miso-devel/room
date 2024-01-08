@@ -12,3 +12,13 @@ export type TRequiredAccessToken = {
   access_token: string;
   refresh_token: string;
 };
+
+export type TGuild = {
+  features: string[];
+  icon: string;
+  id: string;
+  name: string;
+  owner: boolean;
+  permissions: number;
+  permissions_new: string;
+};

@@ -1,6 +1,11 @@
 import { SECRET } from "../../constants/secret.ts";
 import { Buffer, crypto } from "../../deps.ts";
-import { TAccessToken, TEncryptedData, TRequiredAccessToken } from "./type.ts";
+import {
+  TAccessToken,
+  TEncryptedData,
+  TGuild,
+  TRequiredAccessToken,
+} from "./type.ts";
 
 const ALGO = "aes-128-cbc";
 const PASSWORD = SECRET.CRYPTO_PASSWORD;
@@ -24,6 +29,22 @@ export const getAccessToken = async (code: string): Promise<TAccessToken> => {
   })
     .then((res) => res.json());
   return accessToken;
+};
+
+/**
+ * 特定のサーバーに属しているかどうかを確認している
+ */
+export const isJoinGuild = async (accessToken: string): Promise<boolean> => {
+  const res: Response = await fetch(
+    "https://discordapp.com/api/users/@me/guilds",
+    { headers: { Authorization: `Bearer ${accessToken}` } },
+  );
+
+  if (res.ok) {
+    const guilds: TGuild[] = await res.json();
+    return guilds.some((guild: TGuild) => guild.id === SECRET.GUILD_ID);
+  }
+  return false;
 };
 
 /**
