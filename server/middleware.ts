@@ -5,7 +5,6 @@ import { throwAPIError } from "./util/throwError.ts";
 
 export const authMiddleware = async (c: Context, next: Next) => {
   const accessToken = getCookie(c, "accessToken");
-  console.log(accessToken);
   if (!accessToken) throwAPIError(403, "Not Found");
   const decryptedAccessToken = decrypt(accessToken as string);
   const requiredTokenData = parseTokenData(decryptedAccessToken);

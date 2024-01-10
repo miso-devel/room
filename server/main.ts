@@ -4,6 +4,7 @@ import Auth from "./controller/auth/index.ts";
 import Workshop from "./controller/workshops/index.ts";
 import User from "./controller/users/index.ts";
 import Event from "./controller/events/index.ts";
+import { authMiddleware } from "./middleware.ts";
 
 const app = new Hono();
 
@@ -25,6 +26,7 @@ app.use(
   }),
   logger(),
   poweredBy(),
+  authMiddleware,
 );
 
 app.route("/auth", Auth);
