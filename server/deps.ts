@@ -17,6 +17,7 @@ export {
 
 // Hono
 export * as dotenv from "https://deno.land/std@0.190.0/dotenv/load.ts";
+export type { Next } from "https://deno.land/x/hono@v3.10.3/types.ts";
 export type { Response } from "https://deno.land/x/hono@v3.10.3/client/types.ts";
 export {
   type Context,
