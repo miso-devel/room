@@ -1,6 +1,8 @@
+import { headers } from 'next/headers';
+
 const get = async <T>(url: string, init?: RequestInit): Promise<T> => {
   const baseUrl = typeof window ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.SERVER_URL;
-  const res = await fetch(baseUrl + url, init).then((res) => res.json());
+  const res = await fetch(baseUrl + url, { ...headers(), ...init }).then((res) => res.json());
   return res;
 };
 
@@ -8,7 +10,7 @@ const post = async <I, T>(url: string, data: I, init?: RequestInit): Promise<T> 
   const baseUrl = typeof window ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.SERVER_URL;
   const res = await fetch(baseUrl + url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...headers() },
     body: JSON.stringify(data),
     mode: 'cors',
     credentials: 'include',
@@ -21,7 +23,7 @@ const patch = async <I, T>(url: string, data: I, init?: RequestInit): Promise<T>
   const baseUrl = typeof window ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.SERVER_URL;
   const res = await fetch(baseUrl + url, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...headers() },
     body: JSON.stringify(data),
     mode: 'cors',
     credentials: 'include',
@@ -34,7 +36,7 @@ const _delete = async <I, T>(url: string, data: I, init?: RequestInit): Promise<
   const baseUrl = typeof window ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.SERVER_URL;
   const res = await fetch(baseUrl + url, {
     method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...headers() },
     body: JSON.stringify(data),
     mode: 'cors',
     credentials: 'include',
