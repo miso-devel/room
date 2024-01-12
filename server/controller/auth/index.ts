@@ -71,7 +71,7 @@ app.get("/token/check", async (c: Context) => {
 /**
  * アクセストークンを無効化し、cookieに入っているアクセストークンを破棄するエンドポイント
  */
-app.post("/logout", async (c: Context) => {
+app.post("/signout", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
   if (!accessToken) return c.json({ isRevoked: false });
   const decryptedAccessToken = decrypt(accessToken);

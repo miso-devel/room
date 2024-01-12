@@ -5,15 +5,17 @@ import { fetcher } from '../../util/fetcher';
 
 export const LogoutButton = async () => {
   const router = useRouter();
-  const logout = async () => {
-    const data: { revoked: boolean } = await fetch('/auth/logout', {
+  const signout = async () => {
+    const data: { revoked: boolean } = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/auth/signout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      credentials: 'include',
     }).then((res) => res.json());
     router.push(data.revoked ? '/' : '/home');
   };
   return (
-    <Button onClick={logout} onDark>
+    <Button onClick={signout} onDark>
       Logout
     </Button>
   );
