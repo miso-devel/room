@@ -27,6 +27,8 @@ export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ id: workshop.id }),
                   method: 'DELETE',
+                  mode: 'cors',
+                  credentials: 'include',
                 });
                 router.push('/workshops');
               }
