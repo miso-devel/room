@@ -6,7 +6,6 @@ import { schema } from '../../../../../../../types/common';
 import Edit from 'public/svg/edit.svg';
 import Delete from 'public/svg/delete.svg';
 import { FC } from 'react';
-import { fetcher } from '../../../../../../../util/fetcher';
 import { useRouter } from 'next/navigation';
 
 type TWorkshopInfoProps = { workshop: schema['Workshop'] };
@@ -24,7 +23,11 @@ export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
           <button
             onClick={async () => {
               if (confirm('本当に削除しますか？')) {
-                await fetcher.delete('/workshops', { id: workshop.id });
+                await fetch('/workshops', {
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id: workshop.id }),
+                  method: 'DELETE',
+                });
                 router.push('/workshops');
               }
             }}

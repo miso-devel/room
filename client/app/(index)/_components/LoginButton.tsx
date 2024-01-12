@@ -2,12 +2,10 @@
 import { useRouter } from 'next/navigation';
 import { Button } from '../../../components/ui/Button';
 
-import { fetcher } from '../../../util/fetcher';
-
 export const LoginButton = async () => {
   const router = useRouter();
   const signIn = async () => {
-    const res: { redirectUrl: string } = await fetcher.get('/auth/signin');
+    const res: { redirectUrl: string } = await fetch('/auth/signin').then((res) => res.json());
     router.push(res.redirectUrl);
   };
   return (

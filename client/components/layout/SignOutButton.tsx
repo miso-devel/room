@@ -6,7 +6,10 @@ import { fetcher } from '../../util/fetcher';
 export const LogoutButton = async () => {
   const router = useRouter();
   const logout = async () => {
-    const data: { revoked: boolean } = await fetcher.post('/auth/logout', {});
+    const data: { revoked: boolean } = await fetch('/auth/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    }).then((res) => res.json());
     router.push(data.revoked ? '/' : '/home');
   };
   return (
