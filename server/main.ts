@@ -7,12 +7,19 @@ import { middlewareOptions } from "./middleware.ts";
 
 const app = new Hono();
 
-app.use("*", ...middlewareOptions({ auth: true }));
 app.use("/auth/signin", ...middlewareOptions({ auth: false }));
-
+app.use("/auth/signout", ...middlewareOptions({ auth: true }));
+app.use("/auth/token", ...middlewareOptions({ auth: false }));
+app.use("/auth/token/check", ...middlewareOptions({ auth: true }));
 app.route("/auth", Auth);
+
+app.use("/users/*", ...middlewareOptions({ auth: true }));
 app.route("/users", User);
+
+app.use("/workshops/*", ...middlewareOptions({ auth: true }));
 app.route("/workshops", Workshop);
+
+app.use("/events/*", ...middlewareOptions({ auth: true }));
 app.route("/events", Event);
 
 Deno.serve(app.fetch);
