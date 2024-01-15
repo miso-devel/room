@@ -168,29 +168,21 @@
                 "id": {
                   "type": "string"
                 },
-                "memberId": {
+                "name": {
                   "type": "string"
                 },
-                "workshopId": {
+                "avatar": {
                   "type": "string"
                 },
-                "eventId": {
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "number"
-                },
-                "updatedAt": {
+                "joinedAt": {
                   "type": "number"
                 }
               },
               "required": [
                 "id",
-                "memberId",
-                "workshopId",
-                "eventId",
-                "createdAt",
-                "updatedAt"
+                "name",
+                "avatar",
+                "joinedAt"
               ]
             }
           },

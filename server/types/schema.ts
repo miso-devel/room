@@ -49,11 +49,9 @@ export type components = {
     EventOutput: {
       speakers: {
           id: string;
-          memberId: string;
-          workshopId: string;
-          eventId: string;
-          createdAt: number;
-          updatedAt: number;
+          name: string;
+          avatar: string;
+          joinedAt: number;
         }[];
       id: string;
       workshopId: string;

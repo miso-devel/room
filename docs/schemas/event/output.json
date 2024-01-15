@@ -2,7 +2,7 @@
   "type": "object",
   "properties": {
     "$ref": "./model.json",
-    "speakers": { "type": "array", "items": { "$ref": "../speaker/model.json" } }
+    "speakers": { "type": "array", "items": { "$ref": "../user/model.json" } }
   },
   "required": ["speakers"]
 }
