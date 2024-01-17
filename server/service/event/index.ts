@@ -4,6 +4,7 @@ import { collections } from "../../deps.ts";
 import { schema } from "../../types/common.ts";
 import { addPostRequiredData } from "../../util/addRequiredData.ts";
 import { speakersByEventId } from "../speaker/index.ts";
+import { getAllDiscordBotUsers } from "../user/index.ts";
 
 type TEvent = schema["Event"];
 type TWorkshop = schema["Workshop"];
@@ -57,11 +58,22 @@ type TGetAllEventsOutputs = (
  * eventからeventOutputへ変換する
  */
 export const toEventsOutputs: TGetAllEventsOutputs = async (events) => {
+  const members = await getAllDiscordBotUsers();
+  const membersMap: Map<string, schema["User"]> = new Map();
+  members.forEach((member) => membersMap.set(member.id, member));
+
   const eventOutputs: schema["EventOutput"][] = await Promise.all(events.map(
     async (event) => {
       const speakers: schema["Speaker"][] = await speakersByEventId(event.id);
-      return { ...event, speakers };
+
+      const users = speakers.map((speaker) => {
+        return membersMap.get(speaker.id);
+      })
+        .filter((user) => user !== undefined) as schema["User"][];
+      return { ...event, speakers: users };
     },
   ));
+  console.log(eventOutputs);
+
   return eventOutputs;
 };
