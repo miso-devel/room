@@ -1,12 +1,27 @@
 import { Bot } from "../../bot/bot.ts";
 import { SECRET } from "../../constants/secret.ts";
-import { Member } from "../../deps.ts";
+import { Collection, Member } from "../../deps.ts";
 import { schema } from "../../types/common.ts";
 import { throwAPIError } from "../../util/throwError.ts";
 import { TDiscordUser } from "./type.ts";
 import { getAvatarURL, type Member as TDiscordBotUser } from "../../deps.ts";
 
 type TUser = schema["User"];
+
+/**
+ * 全てのユーザーを取得する
+ */
+export const getAllDiscordBotUsers = async (): Promise<TUser[]> => {
+  const discordBotUsers: TUser[] = await Bot.helpers.getMembers(
+    SECRET.GUILD_ID,
+    { limit: 10 },
+  )
+    .then((data: Collection<bigint, Member>) =>
+      data.map((member: Member) => botUserToUser(member))
+    )
+    .catch(throwAPIError(401, "discord user error"));
+  return discordBotUsers;
+};
 
 /**
  * idから取得したDiscordのUserを必要な値だけ抽出して返す
