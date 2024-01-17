@@ -63,7 +63,7 @@ export type components = {
     };
     Speaker: {
       id: string;
-      memberId: string;
+      discordUserId: string;
       workshopId: string;
       eventId: string;
       createdAt: number;
