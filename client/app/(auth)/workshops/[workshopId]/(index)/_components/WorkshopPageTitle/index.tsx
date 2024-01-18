@@ -3,10 +3,9 @@
 import { WithTitleWrapper } from '../../../../../../../components/layout/WithTitleWrapper';
 import { SvgLink } from '../../../../../../../components/ui/Link/SvgLink';
 import { schema } from '../../../../../../../types/common';
-import Edit from 'public/svg/edit.svg';
-import Delete from 'public/svg/delete.svg';
 import { FC } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 type TWorkshopInfoProps = { workshop: schema['Workshop'] };
 
@@ -18,7 +17,13 @@ export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
       additionalElms={
         <div className="flex gap-1">
           <SvgLink href={`/workshops/${workshop.id}/edit`} ariaLabel="イベントの作成">
-            <Edit className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright" />
+            <Image
+              src="/svg/edit.svg"
+              alt="イベントの編集ボタン"
+              width={10}
+              height={10}
+              className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright"
+            />
           </SvgLink>
           <button
             onClick={async () => {
@@ -34,7 +39,13 @@ export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
               }
             }}
           >
-            <Delete className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright" />
+            <Image
+              src="/svg/delete.svg"
+              alt="イベントの削除ボタン"
+              width={10}
+              height={10}
+              className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright"
+            />
           </button>
         </div>
       }
