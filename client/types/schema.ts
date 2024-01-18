@@ -44,7 +44,7 @@ export type components = {
         theme: string;
         datetime: string;
       };
-      speakerIds: string[];
+      discordIds: string[];
     };
     EventOutput: {
       speakers: {
@@ -63,7 +63,7 @@ export type components = {
     };
     Speaker: {
       id: string;
-      discordUserId: string;
+      discordId: string;
       workshopId: string;
       eventId: string;
       createdAt: number;

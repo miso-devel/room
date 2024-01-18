@@ -10,7 +10,7 @@
       },
       "required": ["workshopId", "theme", "datetime"]
     },
-    "speakerIds": { "type": "array", "items": "string" }
+    "discordIds": { "type": "array", "items": "string" }
   },
-  "required": ["event", "speakerIds"]
+  "required": ["event", "speakerIds", "discordIds"]
 }

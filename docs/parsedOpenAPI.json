@@ -140,7 +140,7 @@
               "datetime"
             ]
           },
-          "speakerIds": {
+          "discordIds": {
             "type": "array",
             "items": "string"
           }
@@ -148,6 +148,7 @@
         "required": [
           "event",
           "speakerIds",
+          "discordIds",
           "id",
           "workshopId",
           "theme",
@@ -225,7 +226,7 @@
           "id": {
             "type": "string"
           },
-          "discordUserId": {
+          "discordId": {
             "type": "string"
           },
           "workshopId": {
@@ -243,7 +244,7 @@
         },
         "required": [
           "id",
-          "discordUserId",
+          "discordId",
           "workshopId",
           "eventId",
           "createdAt",
