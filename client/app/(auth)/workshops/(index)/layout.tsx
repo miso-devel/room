@@ -13,6 +13,8 @@ export default async function PageLayout({ children }: { children: ReactNode }) 
           <Image
             src="/svg/add.svg"
             alt="勉強会作成ボタン"
+            width={10}
+            height={10}
             className="h-6 w-6 rounded-md bg-middle fill-dark p-1 hover:bg-dark hover:fill-bright"
           />
         </SvgLink>
