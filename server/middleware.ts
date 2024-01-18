@@ -1,12 +1,12 @@
 import { SECRET } from "./constants/secret.ts";
-import { Context, getCookie, Next } from "./deps.ts";
+import { Context, getCookie, MiddlewareHandler, Next } from "./deps.ts";
 import { checkToken, decrypt, parseTokenData } from "./service/auth/index.ts";
 import { throwAPIError } from "./util/throwError.ts";
 import { cors, logger, poweredBy } from "./deps.ts";
-import { MiddlewareHandler } from "https://deno.land/x/hono@v3.10.3/types.ts";
 
 export const authMiddleware = async (c: Context, next: Next) => {
-  const accessToken = getCookie(c, "accessToken");
+  // middlewareを通すときにaccessToken=xxxxxという形で渡ってこないのでない時はheaderからとってきている
+  const accessToken = getCookie(c, "accessToken") ?? c.req.header()["cookie"];
   if (!accessToken) throwAPIError(403, "Not Found");
   const decryptedAccessToken = decrypt(accessToken as string);
   const requiredTokenData = parseTokenData(decryptedAccessToken);
