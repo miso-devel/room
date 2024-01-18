@@ -14,10 +14,10 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
     'use server';
     const theme = formData.get('theme') as string;
     const datetime = formData.get('datetime') as string;
-    const speakerIds = formData.getAll('members') as string[];
+    const discordIds = formData.getAll('discordIds') as string[];
     const eventInput: schema['EventInput'] = {
       event: { workshopId: workshop.id, theme, datetime },
-      speakerIds: speakerIds,
+      discordIds: discordIds,
     };
 
     const event = await fetcher.post<schema['EventInput'], schema['Event']>('/events', eventInput);
