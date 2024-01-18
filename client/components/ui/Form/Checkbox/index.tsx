@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
-import Check from 'public/svg/check.svg';
+import Image from 'next/image';
+
 type TCheckBoxProps = {
   label: string;
   name: string;
@@ -10,19 +11,19 @@ type TCheckBoxProps = {
 export const Checkbox: FC<TCheckBoxProps> = ({ children, label, name, value }) => {
   return (
     <div className="inline-flex items-center">
-      <label className="relative flex items-center p-2 rounded-full cursor-pointer" htmlFor={label}>
+      <label className="relative flex cursor-pointer items-center rounded-full p-2" htmlFor={label}>
         <input
           type="checkbox"
-          className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-dark transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-dark checked:bg-accent checked:before:bg-accent hover:before:opacity-10"
+          className="before:content[''] before:bg-blue-gray-500 peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-dark transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-dark checked:bg-accent checked:before:bg-accent hover:before:opacity-10"
           id={label}
           name={name}
           value={value}
         />
-        <span className="absolute text-dark transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-          <Check className="h-4 w-4 fill-dark" />
+        <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-dark opacity-0 transition-opacity peer-checked:opacity-100">
+          <Image src="/svg/check.svg" alt={`${name}をcheckする`} width={5} height={6} className="h-4 w-4 fill-dark" />
         </span>
       </label>
-      <label className="mt-px text-dark cursor-pointer select-none" htmlFor={label}>
+      <label className="mt-px cursor-pointer select-none text-dark" htmlFor={label}>
         {children}
       </label>
     </div>
