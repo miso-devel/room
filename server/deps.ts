@@ -17,15 +17,18 @@ export {
 
 // Hono
 export * as dotenv from "https://deno.land/std@0.190.0/dotenv/load.ts";
-export type { Next } from "https://deno.land/x/hono@v3.10.3/types.ts";
-export type { Response } from "https://deno.land/x/hono@v3.10.3/client/types.ts";
+export type {
+  MiddlewareHandler,
+  Next,
+} from "https://deno.land/x/hono@v3.12.5/types.ts";
+export type { Response } from "https://deno.land/x/hono@v3.12.5/client/types.ts";
 export {
   type Context,
   type Env,
   type Handler,
   Hono,
   HTTPException,
-} from "https://deno.land/x/hono@v3.10.3/mod.ts";
+} from "https://deno.land/x/hono@v3.12.5/mod.ts";
 export {
   cors,
   deleteCookie,
@@ -33,7 +36,7 @@ export {
   logger,
   poweredBy,
   setCookie,
-} from "https://deno.land/x/hono@v3.10.3/middleware.ts";
+} from "https://deno.land/x/hono@v3.12.5/middleware.ts";
 
 // dotenv
 export { load } from "https://deno.land/std@0.194.0/dotenv/mod.ts";
