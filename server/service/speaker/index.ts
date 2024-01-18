@@ -6,22 +6,22 @@ import { throwAPIError } from "../../util/throwError.ts";
 
 type TSpeaker = schema["Speaker"];
 type TCreateSpeakerProps = {
-  speakerIds: schema["EventInput"]["speakerIds"];
+  discordIds: schema["EventInput"]["discordIds"];
   workshopId: schema["Workshop"]["id"];
   eventId: schema["Event"]["id"];
 };
 
 // eventのinputからspeakersを作成する際に使用する
 export const createSpeakers = async (
-  { speakerIds, workshopId, eventId }: TCreateSpeakerProps,
+  { discordIds, workshopId, eventId }: TCreateSpeakerProps,
 ): Promise<TSpeaker[]> => {
   const speakers = await Promise.all(
-    speakerIds.map(async (speakerId: string) => {
+    discordIds.map(async (discordId: string) => {
       const speaker = await DB.createOne<TSpeaker>(PREFIX_MAP["speaker"], {
         ...addPostRequiredData({}),
         workshopId,
         eventId,
-        memberId: speakerId,
+        discordId,
       });
       return speaker ?? throwAPIError(401, "speaker create failed")();
     }),

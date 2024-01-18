@@ -45,7 +45,7 @@ app.post("/", async (c: Context) => {
   if (!event) throwAPIError(401, "event create failed")();
 
   const speakers = await createSpeakers({
-    speakerIds: input.speakerIds,
+    discordIds: input.discordIds,
     workshopId: input.event.workshopId,
     eventId: event.id,
   });
