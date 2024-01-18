@@ -9,7 +9,6 @@ export async function middleware(request: NextRequest) {
       cache: 'no-cache',
       headers: request.headers,
     });
-    console.log('isValid', isValid);
     if (!isValid.hasValidToken) return NextResponse.redirect(new URL('/', request.url));
   } catch (error) {
     console.log('error', error);
@@ -18,15 +17,3 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = { matcher: ['/home', '/members', '/workshop', '/events'] };
-
-// import { withAuth } from 'next-auth/middleware';
-
-// // More on how NextAuth.js middleware works: https://next-auth.js.org/configuration/nextjs#middleware
-// export default withAuth({
-//   callbacks: {
-//     authorized({ req, token }) {
-//       if (req.nextUrl.pathname !== '/') return !!token;
-//       return false;
-//     },
-//   },
-// });
