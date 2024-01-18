@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { serverActions: true },
   images: { domains: ['cdn.discordapp.com'] },
 
   webpack(config) {
@@ -20,7 +19,7 @@ const nextConfig = {
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: ['@svgr/webpack'],
-      }
+      },
     );
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
