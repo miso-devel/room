@@ -25,9 +25,14 @@ const Event: FC<TEventProps> = ({ event, index }) => {
       <EventTableElement tableDataKind="td">{createdDate} ~ </EventTableElement>
       <EventTableElement tableDataKind="td">{event.theme}</EventTableElement>
       <EventTableElement tableDataKind="td">
-        <div className="flex">
+        {/* TODO:画像が入らないパターンもあるのでいい感じにコンポーネントにまとめる */}
+        <div className="flex gap-3">
           {event.speakers.map((speaker) => {
-            return <div key={speaker.id}>{<p>{speaker.id},</p>}</div>;
+            return (
+              <div key={speaker.id} className="flex items-center">
+                <Image src={speaker.avatar} width={30} height={30} alt={''} className="rounded-full" />
+              </div>
+            );
           })}
         </div>
       </EventTableElement>
