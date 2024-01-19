@@ -24,6 +24,19 @@ export const getAllDiscordBotUsers = async (): Promise<TUser[]> => {
 };
 
 /**
+ * 全てのユーザーを取得する
+ * Map<id, User>の形で返す
+ */
+export const getArrangeDiscordBotUser = async (): Promise<
+  Map<string, schema["User"]>
+> => {
+  const members = await getAllDiscordBotUsers();
+  const membersMap: Map<string, schema["User"]> = new Map();
+  members.forEach((member) => membersMap.set(member.id, member));
+  return membersMap;
+};
+
+/**
  * idから取得したDiscordのUserを必要な値だけ抽出して返す
  */
 export const getMemberByUserId = async (id: string): Promise<TUser> => {
