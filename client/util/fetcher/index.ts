@@ -2,7 +2,6 @@ import { cookies } from 'next/headers';
 
 const get = async <T>(url: string, init?: RequestInit): Promise<T> => {
   const withCookieHeader = { headers: { Cookie: cookies().get('accessToken')?.value ?? 'aaaaa' } };
-  console.log('withCookieHeader', withCookieHeader);
   const baseUrl = typeof window ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.SERVER_URL;
   const res = await fetch(baseUrl + url, { ...withCookieHeader, ...init }).then((res) => res.json());
   return res;
