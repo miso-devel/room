@@ -51,6 +51,10 @@ app.post("/", async (c: Context) => {
   });
 
   await updateWorkshopEventInfo(input.event.workshopId);
+  await DB.enqueue("event", event, 0);
+  // TODO: ここでeventの開始時間を取得して、その時間になったら通知するようにする
+  // 開始時間と現時刻の差分を計算して、差分の10分前くらいに通知が出せるようにdelayを調整する
+  // await DB.enqueue("eventStart", event, 0);
   return c.json({ ...event, speakers });
 });
 

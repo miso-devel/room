@@ -36,6 +36,7 @@ app.post("/", async (c: Context) => {
     PREFIX_MAP["workshop"],
     workshopInput,
   );
+  await DB.enqueue("workshop", workshop, 0);
   return c.json(workshop);
 });
 
