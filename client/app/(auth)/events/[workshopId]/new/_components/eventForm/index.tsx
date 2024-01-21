@@ -4,7 +4,7 @@ import { schema } from '../../../../../../../types/common';
 import { FormWrapper } from '../../../../../../../components/ui/Form/FormWrapper';
 import { Input } from '../../../../../../../components/ui/Form/Input';
 import { Button } from '../../../../../../../components/ui/Button';
-import { MemberSelectModal } from '../MemberSelectModal';
+import { UserSelectModal } from '../UserSelectModal';
 import { fetcher } from '../../../../../../../util/fetcher';
 
 type TProps = { members: schema['User'][]; workshop: schema['Workshop'] };
@@ -28,7 +28,7 @@ export const EventForm: FC<TProps> = ({ members, workshop }) => {
     <FormWrapper action={submit}>
       <Input label="テーマ" name="theme" placeholder="theme here" type="text" required />
       <Input label="時間" name="datetime" placeholder="date here" type="datetime-local" required />
-      <MemberSelectModal members={members} />
+      <UserSelectModal users={members} />
       <Button>作成する</Button>
     </FormWrapper>
   );
