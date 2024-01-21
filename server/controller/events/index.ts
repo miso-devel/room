@@ -9,6 +9,7 @@ import {
 } from "../../service/event/index.ts";
 import { createSpeakers } from "../../service/speaker/index.ts";
 import { schema } from "../../types/common.ts";
+import { calculateDelay } from "../../util/calculateDelay.ts";
 import { throwAPIError } from "../../util/throwError.ts";
 
 type TEvent = schema["Event"];
@@ -52,9 +53,10 @@ app.post("/", async (c: Context) => {
 
   await updateWorkshopEventInfo(input.event.workshopId);
   await DB.enqueue("event", event, 0);
-  // TODO: ここでeventの開始時間を取得して、その時間になったら通知するようにする
-  // 開始時間と現時刻の差分を計算して、差分の10分前くらいに通知が出せるようにdelayを調整する
-  // await DB.enqueue("eventStart", event, 0);
+  // 10分前に通知するようにする
+  const delay = 1000 * 60 * 10;
+  calculateDelay(new Date(), event.datetime, delay);
+  await DB.enqueue("eventStart", event, 0);
   return c.json({ ...event, speakers });
 });
 
