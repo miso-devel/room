@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Navigations } from './Navigations';
 import Link from 'next/link';
-import { Profile } from './Profill';
+import { Me } from './Me';
 
 export const SideBar: FC = () => {
   return (
@@ -10,7 +10,7 @@ export const SideBar: FC = () => {
         Doer
       </Link>
       <Navigations />
-      <Profile />
+      <Me />
     </div>
   );
 };
