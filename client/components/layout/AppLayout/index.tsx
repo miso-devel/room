@@ -5,9 +5,9 @@ type AppLayoutProps = { children: ReactNode };
 
 export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div className="flex min-h-screen w-screen text-dark">
+    <div className="flex">
       <SideBar />
-      <div className="m-10 w-[85%]">{children}</div>
+      <main className="ms-[15%] w-[85%] p-10">{children}</main>
     </div>
   );
 };
