@@ -1,22 +1,21 @@
 import { schema } from '../../../../../../types/common';
 import { FC } from 'react';
 import { ContentBox } from '../../../../../../components/ui/Content/Box';
+import { fetcher } from '../../../../../../util/fetcher';
+import { ContentsWrapper } from '../../../../../../components/ui/Content/Wrapper';
 
-type TWorkshops = FC<{ workshops: schema['Workshop'][] }>;
-
-export const Workshops: TWorkshops = async ({ workshops }) => {
+export const Workshops: FC = async () => {
+  const workshops = await fetcher.get<schema['Workshop'][]>('/workshops', { cache: 'no-cache' });
   return (
-    <div className="grid grid-cols-1 gap-3">
-      {workshops.map((workshop) => {
-        return (
-          <ContentBox
-            key={workshop.id}
-            title={workshop.title}
-            to={`workshops/${workshop.id}`}
-            additionalInfo={workshop.description}
-          />
-        );
-      })}
-    </div>
+    <ContentsWrapper>
+      {workshops.map((workshop) => (
+        <ContentBox
+          key={workshop.id}
+          title={workshop.title}
+          to={`workshops/${workshop.id}`}
+          additionalInfo={workshop.description}
+        />
+      ))}
+    </ContentsWrapper>
   );
 };

@@ -1,9 +1,11 @@
 import { Workshops } from './_components/workshops';
-import { schema } from '../../../../types/common';
-import { fetcher } from '../../../../util/fetcher';
+import { Suspense } from 'react';
+import { Spinner } from '../../../../components/ui/Spinner';
 
 export default async function WorkshopsPage() {
-  const workshops = await fetcher.get<schema['Workshop'][]>('/workshops', { cache: 'no-cache' });
-
-  return <Workshops workshops={workshops} />;
+  return (
+    <Suspense fallback={<Spinner dark />}>
+      <Workshops />
+    </Suspense>
+  );
 }
