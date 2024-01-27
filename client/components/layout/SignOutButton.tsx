@@ -14,8 +14,10 @@ export const LogoutButton = async () => {
     router.push(data.revoked ? '/' : '/home');
   };
   return (
-    <Button onClick={signout} onDark sm>
-      Logout
-    </Button>
+    <div className="ms-auto">
+      <Button onClick={signout} onDark sm>
+        Logout
+      </Button>
+    </div>
   );
 };
