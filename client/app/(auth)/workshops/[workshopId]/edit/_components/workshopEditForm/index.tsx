@@ -6,10 +6,13 @@ import { FormWrapper } from '../../../../../../../components/ui/Form/FormWrapper
 import { Input } from '../../../../../../../components/ui/Form/Input';
 import { Textarea } from '../../../../../../../components/ui/Form/Textarea';
 import { Button } from '../../../../../../../components/ui/Button';
+import { WorkshopEditPageTitle } from '../workshopEditPageTitle';
 
-type TWorkshopFormProps = { workshop: schema['Workshop'] };
+type TWorkshopForm = FC<{ workshopId: string }>;
 
-export const WorkshopEditForm: FC<TWorkshopFormProps> = ({ workshop }) => {
+export const WorkshopEditForm: TWorkshopForm = async ({ workshopId }) => {
+  const workshop = await fetcher.get<schema['Workshop']>(`/workshops/${workshopId}`);
+
   const submit = async (formData: FormData) => {
     'use server';
     const title = formData.get('title') as string;
@@ -20,22 +23,24 @@ export const WorkshopEditForm: FC<TWorkshopFormProps> = ({ workshop }) => {
   };
 
   return (
-    <FormWrapper action={submit}>
-      <Input
-        label="勉強会名"
-        name="title"
-        placeholder="workshop name here"
-        type="text"
-        defaultValue={workshop.title}
-        required
-      />
-      <Textarea
-        label="説明"
-        name="description"
-        placeholder="workshop description here"
-        defaultValue={workshop.description}
-      />
-      <Button>編集完了</Button>
-    </FormWrapper>
+    <WorkshopEditPageTitle workshop={workshop}>
+      <FormWrapper action={submit}>
+        <Input
+          label="勉強会名"
+          name="title"
+          placeholder="workshop name here"
+          type="text"
+          defaultValue={workshop.title}
+          required
+        />
+        <Textarea
+          label="説明"
+          name="description"
+          placeholder="workshop description here"
+          defaultValue={workshop.description}
+        />
+        <Button>編集完了</Button>
+      </FormWrapper>
+    </WorkshopEditPageTitle>
   );
 };

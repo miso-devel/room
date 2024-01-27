@@ -1,14 +1,11 @@
-import { schema } from '../../../../../types/common';
-import { fetcher } from '../../../../../util/fetcher';
-import { WorkshopEditPageTitle } from './_components/workshopEditPageTitle';
+import { Suspense } from 'react';
 import { WorkshopEditForm } from './_components/workshopEditForm';
+import { Spinner } from '../../../../../components/ui/Spinner';
 
 export default async function WorkshopsShowPage({ params }: { params: { workshopId: string } }) {
-  const workshop = await fetcher.get<schema['Workshop']>(`/workshops/${params.workshopId}`);
-
   return (
-    <WorkshopEditPageTitle workshop={workshop}>
-      <WorkshopEditForm workshop={workshop} />
-    </WorkshopEditPageTitle>
+    <Suspense fallback={<Spinner dark />}>
+      <WorkshopEditForm workshopId={params.workshopId} />
+    </Suspense>
   );
 }
