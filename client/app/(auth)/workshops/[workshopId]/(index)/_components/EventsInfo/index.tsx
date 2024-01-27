@@ -3,9 +3,10 @@ import { cdate } from 'cdate';
 import { FC, ReactNode } from 'react';
 import { SvgLink } from '../../../../../../../components/ui/Link/SvgLink';
 import Image from 'next/image';
+import { fetcher } from '../../../../../../../util/fetcher';
 
 type TEventProps = { event: schema['EventOutput']; index: number };
-type TEventsProps = { events: schema['EventOutput'][]; workshopId: string };
+type TEventsProps = FC<{ workshopId: string }>;
 
 type TEventTableElement = { tableDataKind: 'td' | 'th'; children?: ReactNode };
 const EventTableElement: FC<TEventTableElement> = ({ tableDataKind, children }) => {
@@ -40,7 +41,8 @@ const Event: FC<TEventProps> = ({ event, index }) => {
   );
 };
 
-export const EventsInfo: FC<TEventsProps> = ({ events, workshopId }) => {
+export const EventsInfo: TEventsProps = async ({ workshopId }) => {
+  const events = await fetcher.get<schema['EventOutput'][]>(`/events?workshopId=${workshopId}`);
   return (
     <>
       <div className="flex items-center gap-3">

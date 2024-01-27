@@ -1,47 +1,16 @@
-'use client';
-
 import { WithTitleWrapper } from '../../../../../../../components/layout/WithTitleWrapper';
-import { SvgLink } from '../../../../../../../components/ui/Link/SvgLink';
 import { schema } from '../../../../../../../types/common';
 import { FC } from 'react';
-import { useRouter } from 'next/navigation';
-import { SvgImage } from '../../../../../../../components/ui/Image/SvgImage';
+import { fetcher } from '../../../../../../../util/fetcher';
+import { WorkshopDeleteButton } from '../WorkshopDeleteButton';
 
-type TWorkshopInfoProps = { workshop: schema['Workshop'] };
+type TWorkshopPageTitle = FC<{ workshopId: string }>;
 
-export const WorkshopPageTitle: FC<TWorkshopInfoProps> = ({ workshop }) => {
-  const router = useRouter();
-
-  const onDeleteWorkshop = async () => {
-    if (confirm('本当に削除しますか？')) {
-      await fetch('/workshops', {
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: workshop.id }),
-        method: 'DELETE',
-        mode: 'cors',
-        credentials: 'include',
-      });
-      router.push('/workshops');
-    }
-  };
+export const WorkshopPageTitle: TWorkshopPageTitle = async ({ workshopId }) => {
+  const workshop = await fetcher.get<schema['Workshop']>(`/workshops/${workshopId}`, { cache: 'no-cache' });
 
   return (
-    <WithTitleWrapper
-      title={workshop.title}
-      additionalElms={
-        <div className="flex gap-1">
-          <SvgLink
-            href={`/workshops/${workshop.id}/edit`}
-            ariaLabel="イベントの作成"
-            svgName="edit"
-            svgAlt="イベントの編集ボタン"
-          />
-          <button onClick={onDeleteWorkshop}>
-            <SvgImage svgName="delete" svgAlt="イベントの削除ボタン" ariaLabel="イベントの削除ボタン" />
-          </button>
-        </div>
-      }
-    >
+    <WithTitleWrapper title={workshop.title} additionalElms={<WorkshopDeleteButton workshopId={workshopId} />}>
       <div className="my-3 break-all rounded-md bg-middle p-3">
         <p>{workshop.description}</p>
       </div>
