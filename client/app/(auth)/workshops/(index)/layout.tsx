@@ -2,8 +2,6 @@ import { ReactNode } from 'react';
 import { SvgLink } from '../../../../components/ui/Link/SvgLink';
 import { WithTitleWrapper } from '../../../../components/layout/WithTitleWrapper';
 
-import Image from 'next/image';
-
 export default async function PageLayout({ children }: { children: ReactNode }) {
   return (
     <WithTitleWrapper
