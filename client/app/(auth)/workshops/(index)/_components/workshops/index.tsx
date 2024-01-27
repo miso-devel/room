@@ -1,28 +1,22 @@
 import { schema } from '../../../../../../types/common';
 import { FC } from 'react';
-import Link from 'next/link';
+import { ContentBox } from '../../../../../../components/ui/Content/Box';
 
-type TWorkshopsProps = { workshops: schema['Workshop'][] };
-type TWorkshopProps = { workshop: schema['Workshop'] };
+type TWorkshops = FC<{ workshops: schema['Workshop'][] }>;
 
-export const Workshops: FC<TWorkshopsProps> = async ({ workshops }) => {
+export const Workshops: TWorkshops = async ({ workshops }) => {
   return (
     <div className="grid grid-cols-1 gap-3">
       {workshops.map((workshop) => {
-        return <Workshop key={workshop.id} workshop={workshop} />;
+        return (
+          <ContentBox
+            key={workshop.id}
+            title={workshop.title}
+            to={`workshops/${workshop.id}`}
+            additionalInfo={workshop.description}
+          />
+        );
       })}
     </div>
-  );
-};
-
-const Workshop: FC<TWorkshopProps> = ({ workshop }) => {
-  return (
-    <Link
-      href={`/workshops/${workshop.id}`}
-      className="border-b-2 py-2 transition-all hover:border-b-primary hover:opacity-80"
-    >
-      <h2 className="mb-2 text-xl">{workshop.title}</h2>
-      <p className="text-sm">{workshop.description}</p>
-    </Link>
   );
 };

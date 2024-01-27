@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { schema } from '../../../../types/common';
 import { fetcher } from '../../../../util/fetcher';
+import { ContentBox } from '../../../../components/ui/Content/Box';
 
 export default async function EventsPage() {
   const events = await fetcher.get<schema['Event'][]>('/events', { cache: 'no-cache' });
@@ -8,15 +8,7 @@ export default async function EventsPage() {
     <>
       <div className="grid grid-cols-1 gap-3">
         {events.map((event) => {
-          return (
-            <Link
-              key={event.id}
-              href={`/workshops/${event.workshopId}`}
-              className="border-b-2 py-2 transition-all hover:border-b-primary"
-            >
-              <h2 className="mb-2 text-xl">{event.theme}</h2>
-            </Link>
-          );
+          return <ContentBox key={event.id} title={event.theme} to={`/workshops/${event.workshopId}`} />;
         })}
       </div>
     </>
