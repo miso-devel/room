@@ -1,13 +1,11 @@
-import { schema } from '../../../types/common';
-import { fetcher } from '../../../util/fetcher';
+import { Suspense } from 'react';
 import { Workshops } from './_components/workshops';
+import { Spinner } from '../../../components/ui/Spinner';
 
 export default async function Home() {
-  const workshops = await fetcher.get<schema['Workshop'][]>('/workshops', { cache: 'no-cache' });
-
   return (
-    <div className="grid grid-cols-2 gap-5">
-      <Workshops workshops={workshops} />
-    </div>
+    <Suspense fallback={<Spinner dark />}>
+      <Workshops />
+    </Suspense>
   );
 }
