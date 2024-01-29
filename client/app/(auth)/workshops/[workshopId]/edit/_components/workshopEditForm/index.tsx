@@ -39,7 +39,6 @@ export const WorkshopEditForm: TWorkshopForm = async ({ workshopId }) => {
           placeholder="workshop description here"
           defaultValue={workshop.description}
         />
-        <Button>編集完了</Button>
       </FormWrapper>
     </WorkshopEditPageTitle>
   );
