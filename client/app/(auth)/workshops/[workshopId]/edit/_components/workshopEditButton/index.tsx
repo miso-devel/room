@@ -1,9 +1,10 @@
 'use client';
-import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { Button } from '../../../../../../../components/ui/Button';
+import { Spinner } from '../../../../../../../components/ui/Spinner';
 
 export const WorkshopEditButton = () => {
   const { pending } = useFormStatus();
 
-  return <Button disable={pending}>編集完了</Button>;
+  return <Button disabled={pending}>{pending ? <Spinner dark /> : '編集'}</Button>;
 };
