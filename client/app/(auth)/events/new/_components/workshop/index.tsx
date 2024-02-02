@@ -1,7 +1,7 @@
-import { schema } from '../../../../../../../types/common';
-import { FC } from 'react';
+import { schema } from "../../../../../../types/common";
+import { FC } from "react";
 
-type TProps = { workshop: schema['Workshop'] };
+type TProps = { workshop: schema["Workshop"] };
 
 export const Workshop: FC<TProps> = ({ workshop }) => {
   return (
