@@ -1,7 +1,7 @@
-import { EventsInfo } from './_components/EventsInfo';
-import { WorkshopPageTitle } from './_components/WorkshopPageTitle';
 import { Suspense } from 'react';
 import { Spinner } from '../../../../../components/ui/Spinner';
+import { WorkshopPageTitle } from './components/WorkshopPageTitle';
+import { EventsInfo } from './components/EventsInfo';
 
 export default async function WorkshopPage({ params }: { params: { workshopId: string } }) {
   return (

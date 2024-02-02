@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Spinner } from '../../../../components/ui/Spinner';
-import { Events } from './_components/events';
+import { Events } from './components/events';
 
 export default async function EventsPage() {
   return (

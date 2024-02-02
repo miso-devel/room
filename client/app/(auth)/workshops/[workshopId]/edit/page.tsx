@@ -1,5 +1,5 @@
 import { FC, Suspense } from 'react';
-import { WorkshopEditForm } from './_components/workshopEditForm';
+import { WorkshopEditForm } from './components/workshopEditForm';
 import { Spinner } from '../../../../../components/ui/Spinner';
 import { fetcher } from '../../../../../util/fetcher';
 import { schema } from '../../../../../types/common';

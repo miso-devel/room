@@ -1,4 +1,4 @@
-import { Workshops } from './_components/workshops';
+import { Workshops } from './components/workshops';
 import { Suspense } from 'react';
 import { Spinner } from '../../../../components/ui/Spinner';
 
