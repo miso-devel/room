@@ -46,6 +46,8 @@ app.get("/token", async (c: Context) => {
     sameSite: "Strict",
     maxAge: accessToken.expires_in,
   });
+
+  return c.redirect(SECRET.CLIENT_URL + "/home");
 });
 
 /**
