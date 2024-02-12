@@ -43,7 +43,8 @@ app.get("/token", async (c: Context) => {
   setCookie(c, "accessToken", encrypt(requiredTokenData), {
     httpOnly: true,
     secure: true,
-    sameSite: "Strict",
+    // redirectされた時にcookieが送られるようにするためにLaxにしている
+    sameSite: "Lax",
     maxAge: accessToken.expires_in,
   });
 
