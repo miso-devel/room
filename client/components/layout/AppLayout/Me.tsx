@@ -1,13 +1,11 @@
-import Image from 'next/image';
 import { schema } from '../../../types/common';
 import { fetcher } from '../../../util/fetcher';
-import { headers } from 'next/headers';
 import { LogoutButton } from '../SignOutButton';
 import { UserProfile } from '../../../features/user/components/UserProfile';
-import { FC, ReactNode, Suspense } from 'react';
+import { FC, ReactNode } from 'react';
 
 export const Me: FC = async () => {
-  const user: schema['User'] = await fetcher.get('/users/me', { credentials: 'include', headers: headers() });
+  const user: schema['User'] = await fetcher.get('/users/me');
   return (
     <>
       <UserProfile name={user.name} avatarPath={user.avatar} />
