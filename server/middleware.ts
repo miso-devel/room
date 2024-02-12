@@ -17,11 +17,9 @@ export const authMiddleware = async (c: Context, next: Next) => {
   const requiredTokenData = parseTokenData(decryptedAccessToken);
   const isValidToken = await checkToken(requiredTokenData.access_token);
 
-  if (isValidToken) {
-    await next();
-  } else {
-    return c.redirect(SECRET.CLIENT_URL as string);
-  }
+  return isValidToken
+    ? await next()
+    : throwAPIError(401, "accessToken is invalid")();
 };
 
 export const middlewareBaseOptions = [
