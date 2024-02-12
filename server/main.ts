@@ -5,7 +5,9 @@ import User from "./controller/users/index.ts";
 import Event from "./controller/events/index.ts";
 import { middlewareOptions } from "./middleware.ts";
 
-const app = new Hono();
+export const app = new Hono();
+
+app.get("/health", (c) => c.json({ message: "Health" }));
 
 app.use("/auth/signin", ...middlewareOptions({ auth: false }));
 app.use("/auth/signout", ...middlewareOptions({ auth: true }));
