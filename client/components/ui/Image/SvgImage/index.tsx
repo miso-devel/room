@@ -17,7 +17,7 @@ export const SvgImage: FC<TSvgImageProps> = ({ svgName, svgAlt, ariaLabel, class
       alt={svgAlt}
       width={width ?? 30}
       height={height ?? 30}
-      className={`${className} rounded-md border-2 border-transparent bg-middle fill-dark p-1 hover:border-dark hover:bg-accent`}
+      className={`${className} rounded-full border-2 border-transparent bg-middle fill-dark p-1 hover:border-dark hover:bg-accent`}
       aria-label={ariaLabel}
     />
   );

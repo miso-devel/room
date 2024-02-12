@@ -7,7 +7,7 @@ export const ButtonLink: FC<TButtonLinkProps> = ({ href, children }) => {
   return (
     <NextLink
       href={href}
-      className="inline-flex p-2 border-2 border-middle hover:bg-accent hover:text-dark rounded-md transition-all"
+      className="inline-flex rounded-md border-2 border-middle p-2 transition-all hover:bg-accent hover:text-dark"
     >
       {children}
     </NextLink>
