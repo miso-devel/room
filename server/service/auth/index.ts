@@ -26,8 +26,7 @@ export const getAccessToken = async (code: string): Promise<TAccessToken> => {
       redirect_uri: SECRET.SERVER_URL + "/auth/token",
       scope: "identify guilds",
     }),
-  })
-    .then((res) => res.json());
+  }).then((res) => res.json());
   return accessToken;
 };
 
@@ -64,18 +63,15 @@ export const checkToken = async (accessToken: string): Promise<boolean> => {
 export const revokeAccessToken = async (
   accessToken: string,
 ): Promise<{ revoked: boolean }> => {
-  await fetch(
-    "https://discord.com/api/oauth2/token/revoke",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        client_id: SECRET.DISCORD_CLIENT_ID,
-        client_secret: SECRET.DISCORD_CLIENT_SECRET,
-        token: accessToken,
-      }),
-    },
-  );
+  await fetch("https://discord.com/api/oauth2/token/revoke", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: SECRET.DISCORD_CLIENT_ID,
+      client_secret: SECRET.DISCORD_CLIENT_SECRET,
+      token: accessToken,
+    }),
+  });
   // fetch結果が成功でも失敗でもobjectは{}を返すので、ここでアクセストークンが本当に使えなくなったのか見ている
   const checkResult = await checkToken(accessToken);
   return { revoked: !checkResult };
@@ -106,16 +102,20 @@ export const encrypt = (data: string): string => {
  * cookieから取り出したデータを復号化するための関数
  * cookieに保存するときに暗号化したデータとivをbase64化しているので、parseしてivと暗号化したデータを取り出している
  */
-export const decrypt = (data: string): string => {
-  const { iv, encryptedData }: TEncryptedData = JSON.parse(atob(data));
-  const decodedIv = Buffer.from(iv, "base64");
-  const decodedEncryptedData = Buffer.from(encryptedData, "base64");
-  const key = crypto.scryptSync(PASSWORD, SALT, 16);
-  const decipher = crypto.createDecipheriv(ALGO, key, decodedIv);
+export const decrypt = (data: string): string | undefined => {
+  try {
+    const { iv, encryptedData }: TEncryptedData = JSON.parse(atob(data));
+    const decodedIv = Buffer.from(iv, "base64");
+    const decodedEncryptedData = Buffer.from(encryptedData, "base64");
+    const key = crypto.scryptSync(PASSWORD, SALT, 16);
+    const decipher = crypto.createDecipheriv(ALGO, key, decodedIv);
 
-  let decryptedData = decipher.update(decodedEncryptedData);
-  decryptedData = Buffer.concat([decryptedData, decipher.final()]);
-  return decryptedData.toString("utf-8");
+    let decryptedData = decipher.update(decodedEncryptedData);
+    decryptedData = Buffer.concat([decryptedData, decipher.final()]);
+    return decryptedData.toString("utf-8");
+  } catch (error) {
+    console.error("decrypt_error", error);
+  }
 };
 
 export const stringifyTokenData = (accessToken: TAccessToken): string => {
