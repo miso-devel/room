@@ -38,9 +38,12 @@ app.get("/", async (c: Context) => {
  * cookieに入ってるアクセストークンからユーザー情報を取得する
  */
 app.get("/me", async (c: Context) => {
-  const accessToken = getCookie(c, "accessToken");
+  const accessToken = getCookie(c, "accessToken") ?? c.req.header()["cookie"];
   if (!accessToken) return throwAPIError(401, "accessToken is not found")();
   const decryptedAccessToken = decrypt(accessToken);
+  if (!decryptedAccessToken) {
+    return throwAPIError(401, "accessToken is not found")();
+  }
   const requiredTokenData = parseTokenData(decryptedAccessToken);
   const user = await getUserByAccessToken(requiredTokenData.access_token);
 
