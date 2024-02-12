@@ -17,7 +17,7 @@ import {
 } from "../../service/auth/index.ts";
 import { throwAPIError } from "../../util/throwError.ts";
 
-const app = new Hono();
+export const app = new Hono();
 
 /**
  * OAuth2.0の認可エンドポイント
