@@ -1,10 +1,14 @@
 import { cookies } from 'next/headers';
+import { errorHandler } from '../error';
+import { redirect } from 'next/navigation';
 
 const get = async <T>(url: string, init?: RequestInit): Promise<T> => {
-  const withCookieHeader = { headers: { Cookie: cookies().get('accessToken')?.value ?? 'aaaaa' } };
+  const withCookieHeader = { headers: { Cookie: cookies().get('accessToken')?.value ?? '' } };
   const baseUrl = typeof window ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.SERVER_URL;
-  const res = await fetch(baseUrl + url, { ...withCookieHeader, ...init }).then((res) => res.json());
-  return res;
+  const res = await fetch(baseUrl + url, { ...withCookieHeader, ...init });
+  if (res.status !== 200) errorHandler(res);
+  const data = await res.json();
+  return data;
 };
 
 const post = async <I, T>(url: string, data: I, init?: RequestInit): Promise<T> => {
