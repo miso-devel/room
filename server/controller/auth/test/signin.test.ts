@@ -5,7 +5,9 @@ import { TEST } from "../../../testUtil/constants.ts";
 
 Deno.test("/signin", async (t) => {
   const res = await app.request(TEST.URL + "/auth/signin");
+
   await t.step("200で返ってくる", () => assertEquals(res.status, 200));
+
   await t.step(
     "適切なレスポンスが返ってくる",
     async () => {
