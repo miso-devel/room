@@ -15,7 +15,7 @@ const SALT = SECRET.CRYPTO_SALT;
  * トークンを取得して返す
  */
 export const getAccessToken = async (code: string): Promise<TAccessToken> => {
-  const accessToken = await fetch("https://discord.com/api/oauth2/token", {
+  const res = await fetch("https://discord.com/api/oauth2/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
@@ -26,7 +26,8 @@ export const getAccessToken = async (code: string): Promise<TAccessToken> => {
       redirect_uri: SECRET.SERVER_URL + "/auth/token",
       scope: "identify guilds",
     }),
-  }).then((res) => res.json());
+  });
+  const accessToken = await res.json() as TAccessToken;
   return accessToken;
 };
 
