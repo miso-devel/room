@@ -2,6 +2,12 @@
 export * as collections from "https://deno.land/std@0.209.0/collections/mod.ts";
 export * as webcrypto from "https://deno.land/std@0.210.0/crypto/mod.ts";
 export { assertEquals } from "https://deno.land/std@0.215.0/assert/mod.ts";
+export {
+  assertSpyCall,
+  assertSpyCalls,
+  spy,
+  stub,
+} from "https://deno.land/std@0.215.0/testing/mock.ts";
 
 // node
 export * as crypto from "node:crypto";
