@@ -37,9 +37,10 @@ app.get("/token", async (c: Context) => {
   const code = c.req.query("code");
   if (!code) return throwAPIError(401, "code is not found")();
   const accessToken = await getAccessToken(code);
-  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
+  if (!accessToken.access_token) {
+    return throwAPIError(401, "accessToken is not found")();
+  }
   const requiredTokenData = stringifyTokenData(accessToken);
-
   setCookie(c, "accessToken", encrypt(requiredTokenData), {
     httpOnly: true,
     secure: true,
