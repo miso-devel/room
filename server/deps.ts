@@ -4,6 +4,7 @@ export * as webcrypto from "https://deno.land/std@0.210.0/crypto/mod.ts";
 export { assertEquals } from "https://deno.land/std@0.215.0/assert/mod.ts";
 export {
   assertSpyCall,
+  assertSpyCallArgs,
   assertSpyCalls,
   spy,
   stub,
