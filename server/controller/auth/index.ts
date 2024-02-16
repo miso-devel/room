@@ -77,11 +77,10 @@ app.get("/token/check", async (c: Context) => {
  */
 app.post("/signout", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
-  if (!accessToken) return c.json({ isRevoked: false });
+  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
   const decryptedAccessToken = decrypt(accessToken);
-  if (!decryptedAccessToken) {
-    return throwAPIError(401, "accessToken is not found")();
-  }
+  if (!decryptedAccessToken) return throwAPIError(401, "decrypt failed")();
+  // parseの処理でエラーが出る時はそもそもdecryptが失敗しているのでparseTokenDataでのエラー処理はしない
   const requiredTokenData = parseTokenData(decryptedAccessToken);
   const revoked = await revokeAccessToken(requiredTokenData.access_token);
   deleteCookie(c, "accessToken");
