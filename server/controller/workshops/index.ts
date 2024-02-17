@@ -12,7 +12,7 @@ const app = new Hono();
 
 app.get("/", async (c: Context) => {
   const workshops = await DB.fetchAll<TWorkshop>(PREFIX_MAP["workshop"]);
-  // eventgがない場合はcreatedAtでsortする
+  // eventがない場合はcreatedAtでsortする
   const sortedWorkshop = collections
     .sortBy(workshops, (w) => new Date(w.latestEventDatetime ?? w.createdAt))
     .reverse();
