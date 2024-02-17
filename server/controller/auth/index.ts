@@ -58,11 +58,12 @@ app.get("/token", async (c: Context) => {
  */
 app.get("/token/check", async (c: Context) => {
   const accessToken = getCookie(c, "accessToken");
-  if (!accessToken) return c.json({ hasValidToken: false });
+  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
+
   const decryptedAccessToken = decrypt(accessToken);
-  if (!decryptedAccessToken) {
-    return throwAPIError(401, "accessToken is not found")();
-  }
+  if (!decryptedAccessToken) return throwAPIError(401, "decrypt failed")();
+
+  // parseの処理でエラーが出る時はそもそもdecryptが失敗しているのでparseTokenDataでのエラー処理はしない
   const requiredTokenData = parseTokenData(decryptedAccessToken);
 
   // TODO: トークンの有効期限が切れているかどうかも見る処理も追加する
