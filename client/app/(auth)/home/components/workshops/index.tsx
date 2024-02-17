@@ -4,7 +4,7 @@ import { formatDateTime } from '../../../../../util/date';
 import { fetcher } from '../../../../../util/fetcher';
 
 export const Workshops: FC = async () => {
-  const workshops = await fetcher.get<schema['Workshop'][]>('/workshops', { cache: 'no-cache' });
+  const workshops = await fetcher.get<schema['Workshop'][]>('/workshops?limit=7', { cache: 'no-cache' });
   return (
     <div className="grid grid-cols-2 gap-5">
       <div className="rounded-md border-2 border-middle shadow-md">

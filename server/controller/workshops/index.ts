@@ -11,12 +11,15 @@ type TWorkshopInput = schema["WorkshopInput"];
 const app = new Hono();
 
 app.get("/", async (c: Context) => {
+  const limit = Number(c.req.query("limit"));
   const workshops = await DB.fetchAll<TWorkshop>(PREFIX_MAP["workshop"]);
   // eventがない場合はcreatedAtでsortする
   const sortedWorkshop = collections
     .sortBy(workshops, (w) => new Date(w.latestEventDatetime ?? w.createdAt))
     .reverse();
-  return c.json(sortedWorkshop);
+  return c.json(
+    limit ? sortedWorkshop.slice(0, limit) : sortedWorkshop,
+  );
 });
 
 app.get("/:id", async (c: Context) => {
