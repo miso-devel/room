@@ -1,11 +1,11 @@
-import { Workshops } from './components/workshops';
-import { Suspense } from 'react';
-import { Spinner } from '../../../../components/ui/Spinner';
+import { Spinner } from '@/components/ui/Spinner'
+import { Suspense } from 'react'
+import { Workshops } from './components/workshops'
 
-export default async function WorkshopsPage() {
+export default function WorkshopsPage() {
   return (
     <Suspense fallback={<Spinner dark />}>
       <Workshops />
     </Suspense>
-  );
+  )
 }

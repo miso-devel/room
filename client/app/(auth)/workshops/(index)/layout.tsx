@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
-import { SvgLink } from '../../../../components/ui/Link/SvgLink';
-import { WithTitleWrapper } from '../../../../components/layout/WithTitleWrapper';
+import { WithTitleWrapper } from '@/components/layout/WithTitleWrapper'
+import { SvgLink } from '@/components/ui/Link/SvgLink'
+import type { ReactNode } from 'react'
 
-export default async function PageLayout({ children }: { children: ReactNode }) {
+export default function PageLayout({ children }: { children: ReactNode }) {
   return (
     <WithTitleWrapper
-      title="勉強会一覧"
-      additionalElms={<SvgLink href="/workshops/new" ariaLabel="勉強会作成" svgName="add" svgAlt="勉強会作成ボタン" />}
+      title='勉強会一覧'
+      additionalElms={<SvgLink href='/workshops/new' ariaLabel='勉強会作成' svgName='add' svgAlt='勉強会作成ボタン' />}
     >
       {children}
     </WithTitleWrapper>
-  );
+  )
 }

@@ -1,12 +1,11 @@
-'use client';
-import { useFormStatus } from 'react-dom';
-
-import { FC } from 'react';
-import { Button } from '../../../../../../components/ui/Button';
-import { Spinner } from '../../../../../../components/ui/Spinner';
+'use client'
+import { Button } from '@/components/ui/Button'
+import { Spinner } from '@/components/ui/Spinner'
+import type { FC } from 'react'
+import { useFormStatus } from 'react-dom'
 
 export const WorkshopNewButton: FC = () => {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
-  return <Button disabled={pending}>{pending ? <Spinner dark /> : '作成'}</Button>;
-};
+  return <Button disabled={pending}>{pending ? <Spinner dark /> : '作成'}</Button>
+}

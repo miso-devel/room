@@ -1,7 +1,6 @@
-import { AppLayout } from '../../components/layout/AppLayout';
+import { AppLayout } from '@/components/layout/AppLayout'
+import type { ReactNode } from 'react'
 
-import { ReactNode } from 'react';
-
-export default async function PageLayout({ children }: { children: ReactNode }) {
-  return <AppLayout>{children}</AppLayout>;
+export default function PageLayout({ children }: { children: ReactNode }) {
+  return <AppLayout>{children}</AppLayout>
 }

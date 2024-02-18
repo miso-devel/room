@@ -1,9 +1,9 @@
-import { Suspense } from 'react';
-import { Spinner } from '../../../../../components/ui/Spinner';
-import { WorkshopPageTitle } from './components/WorkshopPageTitle';
-import { EventsInfo } from './components/EventsInfo';
+import { Spinner } from '@/components/ui/Spinner'
+import { Suspense } from 'react'
+import { EventsInfo } from './components/EventsInfo'
+import { WorkshopPageTitle } from './components/WorkshopPageTitle'
 
-export default async function WorkshopPage({ params }: { params: { workshopId: string } }) {
+export default function WorkshopPage({ params }: { params: { workshopId: string } }) {
   return (
     <Suspense fallback={<Spinner dark />}>
       <WorkshopPageTitle workshopId={params.workshopId} />
@@ -11,5 +11,5 @@ export default async function WorkshopPage({ params }: { params: { workshopId: s
         <EventsInfo workshopId={params.workshopId} />
       </Suspense>
     </Suspense>
-  );
+  )
 }
