@@ -1,12 +1,12 @@
-import { FC, ReactNode } from 'react';
-import NextLink from 'next/link';
+import NextLink from 'next/link'
+import type { FC, ReactNode } from 'react'
 
-type TTextLinkProps = { href: string; children: ReactNode };
+type TextLinkProps = { href: string; children: ReactNode }
 
-export const TextLink: FC<TTextLinkProps> = ({ href, children }) => {
+export const TextLink: FC<TextLinkProps> = ({ href, children }) => {
   return (
-    <NextLink href={href} className="p-2 hover:text-accent">
+    <NextLink href={href} className='p-2 hover:text-accent'>
       {children}
     </NextLink>
-  );
-};
+  )
+}

@@ -1,16 +1,16 @@
-import { FC } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+import type { FC } from 'react'
 
-type TSvgImageProps = {
-  svgName: string;
-  svgAlt: string;
-  ariaLabel: string;
-  className?: string;
-  width?: number;
-  height?: number;
-};
+type SvgImageProps = {
+  svgName: string
+  svgAlt: string
+  ariaLabel: string
+  className?: string
+  width?: number
+  height?: number
+}
 
-export const SvgImage: FC<TSvgImageProps> = ({ svgName, svgAlt, ariaLabel, className, width, height }) => {
+export const SvgImage: FC<SvgImageProps> = ({ svgName, svgAlt, ariaLabel, className, width, height }) => {
   return (
     <Image
       src={`/svg/${svgName}.svg`}
@@ -20,5 +20,5 @@ export const SvgImage: FC<TSvgImageProps> = ({ svgName, svgAlt, ariaLabel, class
       className={`${className} rounded-full border-2 border-transparent bg-middle fill-dark p-1 hover:border-dark hover:bg-accent`}
       aria-label={ariaLabel}
     />
-  );
-};
+  )
+}

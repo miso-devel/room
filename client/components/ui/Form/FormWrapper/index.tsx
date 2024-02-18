@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react'
 
-type TFormWrapperProps = { children: ReactNode; action: (formData: FormData) => void };
+type FormWrapperProps = { children: ReactNode; action: (formData: FormData) => void }
 
-export const FormWrapper: FC<TFormWrapperProps> = ({ children, action }) => {
+export const FormWrapper: FC<FormWrapperProps> = ({ children, action }) => {
   return (
-    <form className="flex flex-col gap-5" action={action}>
+    <form className='flex flex-col gap-5' action={action}>
       {children}
     </form>
-  );
-};
+  )
+}
