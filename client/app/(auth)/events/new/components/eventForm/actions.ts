@@ -1,7 +1,7 @@
 'use server'
+import type { Schema } from '@/types/common'
+import { fetcher } from '@/util/fetcher'
 import { redirect } from 'next/navigation'
-import type { Schema } from '../../../../../../types/common'
-import { fetcher } from '../../../../../../util/fetcher'
 
 export const submit = async (formData: FormData, workshopId: string) => {
   const theme = formData.get('theme') as string

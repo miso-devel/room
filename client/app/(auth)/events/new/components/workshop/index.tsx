@@ -1,5 +1,5 @@
+import type { Schema } from '@/types/common'
 import type { FC } from 'react'
-import type { Schema } from '../../../../../../types/common'
 
 export const Workshop: FC<{ workshop: Schema['Workshop'] }> = ({ workshop }) => {
   return (

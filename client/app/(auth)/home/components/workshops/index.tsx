@@ -1,7 +1,7 @@
+import type { Schema } from '@/types/common'
+import { formatDateTime } from '@/util/date'
+import { fetcher } from '@/util/fetcher'
 import type { FC } from 'react'
-import type { Schema } from '../../../../../types/common'
-import { formatDateTime } from '../../../../../util/date'
-import { fetcher } from '../../../../../util/fetcher'
 
 export const Workshops: FC = async () => {
   const workshops = await fetcher.get<Schema['Workshop'][]>('/workshops?limit=7', { cache: 'no-cache' })

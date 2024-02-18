@@ -1,7 +1,7 @@
+import { Spinner } from '@/components/ui/Spinner'
+import type { Schema } from '@/types/common'
+import { fetcher } from '@/util/fetcher'
 import { type FC, Suspense } from 'react'
-import { Spinner } from '../../../../components/ui/Spinner'
-import type { Schema } from '../../../../types/common'
-import { fetcher } from '../../../../util/fetcher'
 import { EventForm } from './components/eventForm'
 
 const NewEventWrap: FC<{ workshopId: string }> = async ({ workshopId }) => {

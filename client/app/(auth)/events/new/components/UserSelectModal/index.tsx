@@ -1,9 +1,9 @@
 'use client'
+import { Checkbox } from '@/components/ui/Form/Checkbox'
+import { SvgImage } from '@/components/ui/Image/SvgImage'
+import { UserProfile } from '@/features/user/components/UserProfile'
+import type { Schema } from '@/types/common'
 import { type FC, type MouseEventHandler, useState } from 'react'
-import { Checkbox } from '../../../../../../components/ui/Form/Checkbox'
-import { SvgImage } from '../../../../../../components/ui/Image/SvgImage'
-import { UserProfile } from '../../../../../../features/user/components/UserProfile'
-import type { Schema } from '../../../../../../types/common'
 
 type UserSelectModalProps = { users: Schema['User'][] }
 

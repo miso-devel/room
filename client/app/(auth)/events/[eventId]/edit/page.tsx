@@ -1,19 +1,18 @@
-import { FC, Suspense } from 'react';
-import { EventEditForm } from './components/eventEditForm';
-import { Spinner } from '../../../../../components/ui/Spinner';
-import { fetcher } from '../../../../../util/fetcher';
-import { schema } from '../../../../../types/common';
+import { Spinner } from '@/components/ui/Spinner'
+import type { Schema } from '@/types/common'
+import { fetcher } from '@/util/fetcher'
+import { type FC, Suspense } from 'react'
+import { EventEditForm } from './components/eventEditForm'
 
-type TEventShowPageWrap = FC<{ eventId: string }>;
-export const EventShowPageWrap: TEventShowPageWrap = async ({ eventId }) => {
-  const event = await fetcher.get<schema['Event']>(`/events/${eventId}`);
-  return <EventEditForm event={event} />;
-};
+export const EventShowPageWrap: FC<{ eventId: string }> = async ({ eventId }) => {
+  const event = await fetcher.get<Schema['Event']>(`/events/${eventId}`)
+  return <EventEditForm event={event} />
+}
 
 export default function EventsShowPage({ params }: { params: { eventId: string } }) {
   return (
     <Suspense fallback={<Spinner dark />}>
       <EventShowPageWrap eventId={params.eventId} />
     </Suspense>
-  );
+  )
 }

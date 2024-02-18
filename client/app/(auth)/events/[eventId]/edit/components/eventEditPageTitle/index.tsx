@@ -1,6 +1,6 @@
+import { WithTitleWrapper } from '@/components/layout/WithTitleWrapper'
+import type { Schema } from '@/types/common'
 import type { FC, ReactNode } from 'react'
-import { WithTitleWrapper } from '../../../../../../../components/layout/WithTitleWrapper'
-import type { Schema } from '../../../../../../../types/common'
 
 type WorkshopInfo = FC<{ event: Schema['Event']; children: ReactNode }>
 
