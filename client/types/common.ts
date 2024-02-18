@@ -1,3 +1,3 @@
-import { components } from './schema';
+import type { components } from './schema'
 
-export type schema = components['schemas'];
+export type schema = components['schemas']

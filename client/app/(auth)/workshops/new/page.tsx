@@ -1,5 +1,5 @@
-import { WorkshopForm } from './components/workshopForm';
+import { WorkshopForm } from './components/workshopForm'
 
-export default async function NewWorkshop() {
-  return <WorkshopForm />;
+export default function NewWorkshop() {
+  return <WorkshopForm />
 }

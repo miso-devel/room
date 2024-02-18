@@ -1,6 +1,4 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { fetcher } from './util/fetcher';
+import type { NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
   // try {
@@ -16,4 +14,4 @@ export async function middleware(request: NextRequest) {
   // }
 }
 
-export const config = { matcher: ['/home', '/members', '/workshop', '/events'] };
+export const config = { matcher: ['/home', '/members', '/workshop', '/events'] }
