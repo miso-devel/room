@@ -1,11 +1,11 @@
 'use client'
+import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
-import { Button } from '../ui/Button'
 
 export const LogoutButton = async () => {
   const router = useRouter()
   const signout = async () => {
-    const data: { revoked: boolean } = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/auth/signout', {
+    const data: { revoked: boolean } = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/signout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',

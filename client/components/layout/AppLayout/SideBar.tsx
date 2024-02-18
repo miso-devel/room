@@ -1,5 +1,5 @@
+import { Spinner } from '@/components/ui/Spinner'
 import { type FC, Suspense } from 'react'
-import { Spinner } from '../../ui/Spinner'
 import { Logo } from './Logo'
 import { Me, MeWrapper } from './Me'
 import { Navigations } from './Navigations'

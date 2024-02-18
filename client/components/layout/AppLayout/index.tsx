@@ -1,9 +1,7 @@
 import type { FC, ReactNode } from 'react'
 import { SideBar } from './SideBar'
 
-type AppLayoutProps = { children: ReactNode }
-
-export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+export const AppLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       <SideBar />

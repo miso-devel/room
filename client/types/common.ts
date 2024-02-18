@@ -1,3 +1,3 @@
 import type { components } from './schema'
 
-export type schema = components['schemas']
+export type Schema = components['schemas']
