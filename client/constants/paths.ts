@@ -3,4 +3,4 @@ export const PATHS = [
   { name: '/users', text: 'USERS' },
   { name: '/workshops', text: 'WORKSHOPS' },
   { name: '/events', text: 'EVENTS' },
-];
+]
