@@ -1,13 +1,9 @@
-import { FC, ReactNode } from "react";
-import { WithTitleWrapper } from "../../../../../../../components/layout/WithTitleWrapper";
-import { schema } from "../../../../../../../types/common";
+import type { FC, ReactNode } from 'react'
+import { WithTitleWrapper } from '../../../../../../../components/layout/WithTitleWrapper'
+import type { Schema } from '../../../../../../../types/common'
 
-type TWorkshopInfo = FC<{ event: schema["Event"]; children: ReactNode }>;
+type WorkshopInfo = FC<{ event: Schema['Event']; children: ReactNode }>
 
-export const EventEditPageTitle: TWorkshopInfo = ({ event, children }) => {
-  return (
-    <WithTitleWrapper title={"編集中：" + event.theme}>
-      {children}
-    </WithTitleWrapper>
-  );
-};
+export const EventEditPageTitle: WorkshopInfo = ({ event, children }) => {
+  return <WithTitleWrapper title={`編集中：${event.theme}`}>{children}</WithTitleWrapper>
+}

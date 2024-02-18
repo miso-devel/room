@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { WithTitleWrapper } from '../../../../components/layout/WithTitleWrapper';
+import { WithTitleWrapper } from '@/components/layout/WithTitleWrapper'
+import type { ReactNode } from 'react'
 
-export default async function PageLayout({ children }: { children: ReactNode }) {
-  return <WithTitleWrapper title="イベント一覧">{children}</WithTitleWrapper>;
+export default function PageLayout({ children }: { children: ReactNode }) {
+  return <WithTitleWrapper title='イベント一覧'>{children}</WithTitleWrapper>
 }

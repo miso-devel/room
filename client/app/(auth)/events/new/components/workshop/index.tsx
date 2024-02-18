@@ -1,13 +1,11 @@
-import { schema } from "../../../../../../types/common";
-import { FC } from "react";
+import type { FC } from 'react'
+import type { Schema } from '../../../../../../types/common'
 
-type TProps = { workshop: schema["Workshop"] };
-
-export const Workshop: FC<TProps> = ({ workshop }) => {
+export const Workshop: FC<{ workshop: Schema['Workshop'] }> = ({ workshop }) => {
   return (
-    <div className="mb-5 rounded-md border-2 bg-secondary p-3 text-bright">
-      <h2 className="m-0 mb-2 text-2xl">{workshop.title}</h2>
-      <p className="text-xs">{workshop.description}</p>
+    <div className='mb-5 rounded-md border-2 bg-secondary p-3 text-bright'>
+      <h2 className='m-0 mb-2 text-2xl'>{workshop.title}</h2>
+      <p className='text-xs'>{workshop.description}</p>
     </div>
-  );
-};
+  )
+}
