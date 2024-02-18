@@ -37,7 +37,12 @@
   "linter": {
     "ignore": [".next", "node_modules"],
     "rules": {
-      "all": true
+      "recommended": true,
+      "nursery": { "recommended": true },
+      "a11y": { "recommended": true },
+      "correctness": { "all": true },
+      "security": { "all": true },
+      "style": { "useNamingConvention": "warn" }
     }
   }
 }
