@@ -12,7 +12,8 @@
     "cdate": "^0.0.7",
     "next": "^14.1.0",
     "react": "next",
-    "react-dom": "next"
+    "react-dom": "next",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
