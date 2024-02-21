@@ -43,7 +43,7 @@ export const EventsInfo: EventsProps = async ({ workshopId }) => {
     <>
       <div className='flex items-center gap-3'>
         <h2 className='my-3 text-xl'>イベント一覧</h2>
-        <SvgLink href={`/workshops/${workshopId}/new`} ariaLabel='イベントの作成' svgName='add' svgAlt='イベント追加ボタン' />
+        <SvgLink href={`/events/new?workshopId=${workshopId}`} ariaLabel='イベントの作成' svgName='add' svgAlt='イベント追加ボタン' />
       </div>
 
       <table className='table-auto rounded-md text-left'>
