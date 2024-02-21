@@ -4,7 +4,7 @@ import { fetcher } from '@/util/fetcher'
 import { type FC, Suspense } from 'react'
 import { EventEditForm } from './components/eventEditForm'
 
-export const EventShowPageWrap: FC<{ eventId: string }> = async ({ eventId }) => {
+const EventShowPageWrap: FC<{ eventId: string }> = async ({ eventId }) => {
   const event = await fetcher.get<Schema['Event']>(`/events/${eventId}`)
   return <EventEditForm event={event} />
 }
