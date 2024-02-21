@@ -6,5 +6,9 @@ import { useFormStatus } from 'react-dom'
 export const WorkshopEditButton = () => {
   const { pending } = useFormStatus()
 
-  return <Button disabled={pending}>{pending ? <Spinner dark /> : '編集'}</Button>
+  return (
+    <Button type='submit' disabled={pending}>
+      {pending ? <Spinner dark /> : '編集'}
+    </Button>
+  )
 }
