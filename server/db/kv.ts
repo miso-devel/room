@@ -1,7 +1,6 @@
 /// <reference lib="deno.unstable" />
 
 import { PREFIX } from "../constants/prefix.ts";
-import { SECRET } from "../constants/secret.ts";
 import { schema } from "../types/common.ts";
 import { throwAPIError } from "../util/throwError.ts";
 import {
@@ -10,9 +9,7 @@ import {
   workshopQueueHandler,
 } from "./queueHandler.ts";
 
-export const kv = await Deno.openKv(
-  SECRET.ENV === "dev" ? "dev.db.sqlite" : "prod.db.sqlite",
-);
+export const kv = await Deno.openKv();
 type basic = { id: string; createdAt: number; updatedAt: number };
 
 const fetchAll = async <T>(prefix: PREFIX): Promise<T[]> => {
