@@ -4,7 +4,7 @@ import { fetcher } from '@/util/fetcher'
 import { type FC, Suspense } from 'react'
 import { WorkshopEditForm } from './components/workshopEditForm'
 
-export const WorkshopShowPageWrap: FC<{ workshopId: string }> = async ({ workshopId }) => {
+const WorkshopShowPageWrap: FC<{ workshopId: string }> = async ({ workshopId }) => {
   const workshop = await fetcher.get<Schema['Workshop']>(`/workshops/${workshopId}`)
   return <WorkshopEditForm workshop={workshop} />
 }
