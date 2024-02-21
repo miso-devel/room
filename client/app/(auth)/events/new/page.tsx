@@ -10,10 +10,10 @@ const NewEventWrap: FC<{ workshopId: string }> = async ({ workshopId }) => {
   return <EventForm workshop={workshop} users={users} />
 }
 
-export default function NewEvent({ params }: { params: { workshopId: string } }) {
+export default function NewEvent({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   return (
     <Suspense fallback={<Spinner dark />}>
-      <NewEventWrap workshopId={params.workshopId} />
+      <NewEventWrap workshopId={searchParams.workshopId as string} />
     </Suspense>
   )
 }
