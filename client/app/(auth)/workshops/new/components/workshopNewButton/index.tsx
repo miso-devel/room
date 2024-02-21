@@ -6,6 +6,9 @@ import { useFormStatus } from 'react-dom'
 
 export const WorkshopNewButton: FC = () => {
   const { pending } = useFormStatus()
-
-  return <Button disabled={pending}>{pending ? <Spinner dark /> : '作成'}</Button>
+  return (
+    <Button disabled={pending} type='submit'>
+      {pending ? <Spinner dark /> : '作成'}
+    </Button>
+  )
 }
