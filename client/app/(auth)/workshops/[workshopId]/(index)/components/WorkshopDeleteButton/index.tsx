@@ -7,16 +7,18 @@ import type { FC } from 'react'
 export const WorkshopDeleteButton: FC<{ workshopId: string }> = ({ workshopId }) => {
   const router = useRouter()
 
+  // TODO:リダイレクト時に消したはずのworkshopが残っているので上手いことやるようにする
   const onDeleteWorkshop = async () => {
     if (confirm('本当に削除しますか？')) {
-      await fetch('/workshops', {
+      await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/workshops`, {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: workshopId }),
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
+      }).then(_ => {
+        router.push('/workshops')
       })
-      router.push('/workshops')
     }
   }
 
