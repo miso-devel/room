@@ -2,7 +2,7 @@
  * enqueueする時に現在時刻からどれくらいに後にtaskを実行するかを計算する
  * @param now 現在時刻
  * @param startTime 開始時刻
- * @param dif 開始時刻からどれくらいずらして通知するか
+ * @param dif 開始時刻からどれくらいずらして通知するか(-なら早めに、+なら遅めに通知する)
  * @returns delay(number)
  */
 export const calculateDelay = (
@@ -15,7 +15,7 @@ export const calculateDelay = (
   const startInJP = startDate.setHours(startDate.getHours() + 9);
   const timeDif = startInJP - nowInJP;
   if (timeDif < 0) return 0;
-  const timeDifWithDelay = timeDif - dif;
+  const timeDifWithDelay = timeDif + dif;
   if (timeDifWithDelay < 0) return timeDif;
 
   // debugDelay(timeDifWithDelay);

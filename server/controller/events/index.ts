@@ -52,11 +52,19 @@ app.post("/", async (c: Context) => {
   });
 
   await updateWorkshopEventInfo(input.event.workshopId);
-  await DB.enqueue("event", event, 0);
-  // 10分前に通知するようにする
-  const delay = 1000 * 60 * 10;
-  calculateDelay(new Date(), event.datetime, delay);
-  await DB.enqueue("eventStart", event, 0);
+  // 事前の告知は30分前に通知するようにする
+  const annotuncementDelay = -1000 * 60 * 30;
+  await DB.enqueue(
+    "eventAnnouncement",
+    event,
+    calculateDelay(new Date(), event.datetime, annotuncementDelay),
+  );
+  // 始まる時も通知出すようにする
+  await DB.enqueue(
+    "eventStart",
+    event,
+    calculateDelay(new Date(), event.datetime),
+  );
   return c.json({ ...event, speakers });
 });
 
