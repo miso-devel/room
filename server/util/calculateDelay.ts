@@ -24,20 +24,20 @@ export const calculateDelay = (
 };
 
 // debug用
-const debugDelay = (dif: number) => {
-  const millisecondsInSecond = 1000;
-  const millisecondsInMinute = 60 * millisecondsInSecond;
-  const millisecondsInHour = 60 * millisecondsInMinute;
-  const millisecondsInDay = 24 * millisecondsInHour;
+// const debugDelay = (dif: number) => {
+//   const millisecondsInSecond = 1000;
+//   const millisecondsInMinute = 60 * millisecondsInSecond;
+//   const millisecondsInHour = 60 * millisecondsInMinute;
+//   const millisecondsInDay = 24 * millisecondsInHour;
 
-  const days = Math.floor(dif / millisecondsInDay);
-  const hours = Math.floor((dif % millisecondsInDay) / millisecondsInHour);
-  const minutes = Math.floor(
-    (dif % millisecondsInHour) / millisecondsInMinute,
-  );
-  const seconds = Math.floor(
-    (dif % millisecondsInMinute) / millisecondsInSecond,
-  );
+//   const days = Math.floor(dif / millisecondsInDay);
+//   const hours = Math.floor((dif % millisecondsInDay) / millisecondsInHour);
+//   const minutes = Math.floor(
+//     (dif % millisecondsInHour) / millisecondsInMinute,
+//   );
+//   const seconds = Math.floor(
+//     (dif % millisecondsInMinute) / millisecondsInSecond,
+//   );
 
-  console.log(`差分: ${days} 日, ${hours} 時間, ${minutes} 分, ${seconds} 秒`);
-};
+//   console.log(`差分: ${days} 日, ${hours} 時間, ${minutes} 分, ${seconds} 秒`);
+// };
