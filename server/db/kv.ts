@@ -58,12 +58,12 @@ kv.listenQueue(async (queue: unknown) => {
   switch (key) {
     case "create:workshop":
       await workshopCreateQueueHandler(
-        data as schema["Workshop"] & schema["User"],
+        data as { workshop: schema["Workshop"]; user: schema["User"] },
       );
       break;
     case "create:event":
       await eventCreateQueueHandler(
-        data as schema["EventOutput"] & schema["User"],
+        data as { event: schema["EventOutput"]; user: schema["User"] },
       );
       break;
     case "announcement:event":

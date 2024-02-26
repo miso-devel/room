@@ -3,18 +3,19 @@ import { SECRET } from "../constants/secret.ts";
 import { schema } from "../types/common.ts";
 
 export const workshopCreateQueueHandler = async (
-  data: schema["Workshop"] & schema["User"],
+  data: { workshop: schema["Workshop"]; user: schema["User"] },
 ) => {
   await Bot.helpers.sendMessage(SECRET.MY_CHANNEL_ID, {
-    content: `${data.name}によって「${data.title}」が作成されました`,
+    content:
+      `${data.user.name}によって「${data.workshop.title}」が作成されました`,
   });
 };
 
 export const eventCreateQueueHandler = async (
-  data: schema["EventOutput"] & schema["User"],
+  data: { event: schema["EventOutput"]; user: schema["User"] },
 ) => {
   await Bot.helpers.sendMessage(SECRET.MY_CHANNEL_ID, {
-    content: `${data.name}によって「${data.theme}」が作成されました`,
+    content: `${data.user.name}によって「${data.event.theme}」が作成されました`,
   });
 };
 
