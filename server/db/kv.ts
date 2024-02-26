@@ -4,9 +4,10 @@ import { PREFIX } from "../constants/prefix.ts";
 import { schema } from "../types/common.ts";
 import { throwAPIError } from "../util/throwError.ts";
 import {
-  eventQueueHandler,
+  eventAnnouncementQueueHandler,
+  eventCreateQueueHandler,
   eventStartQueueHandler,
-  workshopQueueHandler,
+  workshopCreateQueueHandler,
 } from "./queueHandler.ts";
 
 export const kv = await Deno.openKv();
@@ -55,14 +56,21 @@ type TQueue = { key: string; data: unknown };
 kv.listenQueue(async (queue: unknown) => {
   const { key, data } = queue as TQueue;
   switch (key) {
-    case "workshop":
-      await workshopQueueHandler(data as schema["Workshop"]);
+    case "create:workshop":
+      await workshopCreateQueueHandler(
+        data as schema["Workshop"] & schema["User"],
+      );
       break;
-    case "event":
-      await eventQueueHandler(data as schema["Event"]);
+    case "create:event":
+      await eventCreateQueueHandler(
+        data as schema["EventOutput"] & schema["User"],
+      );
       break;
-    case "eventStart":
-      await eventStartQueueHandler(data as schema["Event"]);
+    case "announcement:event":
+      await eventAnnouncementQueueHandler(data as schema["EventOutput"]);
+      break;
+    case "start:event":
+      await eventStartQueueHandler(data as schema["EventOutput"]);
       break;
     default:
       break;
