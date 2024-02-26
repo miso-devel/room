@@ -1,5 +1,6 @@
 import { SECRET } from "../../constants/secret.ts";
 import { Buffer, crypto } from "../../deps.ts";
+import { throwAPIError } from "../../util/throwError.ts";
 import {
   TAccessToken,
   TEncryptedData,
@@ -128,4 +129,19 @@ export const stringifyTokenData = (accessToken: TAccessToken): string => {
 
 export const parseTokenData = (tokenData: string): TRequiredAccessToken => {
   return JSON.parse(tokenData);
+};
+
+/**
+ * cookieからのトークンを使える形に戻す
+ */
+export const getRawAccessToken = (accessToken: string): string => {
+  if (!accessToken) return throwAPIError(401, "accessToken is not found")();
+  const decryptedAccessToken = decrypt(accessToken);
+
+  if (!decryptedAccessToken) {
+    return throwAPIError(401, "accessToken is not found")();
+  }
+
+  const requiredTokenData = parseTokenData(decryptedAccessToken);
+  return requiredTokenData.access_token;
 };
