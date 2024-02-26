@@ -1,6 +1,8 @@
 import { PREFIX_MAP } from "../../constants/prefix.ts";
 import { DB } from "../../db/kv.ts";
-import { collections, Context, Hono } from "../../deps.ts";
+import { collections, Context, getCookie, Hono } from "../../deps.ts";
+import { getRawAccessToken } from "../../service/auth/index.ts";
+import { getUserByAccessToken } from "../../service/user/index.ts";
 import { addWorkshopRequiredData } from "../../service/workshop/index.ts";
 import { schema } from "../../types/common.ts";
 import { addUpdateRequiredData } from "../../util/addRequiredData.ts";
@@ -34,11 +36,16 @@ app.get("/:id", async (c: Context) => {
 app.post("/", async (c: Context) => {
   const input: TWorkshopInput = await c.req.json();
   const workshopInput: TWorkshop = addWorkshopRequiredData(input);
+
+  const accessToken = getCookie(c, "accessToken") ?? c.req.header()["cookie"];
+  const rawAccessToken = getRawAccessToken(accessToken);
+  const user = await getUserByAccessToken(rawAccessToken);
+
   const workshop = await DB.createOne<TWorkshop>(
     PREFIX_MAP["workshop"],
     workshopInput,
   );
-  await DB.enqueue("create:workshop", workshop, 5000);
+  await DB.enqueue("create:workshop", { workshop, user }, 5000);
   return c.json(workshop);
 });
 

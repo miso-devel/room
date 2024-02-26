@@ -42,8 +42,8 @@ app.get("/:id", async (c: Context) => {
 app.post("/", async (c: Context) => {
   const input: TEventInput = await c.req.json();
   const eventInput: TEvent = createEventFromInput(input);
-  const accessToken = getCookie(c, "accessToken") ?? c.req.header()["cookie"];
 
+  const accessToken = getCookie(c, "accessToken") ?? c.req.header()["cookie"];
   const rawAccessToken = getRawAccessToken(accessToken);
   const user = await getUserByAccessToken(rawAccessToken);
 
