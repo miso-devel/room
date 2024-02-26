@@ -59,6 +59,7 @@ app.post("/", async (c: Context) => {
 
   await updateWorkshopEventInfo(input.event.workshopId);
 
+  //TODO: ここで渡す`speakers`はメンションをするためにBotから取得したspeakersにする
   await DB.enqueue(
     "create:event",
     { ...event, speakers, user },
