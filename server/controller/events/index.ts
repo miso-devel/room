@@ -59,23 +59,18 @@ app.post("/", async (c: Context) => {
 
   await updateWorkshopEventInfo(input.event.workshopId);
 
-  //TODO: ここで渡す`speakers`はメンションをするためにBotから取得したspeakersにする
-  await DB.enqueue(
-    "create:event",
-    { ...event, speakers, user },
-    calculateDelay(new Date(), event.datetime),
-  );
+  await DB.enqueue("create:event", { event, user }, 5000);
   // 事前の告知は30分前に通知するようにする
   const annotuncementDelay = -1000 * 60 * 30;
   await DB.enqueue(
     "announcement:event",
-    { ...event, speakers },
+    event,
     calculateDelay(new Date(), event.datetime, annotuncementDelay),
   );
   // 始まる時も通知出すようにする
   await DB.enqueue(
     "start:event",
-    { ...event, speakers },
+    event,
     calculateDelay(new Date(), event.datetime),
   );
   return c.json({ ...event, speakers });
