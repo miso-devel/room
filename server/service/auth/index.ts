@@ -52,10 +52,14 @@ export const isJoinGuild = async (accessToken: string): Promise<boolean> => {
  * トークンが有効かどうかをユーザーが返ってくるかどうかを見て確認している
  */
 export const checkToken = async (accessToken: string): Promise<boolean> => {
-  const res = await fetch("https://discord.com/api/users/@me", {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  }).then((res) => res.json());
-  return res.id ? true : false;
+  // 別にこれでもいいけどギルドに入っているかどうかを見る時にトークンが有効かどうかもわかるので、これはいらない気がする。ただ残しておきたいのでコメントアウト
+  // const res = await fetch("https://discord.com/api/users/@me", {
+  //   headers: { Authorization: `Bearer ${accessToken}` },
+  // }).then((res) => res.json());
+
+  const isValidateUser = await isJoinGuild(accessToken);
+
+  return isValidateUser;
 };
 
 /**
