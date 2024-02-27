@@ -47,17 +47,21 @@ export const getMemberByUserId = async (id: string): Promise<TUser> => {
   return botUserToUser(user);
 };
 
+export const getDiscordUserByAccessToken = async (accessToken: string) => {
+  const data: { user: TDiscordUser } = await fetch(
+    "https://discord.com/api/oauth2/@me",
+    { method: "GET", headers: { Authorization: `Bearer ${accessToken}` } },
+  ).then((res) => res.json());
+  return data;
+};
+
 /**
  * アクセストークンからユーザー情報を取得する
  */
 export const getUserByAccessToken = async (
   accessToken: string,
 ): Promise<TUser> => {
-  const data: { user: TDiscordUser } = await fetch(
-    "https://discord.com/api/oauth2/@me",
-    { method: "GET", headers: { Authorization: `Bearer ${accessToken}` } },
-  ).then((res) => res.json());
-
+  const data = await getDiscordUserByAccessToken(accessToken);
   // 二度手間だが、joinedAtをUser情報に含めるためにAPIでUserを取得してからBotを使って再取得している
   const discordUser = await getMemberByUserId(data.user.id);
   if (!discordUser) throwAPIError(404, "user not found")();
