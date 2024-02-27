@@ -67,10 +67,10 @@ kv.listenQueue(async (queue: unknown) => {
       );
       break;
     case "announcement:event":
-      await eventAnnouncementQueueHandler(data as schema["EventOutput"]);
+      await eventAnnouncementQueueHandler(data as schema["Event"]);
       break;
     case "start:event":
-      await eventStartQueueHandler(data as schema["EventOutput"]);
+      await eventStartQueueHandler(data as schema["Event"]);
       break;
     default:
       break;
