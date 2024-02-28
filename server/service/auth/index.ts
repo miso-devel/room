@@ -50,16 +50,15 @@ export const isJoinGuild = async (accessToken: string): Promise<boolean> => {
 
 /**
  * トークンが有効かどうかをユーザーが返ってくるかどうかを見て確認している
+ * @todo 本当は3時間くらいcacheしたい
  */
 export const checkToken = async (accessToken: string): Promise<boolean> => {
-  // 別にこれでもいいけどギルドに入っているかどうかを見る時にトークンが有効かどうかもわかるので、これはいらない気がする。ただ残しておきたいのでコメントアウト
-  // const res = await fetch("https://discord.com/api/users/@me", {
-  //   headers: { Authorization: `Bearer ${accessToken}` },
-  // }).then((res) => res.json());
+  const res = await fetch("https://discord.com/api/users/@me", {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "default",
+  }).then((res) => res.json());
 
-  const isValidateUser = await isJoinGuild(accessToken);
-
-  return isValidateUser;
+  return res.id ? true : false;
 };
 
 /**
