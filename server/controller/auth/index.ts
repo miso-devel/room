@@ -11,6 +11,7 @@ import {
   decrypt,
   encrypt,
   getAccessToken,
+  isJoinGuild,
   parseTokenData,
   revokeAccessToken,
   stringifyTokenData,
@@ -41,6 +42,13 @@ app.get("/token", async (c: Context) => {
     return throwAPIError(401, "accessToken is not found")();
   }
   const requiredTokenData = stringifyTokenData(accessToken);
+
+  const isValidToken = await checkToken(accessToken.access_token);
+  if (!isValidToken) return throwAPIError(401, "accessToken invalid")();
+
+  const isJoin = await isJoinGuild(accessToken.access_token);
+  if (!isJoin) return throwAPIError(401, "not join specific guild")();
+
   setCookie(c, "accessToken", encrypt(requiredTokenData), {
     httpOnly: true,
     secure: true,
