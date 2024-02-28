@@ -46,7 +46,6 @@ app.get("/me", async (c: Context) => {
   }
   const requiredTokenData = parseTokenData(decryptedAccessToken);
   const user = await getUserByAccessToken(requiredTokenData.access_token);
-
   return c.json(user);
 });
 
