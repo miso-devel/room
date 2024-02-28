@@ -17,7 +17,7 @@ export const LoginButton = async () => {
   }
   return (
     <Button onClick={signIn} onDark>
-      Login with Discord
+      Discordでログインする
     </Button>
   )
 }
