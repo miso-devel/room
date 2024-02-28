@@ -1,6 +1,6 @@
 'use client'
+import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
-import { Button } from '../../../components/ui/Button'
 
 export const LoginButton = async () => {
   const router = useRouter()
