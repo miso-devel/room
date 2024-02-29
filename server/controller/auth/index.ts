@@ -53,7 +53,7 @@ app.get("/token", async (c: Context) => {
   if (!isJoin) return throwAPIError(401, "not join specific guild")();
 
   setCookie(c, "accessToken", encrypt(requiredTokenData), {
-    domain: SECRET.CLIENT_DOMAIN,
+    domain: SECRET.COOKIE_DOMAIN,
     httpOnly: true,
     secure: true,
     // redirectされた時にcookieが送られるようにするためにLaxにしている

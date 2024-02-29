@@ -1,7 +1,7 @@
 import "https://deno.land/std@0.190.0/dotenv/load.ts";
 
 export const SECRET = {
-  CLIENT_DOMAIN: Deno.env.get("CLIENT_DOMAIN"),
+  COOKIE_DOMAIN: Deno.env.get("COOKIE_DOMAIN"),
   CLIENT_URL: Deno.env.get("CLIENT_URL"),
   SERVER_URL: Deno.env.get("SERVER_URL"),
   DISCORD_TOKEN: Deno.env.get("DISCORD_TOKEN")!,
