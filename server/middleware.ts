@@ -8,10 +8,7 @@ export const authMiddleware = async (c: Context, next: Next) => {
   // middlewareを通すときにaccessToken=xxxxxという形で渡ってこないのでない時はheaderからとってきている
   const accessToken = getCookie(c, "accessToken") ?? c.req.header()["cookie"];
 
-  // console.debug("token", accessToken);
   if (!accessToken) throwAPIError(401, "Not Found")();
-
-  // console.debug("after token", accessToken);
 
   const decryptedAccessToken = decrypt(accessToken as string);
   if (!decryptedAccessToken) {
@@ -19,15 +16,9 @@ export const authMiddleware = async (c: Context, next: Next) => {
     return throwAPIError(401, "accessToken is invalid")();
   }
 
-  // console.debug("decryptedToken", decryptedAccessToken);
-
   const requiredTokenData = parseTokenData(decryptedAccessToken);
 
-  // console.debug("requiredTokenData", requiredTokenData);
-
   const isValidToken = await checkToken(requiredTokenData.access_token);
-
-  // console.debug("isValidToken", isValidToken);
 
   return isValidToken
     ? await next()
