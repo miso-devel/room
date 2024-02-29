@@ -55,8 +55,9 @@ export const isJoinGuild = async (accessToken: string): Promise<boolean> => {
 export const checkToken = async (accessToken: string): Promise<boolean> => {
   const res = await fetch("https://discord.com/api/users/@me", {
     headers: { Authorization: `Bearer ${accessToken}` },
-    cache: "default",
   }).then((res) => res.json());
+
+  console.debug("res user", res);
 
   return res.id ? true : false;
 };
