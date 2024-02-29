@@ -38,25 +38,32 @@ app.get("/token", async (c: Context) => {
   const code = c.req.query("code");
   if (!code) return throwAPIError(401, "code is not found")();
 
+  console.debug("code", code);
   const accessToken = await getAccessToken(code);
   if (!accessToken.access_token) {
     return throwAPIError(401, "accessToken is not found")();
   }
+
+  console.debug("accessToken", accessToken);
 
   const requiredTokenData = stringifyTokenData(accessToken);
 
   const isValidToken = await checkToken(accessToken.access_token);
   if (!isValidToken) return throwAPIError(401, "accessToken invalid")();
 
+  console.debug("isValidToken", isValidToken);
+
   const isJoin = await isJoinGuild(accessToken.access_token);
   if (!isJoin) return throwAPIError(401, "not join specific guild")();
+
+  console.debug("isJoinGuild", isValidToken);
 
   setCookie(c, "accessToken", encrypt(requiredTokenData), {
     domain: SECRET.CLIENT_DOMAIN,
     httpOnly: true,
     secure: true,
     // redirectされた時にcookieが送られるようにするためにLaxにしている
-    sameSite: "Lax",
+    sameSite: "None",
     maxAge: accessToken.expires_in,
   });
 
