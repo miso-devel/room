@@ -3,6 +3,7 @@
     { "path": "./client" },
     { "path": "./server" },
     { "path": "./docs" },
+    { "path": ".github" },
     { "path": "." }
   ]
 }
