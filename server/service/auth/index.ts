@@ -57,8 +57,6 @@ export const checkToken = async (accessToken: string): Promise<boolean> => {
     headers: { Authorization: `Bearer ${accessToken}` },
   }).then((res) => res.json());
 
-  console.debug("res user", res);
-
   return res.id ? true : false;
 };
 
