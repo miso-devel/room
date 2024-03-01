@@ -24,7 +24,7 @@ const app = new Hono();
  */
 app.get("/", async (c: Context) => {
   const members: TMember[] = await Bot.helpers.getMembers(SECRET.GUILD_ID, {
-    limit: 10,
+    limit: 150,
   })
     .then((data: Collection<bigint, Member>) =>
       data.map((member: Member) => botUserToUser(member))
